@@ -19,7 +19,7 @@ GILLA, a free multiplayer VR horror game from **Play Gilla**, launched in **Earl
 
 - **Three modes:** Roam (The Base), Hunt (Be the Monster) and Survive (Don't Splash). See [game modes](/guides/game-modes/).
 - **Three monsters:** the Grinner, the Mannequin and the Mako. See [all monsters](/guides/monsters/).
-- **Ape movement:** you move with your arms, not a thumbstick. See [controls](/guides/controls-and-movement/).
+- **Ape movement:** you move with your arms, not a thumbstick. See [controls](/guides/movement-and-comfort/).
 - **Social features:** live 3D voice chat, public rooms or private codes, daily quests, levels, a walk-in cosmetics shop, and fur colours chosen on the lobby computer.
 
 ## Store details

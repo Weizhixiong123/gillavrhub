@@ -25,7 +25,7 @@ const ALIASES: Record<string, string> = {
   'beginner-guide': 'the-base-map',
   'be-the-monster': 'the-grinner',
   'dont-splash': 'the-mako',
-  'game-modes': 'loot-and-recycler',
+  'game-modes': 'recycler-and-keycard',
   monsters: 'the-grinner',
 };
 const lookup = (name: string) => byName[name] ?? byName[ALIASES[name] ?? ''];

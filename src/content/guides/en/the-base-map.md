@@ -5,7 +5,7 @@ title: 'GILLA VR map guide: The Base'
 description: 'A written guide to the GILLA Base map: the recycler, the keycard desk, the locked door and reader, the vault and the levels under the Base.'
 category: 'maps'
 series: 'first-night'
-step: 4
+step: 3
 featured: true
 tags: [map, base, keycard, vault, monsters]
 sources:
@@ -22,9 +22,9 @@ These are the places the official GILLA site names. Locations inside the Base th
 
 | Place | What it is | Read more |
 | --- | --- | --- |
-| Recycler | Where you carry gold bars and diamonds | [Loot and the recycler](/guides/loot-and-recycler/) |
-| Keycard desk | A keycard lies on a desk somewhere in the Base | [Keycard and locked door](/guides/keycard-and-locked-door/) |
-| Card reader and locked door | Take the keycard to the reader to open the door | [Keycard and locked door](/guides/keycard-and-locked-door/) |
+| Recycler | Where you carry gold bars and diamonds | [Loot and the recycler](/guides/recycler-and-keycard/) |
+| Keycard desk | A keycard lies on a desk somewhere in the Base | [Keycard and locked door](/guides/recycler-and-keycard/#the-keycard-and-the-locked-door) |
+| Card reader and locked door | Take the keycard to the reader to open the door | [Keycard and locked door](/guides/recycler-and-keycard/#the-keycard-and-the-locked-door) |
 | Vault | Named on the official site as part of the Base | Not yet confirmed |
 | Under the Base | Levels below, "where the rooms stop making sense" | [Under the Base](#under-the-base) |
 
@@ -41,8 +41,8 @@ Climbing down is optional. Everything above the locked door is the "safer" part 
 
 ## Monsters on this map
 
-- **In the Base:** [the Grinner](/guides/the-grinner/). It comes to the sound of talking.
-- **Under the Base:** [the Mannequin](/guides/the-mannequin/). It's three metres tall, has no arms and no face, and hunts on the lower levels.
+- **In the Base:** [the Grinner](/guides/monsters/#the-grinner). It comes to the sound of talking.
+- **Under the Base:** [the Mannequin](/guides/monsters/#the-mannequin). It's three metres tall, has no arms and no face, and hunts on the lower levels.
 
 ## Under the Base
 
@@ -57,4 +57,4 @@ Below the locked door, the official site says, "the rooms stop making sense." Th
 
 Play Gilla's fan content rules don't allow ripping, data-mining or AI copies of the game's maps. A map image here could only come from our own screenshots or our own drawing, so we only publish what we've checked ourselves. Screenshots taken in-game are allowed in guides and wikis, and we add them as we capture them.
 
-Next step: [the keycard and locked door](/guides/keycard-and-locked-door/).
+Next step: make your [first loot run and open the keycard door](/guides/recycler-and-keycard/).

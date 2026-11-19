@@ -1,9 +1,10 @@
 ---
+import { render } from 'astro:content';
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import { getPublished, entryUrl, faqGroup } from '../lib/content';
-import { localize, type Lang } from '../i18n/locales';
-import { t } from '../i18n/ui';
+import { getPublished, slugOf, FAQ_GROUPS } from '../lib/content';
+import { localize, formatDate, LANG_META, type Lang } from '../i18n/locales';
+import { t, fill } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -12,15 +13,37 @@ interface Props {
 const { lang, alternates } = Astro.props;
 const ui = t(lang);
 const entries = await getPublished('faq', lang);
-const groups = (['general', 'troubleshooting'] as const)
-  .map((key) => ({
-    key,
-    label: ui.hubs.faqGroups[key],
-    items: entries
-      .filter((e) => faqGroup(e) === key)
-      .sort((a, b) => a.data.title.localeCompare(b.data.title, lang)),
-  }))
-  .filter((g) => g.items.length > 0);
+const guides = await getPublished('guides', lang);
+// Questions answered in full by a guide link to that guide; the link text is its title.
+const guideTitle = (href: string) =>
+  guides.find((g) => href.startsWith(`/guides/${slugOf(g.id)}/`))?.data.title;
+const items = await Promise.all(
+  entries.map(async (e) => ({
+    entry: e,
+    slug: slugOf(e.id),
+    Content: (await render(e)).Content,
+    moreTitle: e.data.more ? guideTitle(e.data.more) : undefined,
+  })),
+);
+const groups = FAQ_GROUPS.map((key) => ({
+  key,
+  label: ui.hubs.faqGroups[key],
+  items: items.filter((i) => i.entry.data.group === key),
+})).filter((g) => g.items.length > 0);
+const lastChecked = new Date(
+  Math.max(...entries.map((e) => e.data.updated.getTime())),
+);
+const schema = [
+  {
+    '@type': 'FAQPage',
+    inLanguage: LANG_META[lang].htmlLang,
+    mainEntity: entries.map((e) => ({
+      '@type': 'Question',
+      name: e.data.title,
+      acceptedAnswer: { '@type': 'Answer', text: e.data.answer },
+    })),
+  },
+];
 ---
 
 <BaseLayout
@@ -28,25 +51,48 @@ const groups = (['general', 'troubleshooting'] as const)
   alternates={alternates}
   title={ui.hubs.faq.title}
   description={ui.hubs.faq.description}
+  schema={schema}
 >
   <Breadcrumbs items={[{ label: ui.sections.home, href: localize(lang, '/') }, { label: ui.sections.faq }]} />
   <h1>{ui.hubs.faq.title}</h1>
   <p class="lead">{ui.hubs.faq.description}</p>
+  <p class="meta">{fill(ui.hubs.faqChecked, { date: formatDate(lastChecked, lang) })}</p>
   <nav class="filters" aria-label={ui.sections.faq}>
     {groups.map((g) => <a href={`#${g.key}`}>{g.label}</a>)}
   </nav>
   {
     groups.map((g) => (
-      <section class="hub-group" id={g.key}>
+      <section class="hub-group faq-group" id={g.key}>
         <h2>{g.label}</h2>
-        <ul class="answers">
-          {g.items.map((e) => (
-            <li>
-              <a href={entryUrl('faq', e.id)}>{e.data.title}</a>
-              <p>{e.data.answer}</p>
-            </li>
-          ))}
-        </ul>
+        {g.items.map(({ entry, slug, Content, moreTitle }) => (
+          <article class="faq-item" id={slug}>
+            <h3>
+              <a href={`#${slug}`}>{entry.data.title}</a>
+            </h3>
+            <p class="faq-answer">{entry.data.answer}</p>
+            <div class="prose">
+              <Content />
+            </div>
+            {entry.data.more && moreTitle && (
+              <p class="faq-more">
+                <a href={localize(lang, entry.data.more)}>
+                  {fill(ui.hubs.faqMore, { title: moreTitle })}
+                </a>
+              </p>
+            )}
+            {entry.data.sources.length > 0 && (
+              <p class="faq-sources">
+                {ui.hubs.faqSources}{' '}
+                {entry.data.sources.map((s, i) => (
+                  <>
+                    {i > 0 && ', '}
+                    <a href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+                  </>
+                ))}
+              </p>
+            )}
+          </article>
+        ))}
       </section>
     ))
   }

@@ -43,19 +43,12 @@ const en = {
     heroCaption: 'The Base, in game',
     shotsTitle: 'Through the Base',
     shots: [
-      { image: 'keycard-and-locked-door', alt: 'A gold GILLA keycard on a concrete floor', note: 'Find the keycard', href: '/guides/keycard-and-locked-door/' },
-      { image: 'card-reader', alt: 'A card reader on the wall by a hazard door', note: 'Take it to the reader', href: '/guides/keycard-and-locked-door/' },
-      { image: 'the-mannequin', alt: 'A jagged hole torn through a storeroom floor', note: 'Then climb down, if you want to', href: '/guides/the-base-map/' },
+      { image: 'keycard', alt: 'A gold GILLA keycard on a concrete floor', note: 'Find the keycard', href: '/guides/recycler-and-keycard/#the-keycard-and-the-locked-door' },
+      { image: 'card-reader', alt: 'A card reader on the wall by a hazard door', note: 'Take it to the reader', href: '/guides/recycler-and-keycard/#the-keycard-and-the-locked-door' },
+      { image: 'floor-hole', alt: 'A jagged hole torn through a storeroom floor', note: 'Then climb down, if you want to', href: '/guides/the-base-map/#under-the-base' },
     ],
     openMap: 'Read the map guide',
     newHere: 'New here? Start with the beginner guide',
-    monsters: 'What hunts you',
-    allMonsters: 'All monster guides',
-    monsterNotes: {
-      grinner: { image: 'the-grinner', alt: 'The Grinner up close, its mouth ripped open', name: 'The Grinner', location: 'Inside the Base', note: 'Comes when you talk near it.' },
-      mannequin: { image: 'the-mannequin', alt: 'A jagged hole torn through a storeroom floor', name: 'The Mannequin', location: 'Under the Base', note: 'Three metres tall, no arms, no face.' },
-      mako: { image: 'the-mako', alt: 'The Mako tearing through the water', name: 'The Mako', location: 'Don’t Splash', note: 'Touch the water and it comes for you.' },
-    },
     placeholder: 'Search the wiki',
     popular: 'Popular:',
     popularTerms: ['keycard', 'Grinner', 'recycler', 'free'],
@@ -68,6 +61,34 @@ const en = {
     facts: 'GILLA at a glance',
     credit: 'Screenshots © Play Gilla, used to illustrate this unofficial guide.',
   },
+  finder: {
+    title: 'Modes and monsters at a glance',
+    filterLabel: 'Filter by mode',
+    all: 'All modes',
+    modes: 'The modes',
+    monsters: 'What hunts you',
+    goal: 'Goal',
+    map: 'Map',
+    rounds: 'Rounds',
+    where: 'Where',
+    trigger: 'What sets it off',
+    tip: 'What to do',
+    player: 'Player',
+    status: { all: 'Showing all modes', one: 'Showing {mode}' },
+    items: {
+      modes: [
+        { key: 'base', name: 'The Base', kind: 'Roam', goal: 'Bring gold bars and diamonds to the recycler', map: 'The Base and the levels under it', rounds: 'Not stated officially', href: '/guides/the-base-map/' },
+        { key: 'hunt', name: 'Be the Monster', kind: 'Hunt', goal: 'The monster catches players; players stay hidden', map: 'Chosen by vote', rounds: 'Two minutes for the other players', href: '/guides/be-the-monster/' },
+        { key: 'splash', name: 'Don’t Splash', kind: 'Survive', goal: 'Cross without touching the water', map: 'A flooded hall', rounds: 'Up to seven, each with a shorter clock', href: '/guides/dont-splash/' },
+      ],
+      monsters: [
+        { mode: 'base', image: 'the-grinner', alt: 'The Grinner up close, its mouth ripped open', name: 'The Grinner', where: 'In the Base', trigger: 'Talking near it', tip: 'Plan at the recycler, then go quiet', href: '/guides/monsters/#the-grinner' },
+        { mode: 'base', image: 'floor-hole', alt: 'A jagged hole torn through a storeroom floor', name: 'The Mannequin', where: 'Under the Base', trigger: 'Not stated officially', tip: 'Drop your loot and go down as a group', href: '/guides/monsters/#the-mannequin' },
+        { mode: 'hunt', image: '', alt: '', name: 'A player', where: 'The map the room voted for', trigger: 'Chosen each round', tip: 'Keep moving between sonar pings', href: '/guides/be-the-monster/' },
+        { mode: 'splash', image: 'the-mako', alt: 'The Mako tearing through the water', name: 'The Mako', where: 'In the water', trigger: 'Touching the water', tip: 'Stay on the platforms and keep moving', href: '/guides/monsters/#the-mako' },
+      ],
+    },
+  },
   sidebar: { route: 'Survival route' },
   hubs: {
     guides: {
@@ -78,7 +99,7 @@ const en = {
     faq: {
       title: 'GILLA VR questions, answered',
       description:
-        'Short answers about GILLA VR: price, release date, headsets, PC VR and Steam, age rating, Discord and troubleshooting.',
+        'Answers about GILLA VR: price, headsets, PC VR and Steam, age rating, playing with friends, muting, motion sickness, cheats, Discord and support.',
     },
     news: {
       title: 'GILLA VR news and updates',
@@ -90,7 +111,14 @@ const en = {
     emptyText:
       'We’re checking primary sources before adding entries. In the meantime, start with the survival route.',
     browse: 'Browse the guides',
-    faqGroups: { general: 'Game and account', troubleshooting: 'Troubleshooting' },
+    faqGroups: {
+      game: 'Getting the game',
+      playing: 'Playing and safety',
+      community: 'Community, rules and support',
+    },
+    faqChecked: 'Every answer checked on {date} against the official site, the terms and the store listing.',
+    faqMore: 'Full answer: {title}',
+    faqSources: 'Sources:',
   },
   entry: {
     checked: 'Checked {date} for {verified}',
@@ -99,7 +127,7 @@ const en = {
     routeLabel: 'Survival route, step {i} of {n}',
     previous: 'Previous: {title}',
     next: 'Next: {title}',
-    nextFallback: 'Explore the Base map',
+    nextFallback: 'Compare the game modes',
     sources: 'Sources and verification',
     sourcesText: 'Checked against the following sources on {date}. Early Access content may change.',
     related: 'Keep exploring',

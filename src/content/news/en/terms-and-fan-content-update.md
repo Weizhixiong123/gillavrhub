@@ -17,12 +17,12 @@ Play Gilla published its **fan content and assets rules** on **November 13, 2026
 
 ## For creators
 
-Streams, videos, screenshots and fan art are allowed, including monetised ones. Ripping or sharing game files, AI copies of monsters or maps, and unofficial merchandise are not. Summary: [can I make GILLA videos or fan art?](/faq/fan-content-rules/)
+Streams, videos, screenshots and fan art are allowed, including monetised ones. Ripping or sharing game files, AI copies of monsters or maps, and unofficial merchandise are not. Summary: [can I make GILLA videos or fan art?](/faq/#fan-content-rules)
 
 ## For players
 
-The terms set minimum ages by region (17 in the US, 16 in most of Europe, 18 in Australia and Germany), ban cheats and mod menus, and state that coins and items can't be sold or traded. See [age rating](/faq/age-rating/) and [cheats and mods](/faq/cheats-and-mods/).
+The terms set minimum ages by region (17 in the US, 16 in most of Europe, 18 in Australia and Germany), ban cheats and mod menus, and state that coins and items can't be sold or traded. See [age rating](/guides/how-to-get-gilla/#age-rating) and [cheats and mods](/faq/#cheats-and-mods).
 
 ## Player model
 
-The official Blender and FBX model can be downloaded from [gillavr.com/player-model](https://gillavr.com/player-model). It supports your in-game colour code and can be used for profile pictures, thumbnails and fan art. You can't sell it or share its files. See [change your fur colour](/guides/change-fur-colour/).
+The official Blender and FBX model can be downloaded from [gillavr.com/player-model](https://gillavr.com/player-model). It supports your in-game colour code and can be used for profile pictures, thumbnails and fan art. You can't sell it or share its files. See [change your fur colour](/guides/quests-levels-and-shop/#fur-colour).

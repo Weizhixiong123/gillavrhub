@@ -72,9 +72,27 @@ export function related<
     }));
 }
 
-/** Groups FAQ entries for the hub page: troubleshooting gets its own list. */
-export function faqGroup(e: CollectionEntry<'faq'>) {
-  if (e.data.tags.includes('troubleshooting'))
-    return 'troubleshooting' as const;
-  return 'general' as const;
+/** FAQ questions all live on one page; each has an anchor named after its slug. */
+export const faqUrl = (id: string) =>
+  localize(langOf(id), `/faq/#${slugOf(id)}`);
+
+/** FAQ groups, in the order the FAQ page lists them. */
+export const FAQ_GROUPS = ['game', 'playing', 'community'] as const;
+
+/**
+ * Categories get their own hub page only when they hold two or more guides; a hub
+ * with a single card would just be a thin page in front of that guide.
+ */
+export const MIN_CATEGORY_GUIDES = 2;
+
+/** Where a category link should go: its hub page, or straight to its only guide. */
+export function categoryHref(
+  lang: Lang,
+  key: string,
+  guides: CollectionEntry<'guides'>[],
+): string {
+  const inCategory = guides.filter((g) => g.data.category === key);
+  return inCategory.length >= MIN_CATEGORY_GUIDES
+    ? localize(lang, `/guides/${key}/`)
+    : entryUrl('guides', inCategory[0].id);
 }

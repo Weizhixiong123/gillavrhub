@@ -26,6 +26,8 @@ const guides = defineCollection({
     series: z.string().optional(),
     step: z.number().int().positive().optional(),
     featured: z.boolean().default(false),
+    /** Interactive block rendered above the guide text. */
+    module: z.enum(['mode-finder']).optional(),
   }),
 });
 
@@ -34,6 +36,10 @@ const faq = defineCollection({
   schema: base.extend({
     /** Short direct answer shown first and used for FAQPage schema. */
     answer: z.string(),
+    /** Section of the single FAQ page this question is listed under. */
+    group: z.enum(['game', 'playing', 'community']),
+    /** Internal link to the guide section that covers this question in full. */
+    more: z.string().startsWith('/').optional(),
   }),
 });
 

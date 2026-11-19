@@ -3,7 +3,7 @@
 // alternates and noindex decisions live in one place.
 import type { CollectionEntry } from 'astro:content';
 import { LANGS, localize, type Lang } from '../i18n/locales';
-import { getPublished, slugOf, type Section } from '../lib/content';
+import { getPublished, slugOf, MIN_CATEGORY_GUIDES } from '../lib/content';
 import { GUIDE_CATEGORIES } from '../config/site.mjs';
 import Home from '../views/Home.astro';
 import GuidesHub from '../views/GuidesHub.astro';
@@ -17,7 +17,7 @@ import NotFound from '../views/NotFound.astro';
 type Page =
   | { view: 'home' | 'faq-hub' | 'news-hub' | 'about' | 'search' | 'not-found' }
   | { view: 'guides-hub'; category?: string }
-  | { view: 'entry'; section: Section; entry: CollectionEntry<Section> };
+  | { view: 'entry'; section: 'guides' | 'news'; entry: CollectionEntry<'guides' | 'news'> };
 
 export async function getStaticPaths() {
   const routes: { key: string; lang: Lang; page: Page }[] = [];
@@ -33,9 +33,10 @@ export async function getStaticPaths() {
     if (lang !== 'en') add('/404/', { view: 'not-found' });
     const guides = await getPublished('guides', lang);
     for (const category of GUIDE_CATEGORIES)
-      if (guides.some((g) => g.data.category === category))
+      if (guides.filter((g) => g.data.category === category).length >= MIN_CATEGORY_GUIDES)
         add(`/guides/${category}/`, { view: 'guides-hub', category });
-    for (const section of ['guides', 'faq', 'news'] as const)
+    // FAQ questions have no pages of their own: they are all answered on /faq/.
+    for (const section of ['guides', 'news'] as const)
       for (const entry of await getPublished(section, lang))
         add(`/${section}/${slugOf(entry.id)}/`, { view: 'entry', section, entry });
   }

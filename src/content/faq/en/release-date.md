@@ -12,11 +12,6 @@ sources:
     url: https://www.meta.com/experiences/gilla/1440338659156877/
   - label: 'GILLA official site (gillavr.com)'
     url: https://gillavr.com/
+group: 'game'
+more: '/guides/how-to-get-gilla/#release-date-and-early-access'
 ---
-## Is it finished?
-
-No. GILLA is in **Early Access**, and the official site says content is subject to change. The terms add that Play Gilla can add, change or remove maps, modes, monsters, items and features. We note the version each page was checked against at the top of the page.
-
-## Where can I follow updates?
-
-The [official Discord](/faq/discord/) and our [news page](/news/).

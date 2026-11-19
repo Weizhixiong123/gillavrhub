@@ -970,45 +970,155 @@ main {
   border-color: var(--accent);
 }
 
-/* Monsters: a plain ruled table of who hunts where and what sets it off. */
-.monster-list {
+/* Modes and monsters finder: ruled rows, filtered in place by mode. */
+.finder {
+  margin-top: 48px;
+}
+.finder-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  margin-bottom: 8px;
+}
+.finder-head h2,
+.finder-head h3 {
+  margin: 0;
+}
+.finder-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.finder-filters[hidden] {
+  display: none;
+}
+.finder-filters button {
+  min-height: 40px;
+  padding: 6px 14px;
+  font-size: 15px;
+}
+.finder-filters button[aria-pressed='true'] {
+  background: var(--keycard);
+}
+.finder-sub {
+  margin: 24px 0 6px;
+  font-size: 17px;
+  color: var(--shade);
+}
+.finder-modes,
+.finder-monsters {
   list-style: none;
   margin: 0;
   padding: 0;
   border-bottom: 1px solid var(--line);
 }
-.monster-list li {
+.finder-modes li,
+.finder-monsters li {
   display: grid;
-  grid-template-columns: 128px minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.4fr);
-  gap: 20px;
-  align-items: center;
+  gap: 6px 20px;
+  align-items: start;
   padding: 14px 0;
   border-top: 1px solid var(--line);
 }
-.monster-list img {
+.finder-modes li {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+.finder-monsters li {
+  grid-template-columns: 128px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+}
+.finder li[hidden] {
+  display: none;
+}
+.finder li a {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+  text-decoration: none;
+}
+.finder li a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.finder-kind {
+  display: block;
+  margin-top: 2px;
+  font-weight: 650;
+  color: var(--shade);
+}
+.finder-label {
+  display: block;
+  font-size: 13px;
+  color: var(--shade);
+}
+.finder-monsters img,
+.finder-thumb {
   width: 128px;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   border: 2px solid var(--ink);
   border-radius: 4px;
 }
-.monster-list a {
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.15;
+.finder-thumb {
+  display: grid;
+  place-items: center;
+  border-style: dashed;
+  color: var(--shade);
+  font: 700 18px/1 var(--marker);
+}
+.prose .finder {
+  margin: 8px 0 32px;
+}
+
+/* FAQ: every question answered on one page. */
+.faq-item {
+  max-width: var(--measure);
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 16px;
+}
+.faq-group h2 + .faq-item {
+  border-top: 0;
+}
+.faq-item h3 {
+  margin-bottom: 6px;
+}
+.faq-item h3 a {
   color: var(--ink);
   text-decoration: none;
 }
-.monster-list a:hover {
+.faq-item h3 a:hover {
   color: var(--accent);
   text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
 }
-.monster-location {
-  font-weight: 650;
+.faq-item:target h3 {
+  text-decoration: underline;
+  text-decoration-color: var(--keycard);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
 }
-.monster-note {
+.faq-answer {
+  font-size: 18px;
+}
+.faq-item .prose h4 {
+  margin: 18px 0 4px;
+  font-size: 17px;
+}
+.faq-more {
+  font-weight: 700;
+}
+.faq-sources {
+  margin: 0;
+  font-size: 14px;
+  color: var(--shade);
+}
+.faq-sources a {
   color: var(--shade);
 }
 
@@ -1144,14 +1254,18 @@ main {
   .home-grid {
     gap: 0;
   }
-  .monster-list li {
-    grid-template-columns: 112px minmax(0, 1fr);
-    gap: 2px 16px;
+  .finder-modes li {
+    grid-template-columns: 1fr;
+  }
+  .finder-monsters li {
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 6px 14px;
     align-items: start;
   }
-  .monster-list img {
+  .finder-monsters img,
+  .finder-thumb {
     grid-row: span 3;
-    width: 112px;
+    width: 104px;
   }
   .shot-steps {
     grid-template-columns: none;

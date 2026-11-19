@@ -1,0 +1,43 @@
+# Cloudflare Pages redirects. Pages merged on 2026-11-19 point to the page and section
+# that now covers them. Each path is listed with and without the trailing slash.
+
+/guides/controls-and-movement/ /guides/movement-and-comfort/ 301
+/guides/controls-and-movement /guides/movement-and-comfort/ 301
+/guides/loot-and-recycler/ /guides/recycler-and-keycard/ 301
+/guides/loot-and-recycler /guides/recycler-and-keycard/ 301
+/guides/keycard-and-locked-door/ /guides/recycler-and-keycard/#the-keycard-and-the-locked-door 301
+/guides/keycard-and-locked-door /guides/recycler-and-keycard/#the-keycard-and-the-locked-door 301
+/guides/the-grinner/ /guides/monsters/#the-grinner 301
+/guides/the-grinner /guides/monsters/#the-grinner 301
+/guides/the-mannequin/ /guides/monsters/#the-mannequin 301
+/guides/the-mannequin /guides/monsters/#the-mannequin 301
+/guides/the-mako/ /guides/monsters/#the-mako 301
+/guides/the-mako /guides/monsters/#the-mako 301
+/guides/change-fur-colour/ /guides/quests-levels-and-shop/#fur-colour 301
+/guides/change-fur-colour /guides/quests-levels-and-shop/#fur-colour 301
+/faq/is-it-free/ /guides/how-to-get-gilla/#price 301
+/faq/is-it-free /guides/how-to-get-gilla/#price 301
+/faq/supported-headsets/ /guides/how-to-get-gilla/#supported-headsets 301
+/faq/supported-headsets /guides/how-to-get-gilla/#supported-headsets 301
+/faq/pc-vr-steam/ /guides/how-to-get-gilla/#pc-vr-and-steam 301
+/faq/pc-vr-steam /guides/how-to-get-gilla/#pc-vr-and-steam 301
+/faq/release-date/ /guides/how-to-get-gilla/#release-date-and-early-access 301
+/faq/release-date /guides/how-to-get-gilla/#release-date-and-early-access 301
+/faq/age-rating/ /guides/how-to-get-gilla/#age-rating 301
+/faq/age-rating /guides/how-to-get-gilla/#age-rating 301
+/faq/motion-sickness/ /guides/movement-and-comfort/#motion-sickness 301
+/faq/motion-sickness /guides/movement-and-comfort/#motion-sickness 301
+/faq/play-with-friends/ /guides/play-with-friends/ 301
+/faq/play-with-friends /guides/play-with-friends/ 301
+/faq/mute-and-report/ /guides/play-with-friends/#mute-and-report 301
+/faq/mute-and-report /guides/play-with-friends/#mute-and-report 301
+/faq/contact-support/ /faq/#contact-support 301
+/faq/contact-support /faq/#contact-support 301
+/faq/discord/ /faq/#discord 301
+/faq/discord /faq/#discord 301
+/faq/cheats-and-mods/ /faq/#cheats-and-mods 301
+/faq/cheats-and-mods /faq/#cheats-and-mods 301
+/faq/fan-content-rules/ /faq/#fan-content-rules 301
+/faq/fan-content-rules /faq/#fan-content-rules 301
+/guides/progression/ /guides/quests-levels-and-shop/ 301
+/guides/progression /guides/quests-levels-and-shop/ 301

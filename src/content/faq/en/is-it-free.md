@@ -12,11 +12,6 @@ sources:
     url: https://www.meta.com/experiences/gilla/1440338659156877/
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
+group: 'game'
+more: '/guides/how-to-get-gilla/#price'
 ---
-## What costs money
-
-The game itself is free. The in-game shop sells **cosmetics**, **limited items** and **bundles**. Purchases go through the **Meta Horizon Store** and follow its payment and refund rules. See [the shop and cosmetics](/guides/quests-levels-and-shop/).
-
-## Can I sell or trade items?
-
-No. The terms say coins, cosmetics and other items are licensed to you for in-game use only. They can't be sold, traded or cashed out, and buying or selling anything for real money is against the rules.

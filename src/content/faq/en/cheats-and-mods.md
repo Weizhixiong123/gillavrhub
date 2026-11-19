@@ -10,8 +10,9 @@ sources:
     url: https://gillavr.com/terms
   - label: 'GILLA fan content & assets rules (updated Nov 13, 2026)'
     url: https://gillavr.com/fan-content
+group: 'playing'
 ---
-## What the terms ban
+#### What the terms ban
 
 - cheats, hacks, mod menus, injectors, and speed or fly hacks;
 - playing on a modified or unofficial copy of GILLA;
@@ -19,6 +20,6 @@ sources:
 - faking, copying or generating coins, items or purchases;
 - getting around a ban, mute or kick with another account.
 
-## Risk to you
+#### Risk to you
 
 Bans can be temporary or permanent, and you can lose coins, items and progress. Play Gilla doesn't refund anything lost to a ban. Downloads that promise free coins or mod menus are also a common way to spread malware. Only install the game from the Meta Quest store.

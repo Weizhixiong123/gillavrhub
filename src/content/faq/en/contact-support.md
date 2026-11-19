@@ -10,8 +10,9 @@ sources:
     url: https://gillavr.com/
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
+group: 'community'
 ---
-## What to include
+#### What to include
 
 These are our suggestions:
 
@@ -21,10 +22,10 @@ These are our suggestions:
 
 Don't share passwords. Support doesn't need them.
 
-## Refunds
+#### Refunds
 
 Purchases go through the Meta Horizon Store and follow its refund rules. Otherwise, the terms say all sales are final except where the law says otherwise.
 
-## Fan content questions
+#### Fan content questions
 
 To ask permission for something the fan content rules don't cover (merchandise, collaborations, commercial projects), email the same address. Permission only counts in writing.

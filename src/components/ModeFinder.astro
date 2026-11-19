@@ -1,0 +1,94 @@
+---
+/**
+ * Modes and monsters at a glance: every mode and every monster is in the HTML, so
+ * the block reads fine without JavaScript and is indexed in full. The script only
+ * adds the mode filter, which hides rows in place instead of loading a new page.
+ */
+import { Image } from 'astro:assets';
+import { localize, type Lang } from '../i18n/locales';
+import { t } from '../i18n/ui';
+import { screen } from '../lib/imagery';
+
+interface Props {
+  lang: Lang;
+  /** Heading level for the block title, so it fits the page it sits on. */
+  level?: 'h2' | 'h3';
+}
+const { lang, level = 'h2' } = Astro.props;
+const ui = t(lang);
+const f = ui.finder;
+const Title = level;
+const Sub = level === 'h2' ? 'h3' : 'h4';
+const id = `finder-${level}`;
+---
+
+<section class="finder" data-finder aria-labelledby={id}>
+  <div class="finder-head">
+    <Title id={id}>{f.title}</Title>
+    <div class="finder-filters" role="group" aria-label={f.filterLabel} data-filters hidden>
+      <button type="button" class="secondary" aria-pressed="true" data-mode="all">{f.all}</button>
+      {f.items.modes.map((m) => (
+        <button type="button" class="secondary" aria-pressed="false" data-mode={m.key}>
+          {m.name}
+        </button>
+      ))}
+    </div>
+  </div>
+  <p class="sr-only" aria-live="polite" data-status data-all={f.status.all} data-one={f.status.one}></p>
+
+  <Sub class="finder-sub">{f.modes}</Sub>
+  <ul class="finder-modes" role="list">
+    {f.items.modes.map((m) => (
+      <li data-mode={m.key}>
+        <div>
+          <a href={localize(lang, m.href)}>{m.name}</a>
+          <span class="finder-kind">{m.kind}</span>
+        </div>
+        <div><span class="finder-label">{f.goal}</span>{m.goal}</div>
+        <div><span class="finder-label">{f.map}</span>{m.map}</div>
+        <div><span class="finder-label">{f.rounds}</span>{m.rounds}</div>
+      </li>
+    ))}
+  </ul>
+
+  <Sub class="finder-sub">{f.monsters}</Sub>
+  <ul class="finder-monsters" role="list">
+    {f.items.monsters.map((m) => (
+      <li data-mode={m.mode}>
+        {m.image ? (
+          <Image src={screen(m.image)} alt={m.alt} widths={[160, 320]} sizes="128px" loading="lazy" />
+        ) : (
+          <span class="finder-thumb" aria-hidden="true">{f.player}</span>
+        )}
+        <div>
+          <a href={localize(lang, m.href)}>{m.name}</a>
+          <span class="finder-kind">{m.where}</span>
+        </div>
+        <div><span class="finder-label">{f.trigger}</span>{m.trigger}</div>
+        <div><span class="finder-label">{f.tip}</span>{m.tip}</div>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-finder]')) {
+    const filters = root.querySelector<HTMLElement>('[data-filters]');
+    const status = root.querySelector<HTMLElement>('[data-status]');
+    if (!filters || !status) continue;
+    const buttons = [...filters.querySelectorAll<HTMLButtonElement>('button')];
+    const rows = [...root.querySelectorAll<HTMLElement>('li[data-mode]')];
+    filters.hidden = false;
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        const mode = button.dataset.mode;
+        for (const b of buttons) b.setAttribute('aria-pressed', String(b === button));
+        for (const row of rows) row.hidden = mode !== 'all' && row.dataset.mode !== mode;
+        status.textContent =
+          mode === 'all'
+            ? (status.dataset.all ?? '')
+            : (status.dataset.one ?? '').replace('{mode}', button.textContent?.trim() ?? '');
+      });
+    }
+  }
+</script>

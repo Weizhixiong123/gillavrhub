@@ -4,7 +4,8 @@ import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
 import LinkCards from '../components/LinkCards.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import AdNative from '../components/AdNative.astro';
-import { getPublished, entryUrl, related, type Section } from '../lib/content';
+import ModeFinder from '../components/ModeFinder.astro';
+import { getPublished, entryUrl, related, categoryHref } from '../lib/content';
 import { localize, formatDate, LANG_META, type Lang } from '../i18n/locales';
 import { t, fill } from '../i18n/ui';
 import { SITE_NAME } from '../config/site.mjs';
@@ -15,22 +16,17 @@ import { slugOf } from '../lib/content';
 interface Props {
   lang: Lang;
   alternates: Alternate[];
-  section: Section;
-  entry: CollectionEntry<Section>;
+  section: 'guides' | 'news';
+  entry: CollectionEntry<'guides' | 'news'>;
 }
 const { lang, alternates, section, entry } = Astro.props;
 const ui = t(lang);
 const data = entry.data as CollectionEntry<'guides'>['data'] &
-  Partial<CollectionEntry<'faq'>['data']> &
   Partial<CollectionEntry<'news'>['data']>;
 const { Content, headings } = await render(entry);
 const pool = await getPublished(section, lang);
-const recommendations = related(entry as never, pool as never[], section);
-// FAQ answers are short; send readers on to the guides that cover the same topic.
-const relatedGuides =
-  section === 'faq'
-    ? related(entry as never, (await getPublished('guides', lang)) as never[], 'guides', 4)
-    : [];
+// A short "keep exploring" list at the end; the useful next steps are linked in the text.
+const recommendations = related(entry as never, pool as never[], section, 4);
 const series = data.series
   ? (pool as CollectionEntry<'guides'>[])
       .filter((e) => e.data.series === data.series)
@@ -57,7 +53,12 @@ const crumbs = [
     ? [
         {
           label: categoryLabel,
-          href: localize(lang, `/guides/${data.category}/`),
+          // Single-guide categories have no hub page; link to the guides index instead.
+          href:
+            categoryHref(lang, data.category, pool as CollectionEntry<'guides'>[]) ===
+            entryUrl('guides', entry.id)
+              ? `${localize(lang, '/guides/')}#${data.category}`
+              : categoryHref(lang, data.category, pool as CollectionEntry<'guides'>[]),
         },
       ]
     : []),
@@ -74,20 +75,7 @@ const schema: Record<string, unknown>[] = [
     })),
   },
 ];
-if (data.answer)
-  schema.push({
-    '@type': 'FAQPage',
-    inLanguage: LANG_META[lang].htmlLang,
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: data.title,
-        acceptedAnswer: { '@type': 'Answer', text: data.answer },
-      },
-    ],
-  });
-else
-  schema.push({
+schema.push({
     '@type': section === 'news' ? 'NewsArticle' : 'Article',
     headline: data.title,
     description: data.description,
@@ -121,7 +109,6 @@ else
       verified: data.verifiedFor ?? ui.entry.defaultVerified,
     })}
   </p>
-  {data.answer && <p class="lead">{data.answer}</p>}
   {section === 'guides' && <p class="lead">{data.summary ?? data.description}</p>}
   {image && (
     <figure class="entry-image">
@@ -141,6 +128,7 @@ else
       </figcaption>
     </figure>
   )}
+  {data.module === 'mode-finder' && <ModeFinder lang={lang} />}
   {headings.filter((h) => h.depth === 2).length > 1 && (
     <nav class="toc" aria-label={ui.entry.toc}>
       <strong>{ui.entry.toc}</strong>
@@ -183,7 +171,7 @@ else
           href={
             next
               ? entryUrl('guides', next.id)
-              : localize(lang, '/guides/the-base-map/')
+              : localize(lang, '/guides/game-modes/')
           }
         >
           {fill(ui.entry.next, {
@@ -211,12 +199,6 @@ else
     </section>
   )}
   <AdNative label={ui.adLabel} />
-  {relatedGuides.length > 0 && (
-    <section>
-      <h2>{ui.entry.relatedGuides}</h2>
-      <LinkCards cards={relatedGuides} variant="list" />
-    </section>
-  )}
   {recommendations.length > 0 && (
     <section>
       <h2>{ui.entry.related}</h2>

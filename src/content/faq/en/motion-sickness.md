@@ -12,23 +12,6 @@ sources:
     url: https://gillavr.com/terms
   - label: 'GILLA official site (gillavr.com)'
     url: https://gillavr.com/
+group: 'playing'
+more: '/guides/movement-and-comfort/#motion-sickness'
 ---
-## Official safety advice
-
-From the terms of service:
-
-- take a break at least every 30 minutes;
-- stop straight away if you feel sick, dizzy, tired or sore;
-- clear a big space, because you'll be swinging your arms fast;
-- if you or anyone in your family has had a seizure or blackout from flashing lights, ask a doctor before playing.
-
-## Easing in
-
-These are general VR tips, not official instructions:
-
-- start with short sessions and stop **before** you feel unwell, not after;
-- play in a cool room, and keep a fan pointed at you if you can;
-- try the lobby before a full round of [Don't Splash](/guides/dont-splash/), which is the fastest mode;
-- sit out a round if a chase leaves you dizzy.
-
-See also [controls and movement](/guides/controls-and-movement/).

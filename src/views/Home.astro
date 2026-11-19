@@ -1,6 +1,7 @@
 ---
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
-import { getPublished, entryUrl } from '../lib/content';
+import { getPublished, entryUrl, faqUrl, categoryHref } from '../lib/content';
+import ModeFinder from '../components/ModeFinder.astro';
 import { GUIDE_CATEGORIES, OFFICIAL_LINKS } from '../config/site.mjs';
 import { localize, plural, type Lang } from '../i18n/locales';
 import { t } from '../i18n/ui';
@@ -38,20 +39,16 @@ const guides = await getPublished('guides', lang);
 const route = guides
   .filter((e) => e.data.series === 'first-night')
   .sort((a, b) => (a.data.step ?? 0) - (b.data.step ?? 0));
-const monsters = Object.entries(ui.home.monsterNotes).flatMap(
-  ([slug, monster]) => {
-    const entry = guides.find((guide) => guide.id === `${lang}/the-${slug}`);
-    return entry ? [{ ...monster, href: entryUrl('guides', entry.id) }] : [];
-  },
-);
 // Only categories with published guides become folders; empty ones would be dead ends.
 const folders = GUIDE_CATEGORIES.map((key) => ({
   key,
   ...ui.categories[key as keyof typeof ui.categories],
   count: guides.filter((e) => e.data.category === key).length,
-})).filter((f) => f.count > 0);
+}))
+  .filter((f) => f.count > 0)
+  .map((f) => ({ ...f, href: categoryHref(lang, f.key, guides) }));
 const answers = (await getPublished('faq', lang))
-  .filter((e) => !e.data.tags.includes('troubleshooting'))
+  .filter((e) => e.data.group !== 'community')
   .sort((a, b) => a.data.title.localeCompare(b.data.title, lang))
   .slice(0, 8);
 ---
@@ -138,30 +135,7 @@ const answers = (await getPublished('faq', lang))
     </ol>
   </section>
 
-  {monsters.length > 0 && (
-    <section aria-labelledby="monsters-title">
-      <div class="section-heading">
-        <h2 id="monsters-title">{ui.home.monsters}</h2>
-        <a href={localize(lang, '/guides/monsters/')}>{ui.home.allMonsters}</a>
-      </div>
-      <ul class="monster-list" role="list">
-        {monsters.map((monster) => (
-          <li>
-            <Image
-              src={screen(monster.image)}
-              alt={monster.alt}
-              widths={[160, 320]}
-              sizes="160px"
-              loading="lazy"
-            />
-            <a href={monster.href}>{monster.name}</a>
-            <span class="monster-location">{monster.location}</span>
-            <span class="monster-note">{monster.note}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
+  <ModeFinder lang={lang} />
 
   <section class="case-files" aria-labelledby="files-title">
     <div class="section-heading">
@@ -174,7 +148,7 @@ const answers = (await getPublished('faq', lang))
       <ul class="topic-list" role="list">
         {folders.map((f) => (
           <li>
-            <a href={localize(lang, `/guides/${f.key}/`)}>
+            <a href={f.href}>
               <span class="topic-name">{f.label}</span>
               <span class="topic-count">
                 {plural(lang, f.count, ui.home.guideCount)}
@@ -212,7 +186,7 @@ const answers = (await getPublished('faq', lang))
       <ul class="answers">
         {answers.map((e) => (
           <li>
-            <a href={entryUrl('faq', e.id)}>{e.data.title}</a>
+            <a href={faqUrl(e.id)}>{e.data.title}</a>
             <p>{e.data.answer}</p>
           </li>
         ))}

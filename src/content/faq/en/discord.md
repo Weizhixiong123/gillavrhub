@@ -10,13 +10,14 @@ sources:
     url: https://gillavr.com/
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
+group: 'community'
 ---
 Official invite: [discord.gg/gilla](https://discord.gg/gilla)
 
-## Rules there
+#### Rules there
 
 The terms of service also apply to the Discord server. No harassment, hate speech, sharing personal information, scams, real-money trading or spam.
 
-## For account problems
+#### For account problems
 
-For questions, reports and ban appeals, email official support. See [how to contact GILLA support](/faq/contact-support/).
+For questions, reports and ban appeals, email official support. See [how to contact GILLA support](/faq/#contact-support).

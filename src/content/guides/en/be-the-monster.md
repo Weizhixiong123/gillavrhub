@@ -14,7 +14,7 @@ In **Be the Monster**, the room **votes for a map**, then **one player becomes t
 ## How a round works
 
 1. **Map vote.** Everyone in the room votes on the map.
-2. **One player becomes the monster.**
+2. **One player becomes the monster.** It's a player, not one of the game's [three monsters](/guides/monsters/).
 3. **Two minutes.** The official site says everyone else "has two minutes."
 4. **Sonar pings** reveal players through walls.
 5. **Caught?** Watch the rest on the monster cam.
@@ -27,7 +27,6 @@ Our suggestions:
 - **As the monster, use the pings to plan your route** instead of chasing the closest player.
 - **Learn the maps.** The vote means you'll see more than one. We'll list them once we've checked them in-game.
 
-## Related
+## Play it with friends
 
-- [All game modes](/guides/game-modes/)
-- [All monsters](/guides/monsters/)
+Be the Monster works best with a full room. Make a [private room](/guides/play-with-friends/#private-room) and share the code, or join a busy public room. Compare it with the other modes in the [modes and monsters finder](/guides/game-modes/).

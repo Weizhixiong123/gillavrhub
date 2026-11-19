@@ -19,12 +19,12 @@ GILLA is a free multiplayer VR horror game for Meta Quest, made by Play Gilla. Y
 
 ## The core loop in one minute
 
-1. **Join a room.** Jump into a busy public room, or type a code on the lobby computer to play privately with friends. See [how to play with friends](/faq/play-with-friends/).
-2. **Move like an ape.** There is no thumbstick walking. You push off the floor and walls with your hands. See [controls and movement](/guides/controls-and-movement/).
+1. **Join a room.** Jump into a busy public room, or type a code on the lobby computer to play privately with friends. See [how to play with friends](/guides/play-with-friends/).
+2. **Move like an ape.** There is no thumbstick walking. You push off the floor and walls with your hands. See [controls and movement](/guides/movement-and-comfort/).
 3. **Find valuables.** Search the Base for **gold bars** and **diamonds**.
-4. **Bring them to the recycler.** Carry what you find back to the recycler. See [loot and the recycler](/guides/loot-and-recycler/).
+4. **Bring them to the recycler.** Carry what you find back to the recycler. See [loot and the recycler](/guides/recycler-and-keycard/).
 5. **Stay quiet.** Monsters come to the sound of talking. Plan before you go in, then whisper or go silent near danger.
-6. **Go deeper.** A keycard on a desk opens a locked door, and there is more under the Base. See [the keycard and locked door](/guides/keycard-and-locked-door/).
+6. **Go deeper.** A keycard on a desk opens a locked door, and there is more under the Base. See [the keycard and locked door](/guides/recycler-and-keycard/#the-keycard-and-the-locked-door).
 
 ## The three game modes
 
@@ -38,12 +38,12 @@ More detail: [GILLA game modes](/guides/game-modes/).
 
 ## The three monsters
 
-- **[The Grinner](/guides/the-grinner/)** hunts in the Base and comes when you talk near it.
-- **[The Mannequin](/guides/the-mannequin/)** hunts under the Base.
-- **[The Mako](/guides/the-mako/)** lives in the water in Don't Splash.
+- **[The Grinner](/guides/monsters/#the-grinner)** hunts in the Base and comes when you talk near it.
+- **[The Mannequin](/guides/monsters/#the-mannequin)** hunts under the Base.
+- **[The Mako](/guides/monsters/#the-mako)** lives in the water in Don't Splash.
 
 ## Before you put the headset on
 
-GILLA's comfort rating is **Intense** and it is rated **Mature 17+**. The official terms ask you to clear a big space, because you will swing your arms fast, and to take a break at least every 30 minutes. If VR movement makes you feel sick, read [comfort and motion sickness](/faq/motion-sickness/) first.
+GILLA's comfort rating is **Intense** and it is rated **Mature 17+**. The official terms ask you to clear a big space, because you will swing your arms fast, and to take a break at least every 30 minutes. If VR movement makes you feel sick, read [comfort and motion sickness](/guides/movement-and-comfort/#motion-sickness) first.
 
-Next step: learn how to get around in [controls and movement](/guides/controls-and-movement/).
+Next step: learn how to get around in [controls and movement](/guides/movement-and-comfort/).

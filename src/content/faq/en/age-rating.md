@@ -10,20 +10,6 @@ sources:
     url: https://vrdb.app/game/1440338659156877
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
+group: 'game'
+more: '/guides/how-to-get-gilla/#age-rating'
 ---
-## Minimum age by region
-
-The terms of service set the minimum age as the game's store rating in your country:
-
-| Where | Minimum age |
-| --- | --- |
-| United States | 17 |
-| Most of Europe | 16 |
-| Australia, Germany | 18 |
-| Everywhere else | 17 |
-
-Players under 18 (or under the age of adulthood where they live) need a parent or guardian to read and agree to the terms for them.
-
-## What's in it
-
-The terms warn that GILLA has blood, gore, jump scares, loud noises, flashing lights and dark places. It also has live voice chat with strangers. You can mute or report anyone. See [mute and report](/faq/mute-and-report/).

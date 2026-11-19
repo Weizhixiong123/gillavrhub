@@ -8,17 +8,6 @@ tags: [multiplayer, lobby, voice-chat]
 sources:
   - label: 'GILLA official site (gillavr.com)'
     url: https://gillavr.com/
+group: 'playing'
+more: '/guides/play-with-friends/'
 ---
-## Private room
-
-1. Go to the **lobby computer**.
-2. **Type a code** and share it with your friends.
-3. Your friends type the **same code** on their lobby computer.
-
-## Public room
-
-Jump straight into a **busy room** to play with other players.
-
-## Voice chat
-
-Voice chat is live, and your voice comes out of your ape's mouth in 3D for everyone in the room. Monsters come to the sound of talking, so a talkative group is easier to find. See [the Grinner](/guides/the-grinner/).

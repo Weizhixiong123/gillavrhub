@@ -10,8 +10,9 @@ sources:
     url: https://gillavr.com/fan-content
   - label: 'GILLA official player model'
     url: https://gillavr.com/player-model
+group: 'community'
 ---
-## Allowed
+#### Allowed
 
 - streaming and videos of yourself playing, monetised through ads, subscriptions, donations or sponsorships;
 - screenshots, clips, edits and memes;
@@ -19,7 +20,7 @@ sources:
 - the **official player model** from [gillavr.com/player-model](https://gillavr.com/player-model) for profile pictures, thumbnails, videos and fan art, under its license;
 - GILLA's name and screenshots in reviews, news, guides and wikis.
 
-## Not allowed
+#### Not allowed
 
 - ripping, extracting, decompiling or data-mining anything from the game;
 - sharing or selling anything taken from the game;

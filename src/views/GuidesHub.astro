@@ -2,7 +2,7 @@
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
 import LinkCards from '../components/LinkCards.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import { getPublished, entryUrl } from '../lib/content';
+import { getPublished, entryUrl, MIN_CATEGORY_GUIDES } from '../lib/content';
 import { GUIDE_CATEGORIES } from '../config/site.mjs';
 import { localize, type Lang } from '../i18n/locales';
 import { t, fill } from '../i18n/ui';
@@ -31,7 +31,16 @@ const groups = GUIDE_CATEGORIES.map((key) => ({
       href: entryUrl('guides', g.id),
       image: guideImage(slugOf(g.id), g.data.category),
     })),
-})).filter((g) => g.cards.length > 0);
+}))
+  .filter((g) => g.cards.length > 0)
+  // Single-guide categories have no hub page of their own: link to their section here.
+  .map((g) => ({
+    ...g,
+    href:
+      g.cards.length >= MIN_CATEGORY_GUIDES
+        ? localize(lang, `/guides/${g.key}/`)
+        : `${localize(lang, '/guides/')}#${g.key}`,
+  }));
 const current = category ? groups.find((g) => g.key === category)! : undefined;
 const title = current
   ? fill(ui.hubs.categoryTitle, { label: current.label })
@@ -69,7 +78,7 @@ const crumbs = [
     </a>
     {groups.map((g) => (
       <a
-        href={localize(lang, `/guides/${g.key}/`)}
+        href={g.href}
         aria-current={g.key === category ? 'page' : undefined}
       >
         {g.label}
@@ -82,9 +91,13 @@ const crumbs = [
     </div>
   ) : (
     groups.map((g) => (
-      <section class="hub-group">
+      <section class="hub-group" id={g.key}>
         <h2>
-          <a href={localize(lang, `/guides/${g.key}/`)}>{g.label}</a>
+          {g.cards.length >= MIN_CATEGORY_GUIDES ? (
+            <a href={g.href}>{g.label}</a>
+          ) : (
+            g.label
+          )}
         </h2>
         <p class="muted">{g.blurb}</p>
         <LinkCards cards={g.cards} />

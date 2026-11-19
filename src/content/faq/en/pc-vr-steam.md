@@ -12,11 +12,6 @@ sources:
     url: https://www.meta.com/experiences/gilla/1440338659156877/
   - label: 'VRDB: GILLA store listing data'
     url: https://vrdb.app/game/1440338659156877
+group: 'game'
+more: '/guides/how-to-get-gilla/#pc-vr-and-steam'
 ---
-## Can I play it on PC?
-
-The official site and the store listing only mention Meta Quest. You may be able to stream the Quest version to a PC with Meta's own tools, but that isn't an official PC release, and we haven't tested it.
-
-## Watch out for fake downloads
-
-The terms forbid modified, cracked or unofficial copies of GILLA, and players who use them can be banned. Only install GILLA from the Meta Quest store.

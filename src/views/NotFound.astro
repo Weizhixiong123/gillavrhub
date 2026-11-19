@@ -2,7 +2,7 @@
 // Shown for unknown URLs. Cloudflare Pages serves the nearest 404.html up the path, so
 // each language gets its own copy (see the 404 copy step in astro.config.mjs).
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
-import { getPublished, entryUrl } from '../lib/content';
+import { getPublished, entryUrl, categoryHref } from '../lib/content';
 import { GUIDE_CATEGORIES } from '../config/site.mjs';
 import { localize, plural, type Lang } from '../i18n/locales';
 import { t } from '../i18n/ui';
@@ -58,7 +58,7 @@ const topics = GUIDE_CATEGORIES.map((key) => ({
   <nav class="filters" aria-label={ui.notFound.topics}>
     {
       topics.map((c) => (
-        <a href={localize(lang, `/guides/${c.key}/`)}>
+        <a href={categoryHref(lang, c.key, guides)}>
           {c.label} ({plural(lang, c.count, ui.home.guideCount)})
         </a>
       ))

@@ -14,7 +14,11 @@ Unofficial GILLA VR wiki for Meta Quest players: the Base map, monsters, game mo
 ## Content
 
 - `src/content/guides/en/` holds guides. Each one sets a `category` (beginner, maps, monsters, modes or progression). The beginner route uses `series: first-night` with a `step`.
-- `src/content/faq/en/` holds short answers. `answer` feeds the FAQPage schema.
+- `src/content/faq/en/` holds short answers. They are all shown on one page, `/faq/`, under their `group` (game, playing or community), and each has an anchor named after its file (`/faq/#discord`). `answer` feeds the FAQPage schema. When a guide covers the question in full, set `more` to that guide section and leave the body empty instead of repeating it.
+- Each guide should answer one complete question. If a new topic can't stand on its own, add it as a section of an existing guide. A category only gets its own hub page once it has two guides.
+- Link to the next step where the reader needs it, in the paragraph itself (for example, link the Grinner where the text says monsters hear talking), not in a list at the end.
+- The modes and monsters finder (`src/components/ModeFinder.astro`) reads its rows from `finder` in `src/i18n/ui.ts`. Only put sourced facts there.
+- When you merge or rename a page, add a 301 for the old URL to `public/_redirects` (Cloudflare Pages), pointing at the page and section that now covers it.
 - `src/content/news/en/` holds updates, with `published` and `kind`.
 
 Every page has `updated`, `verifiedFor` and `sources`. Only state facts that a source supports, or that we confirmed in-game.
