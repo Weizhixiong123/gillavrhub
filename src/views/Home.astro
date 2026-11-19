@@ -36,6 +36,12 @@ const guides = await getPublished('guides', lang);
 const route = guides
   .filter((e) => e.data.series === 'first-night')
   .sort((a, b) => (a.data.step ?? 0) - (b.data.step ?? 0));
+const monsters = Object.entries(ui.home.monsterNotes).flatMap(
+  ([slug, monster]) => {
+    const entry = guides.find((guide) => guide.id === `${lang}/the-${slug}`);
+    return entry ? [{ ...monster, href: entryUrl('guides', entry.id) }] : [];
+  },
+);
 // Only categories with published guides become folders; empty ones would be dead ends.
 const folders = GUIDE_CATEGORIES.map((key) => ({
   key,
@@ -60,57 +66,108 @@ const answers = (await getPublished('faq', lang))
     <div class="dispatch-copy">
       <h1 id="home-title">{ui.home.title}</h1>
       <p class="lead">{ui.home.lead}</p>
-      <form action={localize(lang, '/search/')} class="search-form" role="search">
-        <label class="sr-only" for="home-query">{ui.nav.searchLabel}</label>
-        <input id="home-query" type="search" name="q" placeholder={ui.home.placeholder} required />
+      <form
+        action={localize(lang, '/search/')}
+        class="search-form"
+        role="search"
+      >
+        <label class="sr-only" for="home-query">
+          {ui.nav.searchLabel}
+        </label>
+        <input
+          id="home-query"
+          type="search"
+          name="q"
+          placeholder={ui.home.placeholder}
+          required
+        />
         <button type="submit">{ui.search.button}</button>
       </form>
       <p class="suggest">
         {ui.home.popular}
         {ui.home.popularTerms.map((term) => (
-          <a href={`${localize(lang, '/search/')}?q=${encodeURIComponent(term)}`}>{term}</a>
+          <a
+            href={`${localize(lang, '/search/')}?q=${encodeURIComponent(term)}`}
+          >
+            {term}
+          </a>
         ))}
       </p>
+      <div class="actions">
+        <a class="button" href={localize(lang, '/guides/the-base-map/')}>
+          {ui.home.openMap} <span aria-hidden="true">→</span>
+        </a>
+        <a class="start-link" href={localize(lang, '/guides/beginner-guide/')}>
+          {ui.nav.start}
+        </a>
+      </div>
     </div>
-    <aside class="facts" aria-labelledby="facts-title">
-      <h2 id="facts-title">{ui.home.facts}</h2>
-      <dl>
-        {FACTS.map((f) => (
-          <div>
-            <dt>{f.label}</dt>
-            <dd>{f.href ? <a href={f.href} rel="noopener noreferrer">{f.value}</a> : f.value}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="facts-note">
-        <a href={OFFICIAL_LINKS.store} rel="noopener noreferrer">Meta Quest store page</a> ·{' '}
-        <a href={OFFICIAL_LINKS.discord} rel="noopener noreferrer">Official Discord</a>
-      </p>
-    </aside>
+    <figure class="dispatch-art">
+      <img
+        src="/images/the-base-keycard.webp"
+        alt={ui.home.baseArtAlt}
+        width="1536"
+        height="1024"
+        fetchpriority="high"
+      />
+      <figcaption>{ui.home.baseArtCredit}</figcaption>
+    </figure>
   </section>
-  <div class="dispatch-tools">
-    <a class="start-link" href={localize(lang, '/guides/beginner-guide/')}>
-      <strong>{ui.home.newTitle}</strong>
-      <span>{plural(lang, route.length, ui.home.newSub)}</span>
-    </a>
-    <a class="map-link" href={localize(lang, '/guides/the-base-map/')}>
-      <strong>{ui.nav.map}</strong>
-      <span>Recycler, keycard, locked door, vault and the levels underneath</span>
-    </a>
-  </div>
+  <section class="base-route" aria-labelledby="base-route-title">
+    <h2 id="base-route-title">{ui.home.mapRoute}</h2>
+    <ol class="base-steps" role="list">
+      {ui.home.mapSteps.map((step, index, steps) => (
+        <li>
+          <span class="base-step-number" aria-hidden="true">
+            {index + 1}
+          </span>
+          <span>{step}</span>
+          {index === steps.length - 1 && <small>{ui.home.optional}</small>}
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  {monsters.length > 0 && (
+    <section aria-labelledby="monsters-title">
+      <div class="section-heading">
+        <h2 id="monsters-title">{ui.home.monsters}</h2>
+        <a href={localize(lang, '/guides/monsters/')}>{ui.home.allMonsters}</a>
+      </div>
+      <ul class="monster-list" role="list">
+        {monsters.map((monster) => (
+          <li>
+            <a href={monster.href}>
+              <span class="monster-location">{monster.location}</span>
+              <strong>{monster.name}</strong>
+              <span class="monster-note">{monster.note}</span>
+              <span class="monster-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 
   <section class="case-files" aria-labelledby="files-title">
     <div class="section-heading">
       <h2 id="files-title">{ui.home.topics}</h2>
-      <a href={localize(lang, '/guides/')}>{plural(lang, guides.length, ui.home.allGuides)}</a>
+      <a href={localize(lang, '/guides/')}>
+        {plural(lang, guides.length, ui.home.allGuides)}
+      </a>
     </div>
-    <nav class="guide-sign" aria-label={ui.home.topics}>
-      <ul>
+    <nav aria-label={ui.home.topics}>
+      <ul class="topic-list" role="list">
         {folders.map((f) => (
           <li>
             <a href={localize(lang, `/guides/${f.key}/`)}>
-              <span class="sign-dest">{f.label}</span>
-              <span class="sign-count">{plural(lang, f.count, ui.home.guideCount)}</span>
+              <span class="topic-count">
+                {plural(lang, f.count, ui.home.guideCount)}
+              </span>
+              <span class="topic-name">{f.label}</span>
+              <span aria-hidden="true">↗</span>
             </a>
           </li>
         ))}
@@ -151,4 +208,31 @@ const answers = (await getPublished('faq', lang))
       </ul>
     </section>
   </div>
+  <aside class="facts" aria-labelledby="facts-title">
+    <h2 id="facts-title">{ui.home.facts}</h2>
+    <dl>
+      {FACTS.map((f) => (
+        <div>
+          <dt>{f.label}</dt>
+          <dd>
+            {f.href ? (
+              <a href={f.href} rel="noopener noreferrer">
+                {f.value}
+              </a>
+            ) : (
+              f.value
+            )}
+          </dd>
+        </div>
+      ))}
+    </dl>
+    <p class="facts-note">
+      <a href={OFFICIAL_LINKS.store} rel="noopener noreferrer">
+        Meta Quest store page
+      </a>
+      <a href={OFFICIAL_LINKS.discord} rel="noopener noreferrer">
+        Official Discord
+      </a>
+    </p>
+  </aside>
 </BaseLayout>

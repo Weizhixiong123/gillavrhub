@@ -43,6 +43,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 const path = Astro.url.pathname;
 const homeHref = localize(lang, '/');
+const links = NAV.map(({ key, href }) => ({ key, href: localize(lang, href) }));
+const currentLink = links.find(({ href }) => path === href) ??
+  links.find(({ href }) => path.startsWith(href));
 const route = (await getPublished('guides', lang))
   .filter((e) => e.data.series === 'first-night')
   .sort((a, b) => (a.data.step ?? 0) - (b.data.step ?? 0));
@@ -148,7 +151,7 @@ if (
     <meta property="og:image:height" content="675" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="theme-color" content="#ececef" />
+    <meta name="theme-color" content="#f3f5fa" />
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -164,24 +167,21 @@ if (
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="logo" href={homeHref}>
-          <img class="logo-mark" src="/brand/mark.svg" width="20" height="20" alt="" />
+          <img class="logo-mark" src="/brand/mark.svg" width="32" height="32" alt="" />
           {SITE_SHORT_NAME}
         </a>
         <nav aria-label="Main">
           <ul>
-            {NAV.map((n) => {
-              const href = localize(lang, n.href);
-              return (
-                <li>
-                  <a
-                    href={href}
-                    aria-current={path.startsWith(href) ? 'page' : undefined}
-                  >
-                    {ui.nav[n.key as keyof typeof ui.nav]}
-                  </a>
-                </li>
-              );
-            })}
+            {links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={link === currentLink ? (path === link.href ? 'page' : 'location') : undefined}
+                >
+                  {ui.nav[link.key as keyof typeof ui.nav]}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
         <div class="header-tools">
