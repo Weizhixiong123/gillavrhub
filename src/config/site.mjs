@@ -1,7 +1,7 @@
 // Single source of truth for site-wide settings.
 
 // Set SITE_URL at build time if production uses a different domain.
-export const SITE_URL = process.env.SITE_URL || 'https://gillavrmap.wiki';
+export const SITE_URL = process.env.SITE_URL || 'https://gillavrhub.wiki';
 
 /**
  * Search-console ownership tokens for the HTML meta-tag method. Leave empty when the

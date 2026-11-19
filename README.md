@@ -1,6 +1,6 @@
 # GILLA VR Map Wiki
 
-Unofficial GILLA VR wiki for Meta Quest players: the Base map, monsters, game modes, controls and quick answers. Built with Astro and deployed as a static site to https://gillavrmap.wiki.
+Unofficial GILLA VR wiki for Meta Quest players: the Base map, monsters, game modes, controls and quick answers. Built with Astro and deployed as a static site to https://gillavrhub.wiki.
 
 ## Commands
 
