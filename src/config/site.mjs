@@ -14,12 +14,18 @@ export const SITE_VERIFICATION = {
 
 /**
  * Ad scripts. Empty string = no ad script and no ad disclosure on the About page.
- * Adsterra zones are created per site, so this site needs its own keys.
+ * Adsterra zones are created per site, so this site needs its own keys. The keys are
+ * public (they appear in every page's HTML); an environment variable overrides each.
  */
 export const ADS = {
   socialBar: process.env.ADSTERRA_SOCIAL_BAR_SRC || '',
   // Native Banner key; the container id must be exactly "container-<key>".
-  nativeBanner: process.env.ADSTERRA_NATIVE_KEY ?? '',
+  // Shown in the middle of guides and news posts.
+  nativeBanner: process.env.ADSTERRA_NATIVE_KEY ?? '9c98cf02eab307b4838a3e2b77550beb',
+  // Banner keys, shown above the footer. Only one loads per visit: the 728x90 on
+  // screens 768px and wider, the 320x50 below that.
+  bannerDesktop: process.env.ADSTERRA_BANNER_728_KEY ?? 'f1f840a860bc1e1886388ce210f5ffbe',
+  bannerMobile: process.env.ADSTERRA_BANNER_320_KEY ?? '81269ea987f65d435c75a960028c2dd6',
   // Google AdSense publisher id; loads adsbygoogle.js in <head> on every page.
   // Add the domain in AdSense and keep public/ads.txt in sync before turning this on.
   adsenseClient: process.env.ADSENSE_CLIENT ?? '',

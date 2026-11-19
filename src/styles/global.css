@@ -777,11 +777,35 @@ main {
   text-transform: uppercase;
   color: var(--shade);
 }
-.ad-slot:not(:has([id^='container-'] > *)) {
+.ad-native:not(:has([id^='container-'] > *)) {
   margin: 0;
 }
-.ad-slot:not(:has([id^='container-'] > *)) .ad-label {
+.ad-native:not(:has([id^='container-'] > *)) .ad-label {
   display: none;
+}
+/* Banner above the footer: centred, with its height reserved so the page doesn't jump
+   when it loads. The label shows once the network has inserted its iframe. */
+.ad-banner {
+  max-width: none;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+.ad-banner-frame {
+  display: flex;
+  justify-content: center;
+  min-height: 50px;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .ad-banner-frame {
+    min-height: 90px;
+  }
+}
+.ad-banner .ad-label {
+  display: none;
+}
+.ad-banner:has(iframe) .ad-label {
+  display: block;
 }
 
 /* Tools */

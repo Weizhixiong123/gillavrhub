@@ -1,0 +1,43 @@
+---
+// Adsterra banner above the footer. Only one banner loads per visit: the 728x90 on
+// screens 768px and wider, the 320x50 below that, so a phone never gets a banner wider
+// than its screen and the unused one never requests an impression.
+//
+// Adsterra's iframe banners read the global `atOptions` and must run where the banner
+// should appear, before the page finishes parsing. So the script picks a size, sets
+// `atOptions` and writes the network's script in place, exactly as the official
+// snippet does.
+import { ADS } from '../config/site.mjs';
+
+interface Props {
+  label: string;
+}
+const desktop = ADS.bannerDesktop;
+const mobile = ADS.bannerMobile;
+---
+
+{
+  desktop && mobile && (
+    <aside class="ad-slot ad-banner" aria-label={Astro.props.label}>
+      <p class="ad-label">{Astro.props.label}</p>
+      <div class="ad-banner-frame">
+        <script is:inline define:vars={{ desktop, mobile }}>
+          const wide = window.matchMedia('(min-width: 768px)').matches;
+          const banner = wide
+            ? { key: desktop, width: 728, height: 90 }
+            : { key: mobile, width: 320, height: 50 };
+          window.atOptions = {
+            key: banner.key,
+            format: 'iframe',
+            height: banner.height,
+            width: banner.width,
+            params: {},
+          };
+          document.write(
+            '<script src="https://bauval.org/22/' + banner.key + '"><\/script>',
+          );
+        </script>
+      </div>
+    </aside>
+  )
+}

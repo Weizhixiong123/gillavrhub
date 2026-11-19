@@ -5,6 +5,7 @@ import { getPublished, entryUrl } from '../lib/content';
 import { LANG_META, DEFAULT_LANG, localize, type Lang } from '../i18n/locales';
 import { t } from '../i18n/ui';
 import { shareImage } from '../lib/imagery';
+import AdBanner from '../components/AdBanner.astro';
 
 export type Alternate = { lang: Lang; href: string };
 
@@ -254,6 +255,12 @@ if (
         </aside>
       )}
     </div>
+
+    {!noindex && (
+      <div class="wrap">
+        <AdBanner label={ui.adLabel} />
+      </div>
+    )}
 
     <footer class="site-footer">
       <div class="wrap">

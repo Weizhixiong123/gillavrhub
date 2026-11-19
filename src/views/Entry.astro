@@ -146,6 +146,7 @@ schema.push({
   <article class="prose">
     <Content />
   </article>
+  <AdNative label={ui.adLabel} />
   {series.length > 0 && (
     <section class="series" aria-label={ui.sidebar.route}>
       <p class="series-label">
@@ -198,7 +199,6 @@ schema.push({
       </ul>
     </section>
   )}
-  <AdNative label={ui.adLabel} />
   {recommendations.length > 0 && (
     <section>
       <h2>{ui.entry.related}</h2>
