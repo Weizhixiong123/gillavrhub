@@ -1,37 +1,43 @@
 @import '@fontsource-variable/overpass';
 @import '@fontsource-variable/overpass/wght-italic.css';
 
-/* Facility signage in an abandoned base. Dark concrete page, pale text, exit-sign green
-   for navigation panels (white text on it), a brighter green for links on the dark page,
-   alarm red only for the beginner route and caution yellow only for warnings.
-   Overpass (an open Highway Gothic) keeps the signage feel. */
+/* The Base under fluorescent tubes: pale cool concrete walls, slate shadows, the gold
+   keycard for anything you press, hazard stripes only on the topic door, the card
+   reader's red LED only for the beginner route and focus, locker blue for links.
+   Overpass (an open Highway Gothic) keeps the facility-signage feel. */
 :root {
-  --road: #101312;
-  --verge: #181c1b;
-  --asphalt: #e9ebe7;
-  --shoulder: #a3aaa5;
-  --line: #2d3331;
-  --guide: #157a43;
-  --guide-dark: #0f6236;
-  --link: #74d897;
-  --link-hover: #a8ecbf;
-  --warning: #f2c230;
-  --shield: #a8262e;
+  --concrete: #d3d4da;
+  --wall: #ececef;
+  --ink: #23252d;
+  --shade: #4c4f5c;
+  --seam: #a9abb5;
+  --keycard: #e2ae2f;
+  --keycard-dark: #c9961c;
+  --locker: #1d4c8a;
+  --locker-dark: #123566;
+  --alarm: #b0242c;
+  --hazard: repeating-linear-gradient(
+    -45deg,
+    var(--keycard) 0 14px,
+    var(--ink) 14px 28px
+  );
   --measure: 44rem;
   --font: 'Overpass Variable', 'Arial Narrow', Arial, sans-serif;
-  color-scheme: dark;
+  color-scheme: light;
   font-family: var(--font);
   font-size: 17px;
   line-height: 1.6;
-  background: var(--road);
-  color: var(--asphalt);
+  background: var(--concrete);
+  color: var(--ink);
 }
 * {
   box-sizing: border-box;
 }
+/* Light falls off from the ceiling tubes: brighter at the top of the page. */
 body {
   margin: 0;
-  background: var(--road);
+  background: linear-gradient(var(--wall), var(--concrete) 640px) no-repeat,
+    var(--concrete);
 }
 img {
   max-width: 100%;
@@ -39,16 +45,16 @@ img {
   display: block;
 }
 a {
-  color: var(--link);
+  color: var(--locker);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 a:hover {
-  color: var(--link-hover);
+  color: var(--locker-dark);
   text-decoration-thickness: 2px;
 }
 :focus-visible {
-  outline: 3px solid var(--shield);
+  outline: 3px solid var(--alarm);
   outline-offset: 2px;
 }
 button,
@@ -67,7 +73,7 @@ h3 {
   letter-spacing: -0.01em;
   text-wrap: balance;
   margin: 0;
-  color: var(--asphalt);
+  color: var(--ink);
 }
 h1 {
   font-size: clamp(36px, 4.4vw, 52px);
@@ -89,25 +95,25 @@ p {
 .lead {
   font-size: 19px;
   line-height: 1.5;
-  color: var(--asphalt);
+  color: var(--ink);
   max-width: 58ch;
 }
 .muted {
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .meta {
   font-size: 14px;
-  color: var(--shoulder);
+  color: var(--shade);
   margin-bottom: 24px;
 }
 
 /* Controls */
 input,
 select {
-  border: 2px solid var(--asphalt);
+  border: 2px solid var(--ink);
   border-radius: 6px;
-  background: var(--road);
-  color: var(--asphalt);
+  background: #fff;
+  color: var(--ink);
   padding: 10px 12px;
   max-width: 100%;
 }
@@ -121,10 +127,10 @@ button,
   justify-content: center;
   min-height: 46px;
   padding: 10px 20px;
-  border: 2px solid var(--guide);
+  border: 2px solid var(--ink);
   border-radius: 6px;
-  background: var(--guide);
-  color: #fff;
+  background: var(--keycard);
+  color: var(--ink);
   font-weight: 700;
   font-size: 16px;
   text-decoration: none;
@@ -132,20 +138,19 @@ button,
 }
 button:hover,
 .button:hover {
-  background: var(--guide-dark);
-  border-color: var(--guide-dark);
-  color: #fff;
+  background: var(--keycard-dark);
+  color: var(--ink);
 }
 button.secondary,
 .button.secondary {
-  background: var(--road);
-  color: var(--asphalt);
-  border-color: var(--asphalt);
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
 }
 button.secondary:hover,
 .button.secondary:hover {
-  background: var(--verge);
-  color: var(--asphalt);
+  background: var(--wall);
+  color: var(--ink);
 }
 .actions {
   display: flex;
@@ -163,7 +168,7 @@ button.secondary:hover,
   top: -100px;
   left: 12px;
   z-index: 10;
-  background: var(--asphalt);
+  background: var(--ink);
   color: #fff;
   padding: 10px 14px;
 }
@@ -171,8 +176,8 @@ button.secondary:hover,
   top: 12px;
 }
 .site-header {
-  background: var(--road);
-  border-bottom: 1px solid var(--line);
+  background: var(--wall);
+  border-bottom: 1px solid var(--seam);
 }
 .header-inner {
   display: flex;
@@ -180,30 +185,27 @@ button.secondary:hover,
   gap: 28px;
   min-height: 72px;
 }
-/* The wordmark is a small guide sign: green panel, white border inset. */
+/* The wordmark is the access keycard you find on the desk: gold card, ink edge,
+   a magstripe along the bottom. */
 .logo {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 14px 5px;
-  background: var(--guide);
-  color: #fff;
-  border-radius: 7px;
-  box-shadow:
-    inset 0 0 0 3px var(--guide),
-    inset 0 0 0 5px #fff;
+  padding: 6px 14px 10px;
+  background: var(--keycard);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: inset 0 -5px 0 var(--ink);
   font: 800 19px/1.2 var(--font);
   text-decoration: none;
   white-space: nowrap;
 }
 .logo:hover {
-  color: #fff;
-  background: var(--guide-dark);
-  box-shadow:
-    inset 0 0 0 3px var(--guide-dark),
-    inset 0 0 0 5px #fff;
+  color: var(--ink);
+  background: var(--keycard-dark);
 }
-/* The brand mark: a G that turns into an exit arrow, white on exit-sign green. */
+/* The brand mark: a G that turns into an exit arrow, ink on the keycard. */
 .logo-mark {
   width: 20px;
   height: 20px;
@@ -224,15 +226,15 @@ button.secondary:hover,
   padding: 24px 0 21px;
   font-size: 15px;
   font-weight: 650;
-  color: var(--asphalt);
+  color: var(--ink);
   text-decoration: none;
   border-bottom: 3px solid transparent;
 }
 .site-header nav a:hover {
-  color: var(--link);
+  color: var(--locker);
 }
 .site-header nav a[aria-current] {
-  border-bottom-color: var(--link);
+  border-bottom-color: var(--locker);
 }
 .header-tools {
   display: flex;
@@ -243,16 +245,16 @@ button.secondary:hover,
 .lang-menu summary {
   font-size: 15px;
   font-weight: 600;
-  color: var(--asphalt);
+  color: var(--ink);
   text-decoration: none;
-  border: 1px solid var(--line);
+  border: 1px solid var(--seam);
   border-radius: 6px;
   padding: 6px 12px;
 }
 .search-link:hover,
 .lang-menu summary:hover {
-  border-color: var(--asphalt);
-  color: var(--asphalt);
+  border-color: var(--ink);
+  color: var(--ink);
 }
 .lang-menu {
   position: relative;
@@ -281,24 +283,24 @@ button.secondary:hover,
   margin: 0;
   padding: 6px;
   min-width: 190px;
-  background: var(--road);
-  border: 1px solid var(--line);
+  background: var(--wall);
+  border: 1px solid var(--seam);
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.45);
+  box-shadow: 0 8px 20px rgb(35 37 45 / 0.18);
 }
 .lang-menu a {
   display: block;
   padding: 7px 10px;
   border-radius: 5px;
-  color: var(--asphalt);
+  color: var(--ink);
   text-decoration: none;
 }
 .lang-menu a:hover {
-  background: var(--verge);
+  background: var(--concrete);
 }
 .lang-menu a[aria-current] {
   font-weight: 750;
-  color: var(--link);
+  color: var(--locker);
 }
 
 .layout {
@@ -324,10 +326,10 @@ main {
   margin: 0 0 10px;
 }
 .site-footer {
-  background: var(--verge);
-  border-top: 1px solid var(--line);
+  background: var(--wall);
+  border-top: 1px solid var(--seam);
   padding: 28px 0 40px;
-  color: var(--shoulder);
+  color: var(--shade);
   font-size: 14px;
 }
 .site-footer p {
@@ -343,7 +345,7 @@ main {
   margin: 0 0 14px;
 }
 .site-footer a {
-  color: var(--asphalt);
+  color: var(--ink);
   font-weight: 600;
 }
 
@@ -352,11 +354,11 @@ main {
   flex-wrap: wrap;
   gap: 6px;
   font-size: 14px;
-  color: var(--shoulder);
+  color: var(--shade);
   margin-bottom: 16px;
 }
 .breadcrumbs a {
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .section-heading {
   display: flex;
@@ -391,26 +393,26 @@ main {
   display: grid;
   align-items: start;
   text-decoration: none;
-  color: var(--asphalt);
+  color: var(--ink);
 }
 .route-list a::before,
 .side-route a::before {
   content: counter(step);
   display: grid;
   place-items: center;
-  background: var(--shield);
+  background: var(--alarm);
   color: #fff;
   font-weight: 800;
   border-radius: 6px 6px 50% 50% / 6px 6px 38% 38%;
   box-shadow:
-    inset 0 0 0 2px var(--shield),
+    inset 0 0 0 2px var(--alarm),
     inset 0 0 0 3px #fff;
 }
 .route-list a {
   grid-template-columns: 38px 1fr;
   gap: 14px;
   padding: 14px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--seam);
   font-weight: 700;
 }
 .route-list a::before {
@@ -425,10 +427,10 @@ main {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.45;
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .route-list a:hover {
-  color: var(--link);
+  color: var(--locker);
 }
 .side-route {
   font-size: 15px;
@@ -447,7 +449,7 @@ main {
 }
 .side-route a:hover,
 .side-route a[aria-current] {
-  color: var(--link);
+  color: var(--locker);
 }
 .side-route a[aria-current] {
   font-weight: 700;
@@ -464,16 +466,17 @@ main {
 }
 .card {
   display: block;
-  color: var(--asphalt);
+  color: var(--ink);
   text-decoration: none;
 }
 .card:not(.image-card) {
   padding: 16px 18px;
-  border: 1px solid var(--line);
+  background: var(--wall);
+  border: 1px solid var(--seam);
   border-radius: 8px;
 }
 .card:not(.image-card):hover {
-  border-color: var(--asphalt);
+  border-color: var(--ink);
 }
 .card h2,
 .card h3 {
@@ -483,11 +486,11 @@ main {
   margin: 0;
   font-size: 15px;
   line-height: 1.45;
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .card:hover h2,
 .card:hover h3 {
-  color: var(--link);
+  color: var(--locker);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
@@ -501,7 +504,7 @@ main {
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: contain;
-  background: var(--asphalt);
+  background: var(--ink);
   border-radius: 6px;
   flex: none;
 }
@@ -529,7 +532,7 @@ main {
   max-width: var(--measure);
 }
 .link-list li {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--seam);
   padding: 12px 0;
 }
 .link-list a {
@@ -539,7 +542,7 @@ main {
   margin: 2px 0 0;
   font-size: 14px;
   line-height: 1.45;
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .answers {
   list-style: none;
@@ -547,7 +550,7 @@ main {
   padding: 0;
 }
 .answers li {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--seam);
   padding: 13px 0;
 }
 .answers a {
@@ -557,7 +560,7 @@ main {
   margin: 3px 0 0;
   font-size: 15px;
   line-height: 1.45;
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .news-list {
   max-width: var(--measure);
@@ -566,11 +569,11 @@ main {
   margin: 2px 0 4px;
   font-size: 14px;
   font-weight: 650;
-  color: var(--asphalt);
+  color: var(--ink);
 }
 .notice {
   padding: 20px 22px;
-  background: var(--verge);
+  background: var(--wall);
   border-radius: 8px;
   max-width: var(--measure);
 }
@@ -586,25 +589,25 @@ main {
   margin: 20px 0 8px;
 }
 .filters a {
-  border: 1px solid var(--line);
+  border: 1px solid var(--seam);
   border-radius: 999px;
   padding: 5px 14px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--asphalt);
+  color: var(--ink);
   text-decoration: none;
 }
 .filters a:hover {
-  border-color: var(--asphalt);
+  border-color: var(--ink);
 }
 .filters a[aria-current] {
-  background: var(--guide);
-  border-color: var(--guide);
-  color: #fff;
+  background: var(--keycard);
+  border-color: var(--ink);
+  color: var(--ink);
 }
 .hub-group {
   padding-block: 32px 8px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--seam);
   margin-top: 28px;
 }
 .hub-group:first-of-type {
@@ -615,11 +618,11 @@ main {
   margin: 0 0 4px;
 }
 .hub-group h2 a {
-  color: var(--asphalt);
+  color: var(--ink);
   text-decoration: none;
 }
 .hub-group h2 a:hover {
-  color: var(--link);
+  color: var(--locker);
 }
 .hub-group > .muted {
   margin-bottom: 16px;
@@ -650,13 +653,13 @@ main {
 }
 .prose th,
 .prose td {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--seam);
   padding: 9px 16px 9px 0;
   text-align: left;
   vertical-align: top;
 }
 .prose th {
-  border-bottom: 2px solid var(--asphalt);
+  border-bottom: 2px solid var(--ink);
   font-weight: 750;
 }
 /* In-game screenshots: the image sits in its own paragraph, the caption is the
@@ -666,13 +669,13 @@ main {
 }
 .prose p > img {
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid var(--seam);
   border-radius: 8px;
 }
 .prose p:has(> img:only-child) + p > em:only-child {
   display: block;
   font-size: 14px;
-  color: var(--shoulder);
+  color: var(--shade);
   margin-bottom: 20px;
 }
 .entry-image {
@@ -691,16 +694,16 @@ main {
   gap: 16px;
   margin-top: 6px;
   font-size: 13px;
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .entry-image figcaption a {
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .toc {
   max-width: var(--measure);
   margin: 0 0 28px;
   padding: 14px 18px;
-  background: var(--verge);
+  background: var(--wall);
   border-radius: 8px;
 }
 .toc strong {
@@ -720,13 +723,13 @@ main {
 .series-label {
   font-size: 14px;
   font-weight: 650;
-  color: var(--shoulder);
+  color: var(--shade);
   margin-bottom: 8px;
 }
 .series-progress {
   width: 100%;
   height: 6px;
-  accent-color: var(--shield);
+  accent-color: var(--alarm);
   margin-bottom: 12px;
 }
 .series-nav {
@@ -739,7 +742,7 @@ main {
   font-size: 15px;
 }
 .series-nav .card:hover {
-  color: var(--link);
+  color: var(--locker);
 }
 .series-nav .next {
   grid-column: 2;
@@ -753,9 +756,9 @@ main {
   max-width: var(--measure);
   margin: 40px 0;
   padding-top: 6px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--seam);
   font-size: 15px;
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .sources h2 {
   font-size: 18px;
@@ -775,7 +778,7 @@ main {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .ad-slot:not(:has([id^='container-'] > *)) {
   margin: 0;
@@ -809,13 +812,13 @@ main {
   gap: 12px;
   align-items: start;
   padding: 12px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--seam);
 }
 .check-item input {
   margin-top: 5px;
   width: 18px;
   height: 18px;
-  accent-color: var(--guide);
+  accent-color: var(--keycard);
 }
 .search-form {
   display: flex;
@@ -833,8 +836,8 @@ main {
   max-width: var(--measure);
 }
 .search-results mark {
-  background: var(--warning);
-  color: #111;
+  background: var(--keycard);
+  color: var(--ink);
 }
 .sr-only {
   position: absolute;
@@ -872,15 +875,15 @@ main {
   flex-wrap: wrap;
   gap: 4px 14px;
   font-size: 15px;
-  color: var(--shoulder);
+  color: var(--shade);
   margin: 0;
 }
 /* Home: store facts panel beside the search, styled like a posted facility notice. */
 .facts {
   padding: 22px 24px;
-  background: var(--verge);
-  border: 1px solid var(--line);
-  border-left: 6px solid var(--warning);
+  background: var(--wall);
+  border: 1px solid var(--seam);
+  border-left: 6px solid var(--keycard);
   border-radius: 10px;
 }
 .facts h2 {
@@ -897,11 +900,11 @@ main {
   grid-template-columns: 9.5em 1fr;
   gap: 12px;
   padding: 7px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--seam);
   font-size: 16px;
 }
 .facts dt {
-  color: var(--shoulder);
+  color: var(--shade);
 }
 .facts dd {
   margin: 0;
@@ -916,12 +919,10 @@ main {
   flex-direction: column;
   justify-content: center;
   padding: 20px 26px;
-  background: var(--guide);
-  color: #fff;
+  background: var(--ink);
+  color: var(--wall);
+  border: 2px solid var(--ink);
   border-radius: 10px;
-  box-shadow:
-    inset 0 0 0 4px var(--guide),
-    inset 0 0 0 6px #fff;
   text-decoration: none;
 }
 .map-link strong {
@@ -932,7 +933,7 @@ main {
   font-size: 16px;
 }
 .map-link:hover {
-  color: #fff;
+  color: var(--wall);
 }
 .map-link:hover strong {
   text-decoration: underline;
@@ -956,12 +957,10 @@ main {
   flex-direction: column;
   justify-content: center;
   padding: 20px 26px;
-  background: var(--shield);
+  background: var(--alarm);
   color: #fff;
+  border: 2px solid var(--ink);
   border-radius: 10px;
-  box-shadow:
-    inset 0 0 0 4px var(--shield),
-    inset 0 0 0 6px #fff;
   text-decoration: none;
 }
 .start-link strong {
@@ -980,25 +979,26 @@ main {
   text-underline-offset: 4px;
 }
 
-/* The memorable piece: an overhead guide sign listing every topic like exits. */
+/* The memorable piece: every topic behind the Base's locked door, framed in the
+   yellow-and-black hazard stripes painted around its doorways. */
 .guide-sign {
-  background: var(--guide);
-  border-radius: 14px;
-  padding: 10px;
-  box-shadow:
-    inset 0 0 0 6px var(--guide),
-    inset 0 0 0 9px #fff;
+  background: var(--hazard);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 14px;
 }
 .guide-sign ul {
   list-style: none;
   margin: 0;
-  padding: 10px 18px;
+  padding: 10px 22px;
+  background: var(--wall);
+  border: 2px solid var(--ink);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 44px;
 }
 .guide-sign li + li {
-  border-top: 2px solid rgb(255 255 255 / 0.25);
+  border-top: 2px solid var(--seam);
 }
 .guide-sign li:nth-child(2) {
   border-top: 0;
@@ -1009,7 +1009,7 @@ main {
   align-items: baseline;
   gap: 16px;
   padding: 13px 4px;
-  color: #fff;
+  color: var(--ink);
   text-decoration: none;
 }
 .sign-dest {
@@ -1021,9 +1021,10 @@ main {
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
-  opacity: 0.9;
+  color: var(--shade);
 }
 .guide-sign a:hover .sign-dest {
+  color: var(--locker);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
@@ -1085,7 +1086,7 @@ main {
     grid-template-columns: 1fr;
   }
   .guide-sign li:nth-child(2) {
-    border-top: 2px solid rgb(255 255 255 / 0.25);
+    border-top: 2px solid var(--seam);
   }
 }
 @media (max-width: 640px) {
@@ -1113,8 +1114,11 @@ main {
   .sign-dest {
     font-size: 20px;
   }
+  .guide-sign {
+    padding: 10px;
+  }
   .guide-sign ul {
-    padding: 6px 10px;
+    padding: 6px 14px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
