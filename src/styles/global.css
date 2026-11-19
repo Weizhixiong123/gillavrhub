@@ -502,10 +502,11 @@ main {
 .image-card > img {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
   background: var(--surface);
-  border-radius: 6px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
   flex: none;
 }
 .image-card .card-content {
@@ -684,9 +685,10 @@ main {
 }
 .entry-image img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
-  border-radius: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
 }
 .entry-image figcaption {
   display: flex;
@@ -890,100 +892,82 @@ main {
   font-weight: 700;
 }
 
-/* The memorable piece: the keycard route, marked on a wall in the Base by an earlier
-   player. Each mark links to its guide. */
-.wall {
+/* The hero is a real screenshot of the Base, hung like a framed print on the wall. */
+.hero-shot {
   margin: 0;
+}
+.hero-shot img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
   border: 2px solid var(--ink);
   border-radius: 4px;
-  overflow: hidden;
 }
-.wall svg {
+.hero-shot figcaption,
+.entry-image figcaption {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--shade);
+}
+.hero-shot figcaption a {
+  color: var(--shade);
+}
+
+/* The memorable piece: the official route through the Base, one screenshot per step,
+   each numbered and captioned as if marked up in marker. */
+.shot-steps {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  counter-reset: shot;
+}
+.shot-steps li {
+  counter-increment: shot;
+}
+.shot-steps a {
+  position: relative;
   display: block;
+  color: var(--ink);
+  text-decoration: none;
+}
+.shot-steps img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
 }
-.wall .fill-wall {
-  fill: var(--surface);
+.shot-steps a::before {
+  content: counter(shot);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding-top: 4px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--keycard);
+  font: 700 22px/1 var(--marker);
 }
-.wall .fill-floor {
-  fill: var(--floor);
+.shot-note {
+  display: block;
+  margin-top: 8px;
+  font: 700 22px/1.2 var(--marker);
 }
-.wall .fill-ink {
-  fill: var(--ink);
+.shot-steps a:hover .shot-note {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
-.wall .fill-keycard {
-  fill: var(--keycard);
-}
-.wall .fill-led {
-  fill: #ff3b3b;
-}
-.wall .fill-slot {
-  fill: var(--steel);
-}
-.wall .fill-steel {
-  fill: var(--steel);
-}
-.wall .fill-door {
-  fill: #a9adb8;
-}
-.wall .tube {
-  fill: #fff;
-  stroke: var(--line);
-  stroke-width: 1.5;
-}
-.wall .edge {
-  stroke: var(--ink);
-  stroke-width: 2;
-}
-.wall .edge.thin {
-  fill: none;
-  stroke-width: 1.5;
-  opacity: 0.5;
-}
-.wall .leg {
-  stroke-width: 6;
-}
-.wall .stripe {
-  stroke: var(--ink);
-  stroke-width: 3;
-}
-.wall .scrawl,
-.wall .marker-line {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.wall .dash {
-  stroke-dasharray: 2 9;
-}
-.wall .scrawl-warn {
-  stroke: var(--led);
-}
-.wall .note {
-  font: 700 21px/1 var(--marker);
-  fill: var(--ink);
-}
-.wall .step-no {
-  text-anchor: middle;
-  font-size: 22px;
-}
-.wall .note-warn {
-  fill: var(--led);
-}
-.wall .end {
-  text-anchor: end;
-}
-.wall a:hover .note:not(.note-warn) {
-  fill: var(--accent);
-}
-.wall a:hover .scrawl:not(.scrawl-warn) {
-  stroke: var(--accent);
-}
-.wall a:focus-visible {
-  outline: 3px solid var(--led);
+.shot-steps a:hover img {
+  border-color: var(--accent);
 }
 
 /* Monsters: a plain ruled table of who hunts where and what sets it off. */
@@ -995,11 +979,18 @@ main {
 }
 .monster-list li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.4fr);
+  grid-template-columns: 128px minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.4fr);
   gap: 20px;
-  align-items: baseline;
+  align-items: center;
   padding: 14px 0;
   border-top: 1px solid var(--line);
+}
+.monster-list img {
+  width: 128px;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
 }
 .monster-list a {
   font-size: 24px;
@@ -1154,8 +1145,30 @@ main {
     gap: 0;
   }
   .monster-list li {
-    grid-template-columns: 1fr;
-    gap: 2px;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 2px 16px;
+    align-items: start;
+  }
+  .monster-list img {
+    grid-row: span 3;
+    width: 112px;
+  }
+  .shot-steps {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    gap: 14px;
+    margin-top: 28px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: var(--shade) transparent;
+    padding-bottom: 8px;
+  }
+  .shot-steps li {
+    scroll-snap-align: start;
+  }
+  .shot-note {
+    font-size: 19px;
   }
 }
 @media (max-width: 640px) {

@@ -21,7 +21,7 @@ Every page has `updated`, `verifiedFor` and `sources`. Only state facts that a s
 
 ## Images and the fan content rules
 
-Play Gilla's [fan content rules](https://gillavr.com/fan-content) allow screenshots in guides and wikis. They forbid ripped, data-mined or AI-copied maps, monsters and models. Only add your own in-game screenshots, in `src/assets/screens/`, named after a guide slug or category, and record each one in `public/images/SOURCES.md`.
+Play Gilla's [fan content rules](https://gillavr.com/fan-content) allow screenshots in guides and wikis. They forbid ripped, data-mined or AI-copied maps, monsters and models. Only add real in-game screenshots (from gillavr.com or captured in-game), in `src/assets/screens/`, named after a guide slug or category (or mapped in `ALIASES` in `src/lib/imagery.ts`), and record each one in `public/images/SOURCES.md`.
 
 ## Languages
 

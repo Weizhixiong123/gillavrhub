@@ -2,10 +2,12 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 
 /**
- * Guide header images. Only our own in-game screenshots go in src/assets/screens/
- * (Play Gilla's fan content rules forbid ripped or AI-copied map art). Name a file
- * after a guide slug ("the-base-map.webp") or a category ("monsters.webp") and it is
- * picked up automatically; with no file, the guide simply has no header image.
+ * Guide header images: in-game screenshots in src/assets/screens/. Play Gilla's fan
+ * content rules allow the game's screenshots in guides and wikis; they forbid ripped,
+ * data-mined or AI-copied maps, monsters and models, so only real screenshots go here.
+ * Name a file after a guide slug ("the-base-map.webp") or a category ("monsters.webp")
+ * and it is picked up automatically; ALIASES lets one screenshot serve related pages.
+ * With no match, the guide simply has no header image.
  * Record every screenshot in public/images/SOURCES.md.
  */
 const files = import.meta.glob<{ default: ImageMetadata }>(
@@ -18,12 +20,28 @@ const byName: Record<string, ImageMetadata> = Object.fromEntries(
     mod.default,
   ]),
 );
+/** Guide slug or category -> screenshot file name, for pages that share a shot. */
+const ALIASES: Record<string, string> = {
+  'beginner-guide': 'the-base-map',
+  'be-the-monster': 'the-grinner',
+  'dont-splash': 'the-mako',
+  'game-modes': 'loot-and-recycler',
+  monsters: 'the-grinner',
+};
+const lookup = (name: string) => byName[name] ?? byName[ALIASES[name] ?? ''];
 
 export function guideImage(
   slug: string,
   category?: string,
 ): ImageMetadata | undefined {
-  return byName[slug] ?? (category ? byName[category] : undefined);
+  return lookup(slug) ?? (category ? lookup(category) : undefined);
+}
+
+/** A screenshot by file name, for pages that place one directly (the home page). */
+export function screen(name: string): ImageMetadata {
+  const image = byName[name];
+  if (!image) throw new Error(`Missing screenshot src/assets/screens/${name}`);
+  return image;
 }
 
 /** Site-wide share card, drawn for this site (no game art). */

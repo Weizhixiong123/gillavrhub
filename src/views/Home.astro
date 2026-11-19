@@ -4,6 +4,8 @@ import { getPublished, entryUrl } from '../lib/content';
 import { GUIDE_CATEGORIES, OFFICIAL_LINKS } from '../config/site.mjs';
 import { localize, plural, type Lang } from '../i18n/locales';
 import { t } from '../i18n/ui';
+import { Image } from 'astro:assets';
+import { screen } from '../lib/imagery';
 
 interface Props {
   lang: Lang;
@@ -100,70 +102,40 @@ const answers = (await getPublished('faq', lang))
         <a href={localize(lang, '/guides/beginner-guide/')}>{ui.home.newHere}</a>
       </div>
     </div>
-    <figure class="wall">
-      <svg viewBox="0 0 600 420" role="group" aria-labelledby="wall-title">
-        <title id="wall-title">{ui.home.wallTitle}</title>
-        <defs>
-          <pattern id="hazard" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <rect width="11" height="22" class="fill-keycard" />
-            <rect x="11" width="11" height="22" class="fill-ink" />
-          </pattern>
-          <marker id="tip" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M1 1 8 5 1 9" class="marker-line" />
-          </marker>
-        </defs>
-        <!-- the room: lit wall, ceiling tube, floor -->
-        <rect width="600" height="420" class="fill-wall" />
-        <rect x="210" y="18" width="180" height="8" rx="4" class="tube" />
-        <path d="M0 332H600V420H0Z" class="fill-floor" />
-        <path d="M0 332H600" class="edge" />
-
-        <a href={localize(lang, '/guides/the-grinner/')} aria-label={ui.home.wallNotes.grinner}>
-          <text x="36" y="74" class="note note-warn" transform="rotate(-3 36 74)">{ui.home.wallNotes.grinner}</text>
-          <path d="M38 86c60-6 150-9 232-12" class="scrawl scrawl-warn" />
-        </a>
-
-        <a href={localize(lang, '/guides/keycard-and-locked-door/')} aria-label={`1: ${ui.home.wallNotes.keycard}`}>
-          <path d="M44 252h156v14H44Z" class="fill-steel edge" />
-          <path d="M56 266v66M188 266v66" class="edge leg" />
-          <path d="M96 250l8-13h46l-8 13Z" class="fill-keycard edge" />
-          <path d="M101 243h44" class="stripe" />
-          <path d="M80 246c4-22 76-26 88-6 8 16-30 24-58 21-22-2-34-8-28-19" class="scrawl" />
-          <circle cx="54" cy="150" r="17" class="scrawl" />
-          <text x="54" y="157" class="note step-no">1</text>
-          <text x="80" y="158" class="note">{ui.home.wallNotes.keycard}</text>
-        </a>
-        <path d="M172 232c34-30 66-34 92-30" class="scrawl dash" marker-end="url(#tip)" />
-
-        <a href={localize(lang, '/guides/keycard-and-locked-door/')} aria-label={`2: ${ui.home.wallNotes.reader}`}>
-          <rect x="272" y="168" width="40" height="64" rx="4" class="fill-ink" />
-          <rect x="280" y="179" width="24" height="7" rx="1" class="fill-led" />
-          <rect x="280" y="200" width="24" height="4" class="fill-slot" />
-          <circle cx="252" cy="116" r="17" class="scrawl" />
-          <text x="252" y="123" class="note step-no">2</text>
-          <text x="276" y="124" class="note">{ui.home.wallNotes.reader}</text>
-        </a>
-        <path d="M318 206c24-4 44-2 64 4" class="scrawl dash" marker-end="url(#tip)" />
-
-        <a href={localize(lang, '/guides/keycard-and-locked-door/')} aria-label={`3: ${ui.home.wallNotes.door}`}>
-          <rect x="392" y="140" width="150" height="192" class="fill-door edge" />
-          <path d="M404 152h126v100H404Z" class="edge thin" />
-          <rect x="392" y="262" width="150" height="26" fill="url(#hazard)" class="edge" />
-          <circle cx="436" cy="104" r="17" class="scrawl" />
-          <text x="436" y="111" class="note step-no">3</text>
-          <text x="460" y="112" class="note">{ui.home.wallNotes.door}</text>
-        </a>
-
-        <a href={localize(lang, '/guides/the-mannequin/')} aria-label={`4: ${ui.home.wallNotes.down}. ${ui.home.wallNotes.mannequin}`}>
-          <path d="M478 352h86l-12 30h-86Z" class="fill-ink" />
-          <path d="M546 300c30 18 28 38 10 52" class="scrawl dash" marker-end="url(#tip)" />
-          <circle cx="132" cy="372" r="17" class="scrawl" />
-          <text x="132" y="379" class="note step-no">4</text>
-          <text x="158" y="380" class="note">{ui.home.wallNotes.down}</text>
-          <text x="584" y="408" class="note note-warn end">{ui.home.wallNotes.mannequin}</text>
-        </a>
-      </svg>
+    <figure class="hero-shot">
+      <Image
+        src={screen('the-base-map')}
+        alt={ui.home.heroAlt}
+        widths={[480, 800, 1280]}
+        sizes="(max-width: 760px) calc(100vw - 32px), 640px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <figcaption>
+        {ui.home.heroCaption}.{' '}
+        <a href={`${localize(lang, '/about/')}#game-imagery`}>{ui.home.credit}</a>
+      </figcaption>
     </figure>
+  </section>
+
+  <section class="shots" aria-labelledby="shots-title">
+    <h2 id="shots-title" class="sr-only">{ui.home.shotsTitle}</h2>
+    <ol class="shot-steps">
+      {ui.home.shots.map((shot) => (
+        <li>
+          <a href={localize(lang, shot.href)}>
+            <Image
+              src={screen(shot.image)}
+              alt={shot.alt}
+              widths={[360, 560]}
+              sizes="(max-width: 760px) calc(100vw - 32px), 380px"
+              loading="lazy"
+            />
+            <span class="shot-note">{shot.note}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
   </section>
 
   {monsters.length > 0 && (
@@ -175,6 +147,13 @@ const answers = (await getPublished('faq', lang))
       <ul class="monster-list" role="list">
         {monsters.map((monster) => (
           <li>
+            <Image
+              src={screen(monster.image)}
+              alt={monster.alt}
+              widths={[160, 320]}
+              sizes="160px"
+              loading="lazy"
+            />
             <a href={monster.href}>{monster.name}</a>
             <span class="monster-location">{monster.location}</span>
             <span class="monster-note">{monster.note}</span>

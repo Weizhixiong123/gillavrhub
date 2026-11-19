@@ -39,23 +39,22 @@ const en = {
       'Unofficial GILLA VR wiki: a guide to the Base map and the keycard door, the three monsters, every game mode, controls and quick answers for Meta Quest.',
     title: 'GILLA VR map wiki',
     lead: 'Find your way through the Base, learn what hunts you and get ready for your first night in GILLA VR.',
-    wallTitle: 'The route through the Base, marked on a wall by another player',
-    wallNotes: {
-      keycard: 'keycard’s on a desk',
-      reader: 'swipe it here',
-      door: 'locked door',
-      down: 'climb down, if you want to',
-      grinner: 'Grinner up here. Keep quiet!',
-      mannequin: 'Mannequin below',
-    },
+    heroAlt: 'A hall in the Base, lit red, with a hazard door at the far end',
+    heroCaption: 'The Base, in game',
+    shotsTitle: 'Through the Base',
+    shots: [
+      { image: 'keycard-and-locked-door', alt: 'A gold GILLA keycard on a concrete floor', note: 'Find the keycard', href: '/guides/keycard-and-locked-door/' },
+      { image: 'card-reader', alt: 'A card reader on the wall by a hazard door', note: 'Take it to the reader', href: '/guides/keycard-and-locked-door/' },
+      { image: 'the-mannequin', alt: 'A jagged hole torn through a storeroom floor', note: 'Then climb down, if you want to', href: '/guides/the-base-map/' },
+    ],
     openMap: 'Read the map guide',
     newHere: 'New here? Start with the beginner guide',
     monsters: 'What hunts you',
     allMonsters: 'All monster guides',
     monsterNotes: {
-      grinner: { name: 'The Grinner', location: 'Inside the Base', note: 'Comes when you talk near it.' },
-      mannequin: { name: 'The Mannequin', location: 'Under the Base', note: 'Three metres tall, no arms, no face.' },
-      mako: { name: 'The Mako', location: 'Don’t Splash', note: 'Touch the water and it comes for you.' },
+      grinner: { image: 'the-grinner', alt: 'The Grinner up close, its mouth ripped open', name: 'The Grinner', location: 'Inside the Base', note: 'Comes when you talk near it.' },
+      mannequin: { image: 'the-mannequin', alt: 'A jagged hole torn through a storeroom floor', name: 'The Mannequin', location: 'Under the Base', note: 'Three metres tall, no arms, no face.' },
+      mako: { image: 'the-mako', alt: 'The Mako tearing through the water', name: 'The Mako', location: 'Don’t Splash', note: 'Touch the water and it comes for you.' },
     },
     placeholder: 'Search the wiki',
     popular: 'Popular:',
@@ -143,7 +142,7 @@ const en = {
       },
       {
         title: 'Map pages and the fan content rules',
-        text: 'Play Gilla allows fans to use the game’s name and screenshots in guides and wikis. It does not allow ripping, data-mining or AI copies of its maps, monsters or models. Our map pages therefore use written directions and our own screenshots only. We never publish extracted map files, models or textures, and we don’t accept them from readers.',
+        text: 'Play Gilla allows fans to use the game’s name and screenshots in guides and wikis. It does not allow ripping, data-mining or AI copies of its maps, monsters or models. Our pages therefore use written directions and real in-game screenshots only, credited to Play Gilla. We never publish extracted map files, models or textures, and we don’t accept them from readers.',
       },
       {
         title: 'When information is missing',
@@ -164,7 +163,7 @@ const en = {
     officialTitle: 'Official links',
     imageryTitle: 'Game imagery',
     imageryText:
-      'Screenshots on this site are captured by us in-game and are © Play Gilla. They illustrate our unofficial guides under Play Gilla’s fan content rules. GILLA VR Map Wiki has its own name and design and is not the official game website.',
+      'Screenshots on this site are in-game screenshots from the official GILLA website (gillavr.com) and are © Play Gilla. They illustrate our unofficial guides under Play Gilla’s fan content rules. GILLA VR Map Wiki has its own name and design and is not the official game website.',
   },
 };
 
