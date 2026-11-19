@@ -1,7 +1,7 @@
 // Language registry. English lives at the root; every other language gets a path prefix.
 // To add a language: append it to LANGS, add LANG_META and UI strings, then add
 // src/content/<section>/<lang>/ folders. Routing, hreflang and the sitemap follow.
-export const LANGS = ['en'] as const;
+export const LANGS = ['en', 'de', 'es', 'fr'] as const;
 export type Lang = (typeof LANGS)[number];
 export const DEFAULT_LANG: Lang = 'en';
 
@@ -10,6 +10,9 @@ export const LANG_META: Record<
   { label: string; hreflang: string; htmlLang: string; dateLocale: string }
 > = {
   en: { label: 'English', hreflang: 'en', htmlLang: 'en', dateLocale: 'en-US' },
+  de: { label: 'Deutsch', hreflang: 'de', htmlLang: 'de', dateLocale: 'de-DE' },
+  es: { label: 'Español', hreflang: 'es', htmlLang: 'es', dateLocale: 'es-ES' },
+  fr: { label: 'Français', hreflang: 'fr', htmlLang: 'fr', dateLocale: 'fr-FR' },
 };
 
 /** Language-neutral path ("/guides/x/") → localized path ("/ru/guides/x/"). */

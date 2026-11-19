@@ -1,6 +1,9 @@
 import type { Lang } from './locales';
+import { de } from './ui-de';
+import { es } from './ui-es';
+import { fr } from './ui-fr';
 
-type Forms = Partial<Record<Intl.LDMLPluralRule, string>>;
+export type Forms = Partial<Record<Intl.LDMLPluralRule, string>>;
 
 const en = {
   nav: {
@@ -59,6 +62,18 @@ const en = {
     answers: 'Quick answers',
     allAnswers: 'All answers',
     facts: 'GILLA at a glance',
+    // Store facts read from the Meta Quest listing (via vrdb.app) on 2026-11-19.
+    factList: [
+      { label: 'Price', value: 'Free, with in-app purchases' },
+      { label: 'Released', value: 'November 10, 2026 (Early Access)' },
+      { label: 'Headsets', value: 'Quest 2, Quest 3, Quest 3S, Quest Pro' },
+      { label: 'Play area', value: 'Standing or roomscale' },
+      { label: 'Comfort', value: 'Intense' },
+      { label: 'Age rating', value: 'Mature 17+' },
+      { label: 'Developer', value: 'Play Gilla' },
+    ],
+    storeLink: 'Meta Quest store page',
+    discordLink: 'Official Discord',
     credit: 'Screenshots © Play Gilla, used to illustrate this unofficial guide.',
   },
   finder: {
@@ -182,13 +197,18 @@ const en = {
       },
       {
         title: 'Early Access changes',
-        text: 'Maps, monsters and modes may change after a page is checked. When the game differs from a guide, trust the game, and tell us so we can fix the page.',
+        text: 'Maps, monsters and modes may change after a page is checked. When the game differs from a guide, trust the game.',
       },
     ],
     adsTitle: 'Advertising',
     adsGoogleLink: 'How Google uses information from sites that use its services',
     adsText: 'This site shows ads to cover hosting. Ad networks may use cookies and basic device data to choose and measure ads. Ads are not chosen or endorsed by us, and we never show ads inside guide text.',
     officialTitle: 'Official links',
+    links: {
+      store: 'GILLA on the Meta Quest store',
+      discord: 'Official GILLA Discord',
+      fanContent: 'Fan content & assets rules',
+    },
     imageryTitle: 'Game imagery',
     imageryText:
       'Screenshots on this site are in-game screenshots from the official GILLA website (gillavr.com) and are © Play Gilla. They illustrate our unofficial guides under Play Gilla’s fan content rules. GILLA VR Map Wiki has its own name and design and is not the official game website.',
@@ -197,7 +217,7 @@ const en = {
 
 export type UI = typeof en;
 
-export const UI_STRINGS: Record<Lang, UI> = { en };
+export const UI_STRINGS: Record<Lang, UI> = { en, de, es, fr };
 
 export const t = (lang: Lang) => UI_STRINGS[lang];
 

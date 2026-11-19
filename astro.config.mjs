@@ -4,10 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { satteri } from '@astrojs/markdown-satteri';
 import { SITE_URL } from './src/config/site.mjs';
 
 // Keep in sync with src/i18n/locales.ts (LANGS) and the sitemap locales below.
-const LANGS = ['en'];
+const LANGS = ['en', 'de', 'es', 'fr'];
 
 /**
  * Sitemap <lastmod> for content pages, taken from each entry's `updated` frontmatter.
@@ -46,6 +47,10 @@ export default defineConfig({
   build: { format: 'directory' },
   // Fetch a page when its link is hovered or focused, so navigation feels instant.
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
+  // `attributes` lets a heading fix its anchor: "## Preis {#price}" renders as
+  // <h2 id="price">. Translated pages keep the English anchors, so links, redirects
+  // and the finder can point at the same #section in every language.
+  markdown: { processor: satteri({ features: { attributes: true } }) },
   integrations: [
     {
       // Cloudflare Pages serves the nearest 404.html up the request path, so each
@@ -70,7 +75,7 @@ export default defineConfig({
       // Adds xhtml:link alternates between language versions of the same page.
       i18n: {
         defaultLocale: 'en',
-        locales: { en: 'en' },
+        locales: { en: 'en', de: 'de', es: 'es', fr: 'fr' },
       },
       serialize(item) {
         const date = lastmod.get(new URL(item.url).pathname);

@@ -1222,6 +1222,8 @@ main {
     order: 3;
     flex-basis: 100%;
     overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
   }
   .site-header ul {
     flex-wrap: nowrap;
@@ -1238,9 +1240,11 @@ main {
   }
 }
 @media (max-width: 760px) {
+  /* minmax(0, …) keeps long translated labels (e.g. French "Rechercher") from
+     widening the column past the screen. */
   .dispatch,
   .home-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .dispatch {
     gap: 24px;

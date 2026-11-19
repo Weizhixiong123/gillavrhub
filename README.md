@@ -29,4 +29,13 @@ Play Gilla's [fan content rules](https://gillavr.com/fan-content) allow screensh
 
 ## Languages
 
-English only for now. To add a language, extend `LANGS` in `src/i18n/locales.ts`, the UI strings in `src/i18n/ui.ts` and the locales in `astro.config.mjs`, then add `src/content/<section>/<lang>/` folders.
+The site is in English (at the root), German (`/de/`), Spanish (`/es/`) and French (`/fr/`). Every page exists in all four languages.
+
+- Interface strings live in `src/i18n/ui.ts` (English) and `ui-de.ts`, `ui-es.ts`, `ui-fr.ts`. They share one type, so a missing string fails the type check.
+- Content lives in `src/content/<section>/<lang>/`, with the same file names in every language.
+- When you change a page, change it in all four languages. Facts, numbers, official quotes and source links must match the English page.
+- Keep game names in English: GILLA, The Base, Be the Monster, Don't Splash, The Grinner, The Mannequin, The Mako.
+- Translated headings keep the English anchor: `## Preis {#price}`. Links, redirects, the finder and FAQ `more` fields all point at those English anchors.
+- Links inside translated content carry the language prefix (`/de/guides/monsters/#the-grinner`). FAQ `more` fields stay without a prefix; the FAQ page adds it.
+- `description` is limited to 170 characters, which German and French reach quickly.
+- To add another language: extend `LANGS` and `LANG_META` in `src/i18n/locales.ts`, add a `ui-<lang>.ts` and register it in `ui.ts`, add the locale to `astro.config.mjs` (`LANGS` and the sitemap locales), then add the content folders.

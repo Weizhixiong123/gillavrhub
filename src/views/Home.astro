@@ -14,17 +14,10 @@ interface Props {
 }
 const { lang, alternates } = Astro.props;
 const ui = t(lang);
-// Store facts read from the Meta Quest listing (via vrdb.app) on 2026-11-19.
-// Update them together with the "checked" date when the listing changes.
-const FACTS: { label: string; value: string; href?: string }[] = [
-  { label: 'Price', value: 'Free, with in-app purchases' },
-  { label: 'Released', value: 'November 10, 2026 (Early Access)' },
-  { label: 'Headsets', value: 'Quest 2, Quest 3, Quest 3S, Quest Pro' },
-  { label: 'Play area', value: 'Standing or roomscale' },
-  { label: 'Comfort', value: 'Intense' },
-  { label: 'Age rating', value: 'Mature 17+' },
-  { label: 'Developer', value: 'Play Gilla', href: OFFICIAL_LINKS.site },
-];
+// Store facts live in ui.home.factList (one copy per language); the developer links out.
+const FACTS: { label: string; value: string; href?: string }[] = ui.home.factList.map(
+  (f, i, all) => (i === all.length - 1 ? { ...f, href: OFFICIAL_LINKS.site } : f),
+);
 const gameSchema = {
   '@type': 'VideoGame',
   name: 'GILLA',
@@ -212,12 +205,8 @@ const answers = (await getPublished('faq', lang))
       ))}
     </dl>
     <p class="facts-note">
-      <a href={OFFICIAL_LINKS.store} rel="noopener noreferrer">
-        Meta Quest store page
-      </a>
-      <a href={OFFICIAL_LINKS.discord} rel="noopener noreferrer">
-        Official Discord
-      </a>
+      <a href={OFFICIAL_LINKS.store} rel="noopener noreferrer">{ui.home.storeLink}</a>
+      <a href={OFFICIAL_LINKS.discord} rel="noopener noreferrer">{ui.home.discordLink}</a>
     </p>
   </aside>
 </BaseLayout>
