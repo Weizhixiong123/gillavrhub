@@ -1,0 +1,281 @@
+---
+import '../styles/global.css';
+import { SITE_NAME, SITE_SHORT_NAME, NAV, SITE_VERIFICATION, ADS } from '../config/site.mjs';
+import { getPublished, entryUrl } from '../lib/content';
+import { LANG_META, DEFAULT_LANG, localize, type Lang } from '../i18n/locales';
+import { t } from '../i18n/ui';
+import { shareImage } from '../lib/imagery';
+
+export type Alternate = { lang: Lang; href: string };
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+  title: string;
+  description: string;
+  /** Set for placeholder or thin pages that should not be indexed yet. */
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  /** JSON-LD objects; rendered as one @graph. */
+  schema?: Record<string, unknown>[];
+  home?: boolean;
+  /** Full-width page without the sidebar, for card-heavy hubs. */
+  wide?: boolean;
+  /** Share image path (1200×675 JPEG from shareImage()); defaults to the site card. */
+  image?: string;
+}
+
+const {
+  lang,
+  alternates,
+  title,
+  description,
+  noindex = false,
+  ogType = 'website',
+  schema = [],
+  home = false,
+  wide = false,
+  image,
+} = Astro.props;
+const ogImage = new URL(image ?? (await shareImage()), Astro.site).href;
+const ui = t(lang);
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+const path = Astro.url.pathname;
+const homeHref = localize(lang, '/');
+const route = (await getPublished('guides', lang))
+  .filter((e) => e.data.series === 'first-night')
+  .sort((a, b) => (a.data.step ?? 0) - (b.data.step ?? 0));
+const xDefault = alternates.find((a) => a.lang === DEFAULT_LANG);
+
+const graph = [
+  {
+    '@type': 'WebSite',
+    '@id': `${Astro.site}#website`,
+    name: SITE_NAME,
+    url: Astro.site?.toString(),
+    inLanguage: LANG_META[lang].htmlLang,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${new URL(localize(lang, '/search/'), Astro.site)}?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  ...schema,
+];
+if (
+  path !== homeHref &&
+  !schema.some((item) => item['@type'] === 'BreadcrumbList')
+) {
+  graph.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: ui.sections.home,
+        item: new URL(homeHref, Astro.site).href,
+      },
+      { '@type': 'ListItem', position: 2, name: title, item: canonical.href },
+    ],
+  });
+}
+---
+
+<!doctype html>
+<html lang={LANG_META[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {
+      SITE_VERIFICATION.google && (
+        <meta name="google-site-verification" content={SITE_VERIFICATION.google} />
+      )
+    }
+    {
+      SITE_VERIFICATION.bing && (
+        <meta name="msvalidate.01" content={SITE_VERIFICATION.bing} />
+      )
+    }
+    {
+      ADS.adsenseClient && (
+        <>
+          <meta name="google-adsense-account" content={ADS.adsenseClient} />
+          <script
+            is:inline
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADS.adsenseClient}`}
+            crossorigin="anonymous"
+          />
+        </>
+      )
+    }
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {!noindex &&
+      alternates.length > 1 &&
+      alternates.map((a) => (
+        <link
+          rel="alternate"
+          hreflang={LANG_META[a.lang].hreflang}
+          href={new URL(a.href, Astro.site)}
+        />
+      ))}
+    {!noindex && alternates.length > 1 && xDefault && (
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={new URL(xDefault.href, Astro.site)}
+      />
+    )}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" sizes="180x180" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta
+      property="og:locale"
+      content={LANG_META[lang].htmlLang.replace('-', '_')}
+    />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="theme-color" content="#101312" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': graph,
+      })}
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      {ui.skip}
+    </a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="logo" href={homeHref}>
+          <img class="logo-mark" src="/brand/mark.svg" width="20" height="20" alt="" />
+          {SITE_SHORT_NAME}
+        </a>
+        <nav aria-label="Main">
+          <ul>
+            {NAV.map((n) => {
+              const href = localize(lang, n.href);
+              return (
+                <li>
+                  <a
+                    href={href}
+                    aria-current={path.startsWith(href) ? 'page' : undefined}
+                  >
+                    {ui.nav[n.key as keyof typeof ui.nav]}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        <div class="header-tools">
+          {alternates.length > 1 && (
+            <details class="lang-menu">
+              <summary aria-label={ui.nav.language}>
+                {LANG_META[lang].label}
+              </summary>
+              <ul>
+                {alternates.map((a) => (
+                  <li>
+                    <a
+                      href={a.href}
+                      hreflang={LANG_META[a.lang].hreflang}
+                      lang={LANG_META[a.lang].htmlLang}
+                      aria-current={a.lang === lang ? 'true' : undefined}
+                    >
+                      {LANG_META[a.lang].label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+          <a
+            class="search-link"
+            href={localize(lang, '/search/')}
+            aria-label={ui.nav.searchLabel}
+          >
+            {ui.nav.search}
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div
+      class:list={[
+        'wrap',
+        'layout',
+        { 'layout-home': home, 'layout-wide': wide },
+      ]}
+    >
+      <main
+        id="main"
+        data-pagefind-body={!noindex || undefined}
+        data-pagefind-ignore={noindex || undefined}
+      >
+        <slot />
+      </main>
+      {!home && !wide && (
+        <aside class="sidebar" aria-label="Sidebar">
+          <section class="side-block" aria-labelledby="side-route-title">
+            <h2 id="side-route-title">{ui.sidebar.route}</h2>
+            <ol class="side-route">
+              {route.map((e) => (
+                <li>
+                  <a
+                    href={entryUrl('guides', e.id)}
+                    aria-current={
+                      path === entryUrl('guides', e.id) ? 'page' : undefined
+                    }
+                  >
+                    {e.data.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+          <slot name="sidebar" />
+        </aside>
+      )}
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <ul class="footer-links">
+          <li>
+            <a href={localize(lang, '/guides/')}>{ui.nav.guides}</a>
+          </li>
+          <li>
+            <a href={localize(lang, '/guides/the-base-map/')}>{ui.nav.map}</a>
+          </li>
+          <li>
+            <a href={localize(lang, '/faq/')}>{ui.nav.faq}</a>
+          </li>
+          <li>
+            <a href={localize(lang, '/about/')}>{ui.footer.about}</a>
+          </li>
+        </ul>
+        <p>
+          <strong>{SITE_NAME}</strong> {ui.footer.disclaimer}
+        </p>
+      </div>
+    </footer>
+    {ADS.socialBar && <script is:inline data-cfasync="false" src={ADS.socialBar} />}
+  </body>
+</html>

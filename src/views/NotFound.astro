@@ -1,0 +1,67 @@
+---
+// Shown for unknown URLs. Cloudflare Pages serves the nearest 404.html up the path, so
+// each language gets its own copy (see the 404 copy step in astro.config.mjs).
+import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
+import { getPublished, entryUrl } from '../lib/content';
+import { GUIDE_CATEGORIES } from '../config/site.mjs';
+import { localize, plural, type Lang } from '../i18n/locales';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+}
+const { lang, alternates } = Astro.props;
+const ui = t(lang);
+const guides = await getPublished('guides', lang);
+const route = guides
+  .filter((e) => e.data.series === 'first-night')
+  .sort((a, b) => (a.data.step ?? 0) - (b.data.step ?? 0));
+const topics = GUIDE_CATEGORIES.map((key) => ({
+  key,
+  label: ui.categories[key as keyof typeof ui.categories].label,
+  count: guides.filter((g) => g.data.category === key).length,
+})).filter((c) => c.count > 0);
+---
+
+<BaseLayout
+  lang={lang}
+  alternates={alternates}
+  title={ui.notFound.metaTitle}
+  description={ui.notFound.metaDescription}
+  noindex
+  wide
+>
+  <h1>{ui.notFound.title}</h1>
+  <p class="lead">{ui.notFound.lead}</p>
+  <form action={localize(lang, '/search/')} class="search-form" role="search">
+    <label class="sr-only" for="nf-query">{ui.nav.searchLabel}</label>
+    <input id="nf-query" type="search" name="q" placeholder={ui.home.placeholder} required />
+    <button type="submit">{ui.search.button}</button>
+  </form>
+  <h2>{ui.notFound.route}</h2>
+  <ol class="route-list">
+    {
+      route.map((e) => (
+        <li>
+          <a href={entryUrl('guides', e.id)}>
+            <span>
+              {e.data.title}
+              <small>{e.data.description}</small>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+  <h2>{ui.notFound.topics}</h2>
+  <nav class="filters" aria-label={ui.notFound.topics}>
+    {
+      topics.map((c) => (
+        <a href={localize(lang, `/guides/${c.key}/`)}>
+          {c.label} ({plural(lang, c.count, ui.home.guideCount)})
+        </a>
+      ))
+    }
+  </nav>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { LinkCard } from '../lib/content';
+interface Props {
+  cards: LinkCard[];
+  /** "grid": image cards; "list": compact text links (no images) for secondary blocks. */
+  variant?: 'grid' | 'list';
+}
+const { cards, variant = 'grid' } = Astro.props;
+---
+
+{
+  variant === 'list' ? (
+    <ul class="link-list">
+      {cards.map((card) => (
+        <li>
+          <a href={card.href}>{card.title}</a>
+          <p>{card.description}</p>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="cards">
+      {cards.map((card) => (
+        <a class:list={['card', { 'image-card': card.image }]} href={card.href}>
+          {card.image && (
+            <Image
+              src={card.image}
+              widths={[320, 480, 720]}
+              sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) 45vw, 240px"
+              loading="lazy"
+              alt=""
+            />
+          )}
+          <div class="card-content">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  )
+}

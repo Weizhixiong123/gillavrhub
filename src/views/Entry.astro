@@ -1,0 +1,226 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
+import LinkCards from '../components/LinkCards.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AdNative from '../components/AdNative.astro';
+import { getPublished, entryUrl, related, type Section } from '../lib/content';
+import { localize, formatDate, LANG_META, type Lang } from '../i18n/locales';
+import { t, fill } from '../i18n/ui';
+import { SITE_NAME } from '../config/site.mjs';
+import { Image } from 'astro:assets';
+import { guideImage, shareImage } from '../lib/imagery';
+import { slugOf } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+  section: Section;
+  entry: CollectionEntry<Section>;
+}
+const { lang, alternates, section, entry } = Astro.props;
+const ui = t(lang);
+const data = entry.data as CollectionEntry<'guides'>['data'] &
+  Partial<CollectionEntry<'faq'>['data']> &
+  Partial<CollectionEntry<'news'>['data']>;
+const { Content, headings } = await render(entry);
+const pool = await getPublished(section, lang);
+const recommendations = related(entry as never, pool as never[], section);
+// FAQ answers are short; send readers on to the guides that cover the same topic.
+const relatedGuides =
+  section === 'faq'
+    ? related(entry as never, (await getPublished('guides', lang)) as never[], 'guides', 4)
+    : [];
+const series = data.series
+  ? (pool as CollectionEntry<'guides'>[])
+      .filter((e) => e.data.series === data.series)
+      .sort((a, b) => (a.data.step ?? 0) - (b.data.step ?? 0))
+  : [];
+const index = series.findIndex((e) => e.id === entry.id);
+const previous = series[index - 1];
+const next = series[index + 1];
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const sectionHref = localize(lang, `/${section}/`);
+const categoryLabel =
+  section === 'guides' && data.category
+    ? ui.categories[data.category as keyof typeof ui.categories].label
+    : undefined;
+const image =
+  section === 'guides'
+    ? guideImage(slugOf(entry.id), data.category)
+    : undefined;
+const ogImage = await shareImage(image);
+const crumbs = [
+  { label: ui.sections.home, href: localize(lang, '/') },
+  { label: ui.sections[section], href: sectionHref },
+  ...(categoryLabel
+    ? [
+        {
+          label: categoryLabel,
+          href: localize(lang, `/guides/${data.category}/`),
+        },
+      ]
+    : []),
+  { label: data.title },
+];
+const schema: Record<string, unknown>[] = [
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.label,
+      item: c.href ? new URL(c.href, Astro.site).href : canonical,
+    })),
+  },
+];
+if (data.answer)
+  schema.push({
+    '@type': 'FAQPage',
+    inLanguage: LANG_META[lang].htmlLang,
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: data.title,
+        acceptedAnswer: { '@type': 'Answer', text: data.answer },
+      },
+    ],
+  });
+else
+  schema.push({
+    '@type': section === 'news' ? 'NewsArticle' : 'Article',
+    headline: data.title,
+    description: data.description,
+    inLanguage: LANG_META[lang].htmlLang,
+    ...(data.published ? { datePublished: data.published.toISOString() } : {}),
+    dateModified: data.updated.toISOString(),
+    author: { '@type': 'Organization', name: SITE_NAME, url: Astro.site!.href },
+    mainEntityOfPage: canonical,
+  });
+---
+
+<BaseLayout
+  lang={lang}
+  alternates={alternates}
+  title={data.title}
+  description={data.description}
+  ogType="article"
+  schema={schema}
+  image={ogImage}
+>
+  <Breadcrumbs items={crumbs} />
+  <h1>{data.title}</h1>
+  {section === 'news' && data.published && (
+    <p class="meta published">
+      {fill(ui.entry.published, { date: formatDate(data.published, lang) })}
+    </p>
+  )}
+  <p class="meta">
+    {fill(ui.entry.checked, {
+      date: formatDate(data.updated, lang),
+      verified: data.verifiedFor ?? ui.entry.defaultVerified,
+    })}
+  </p>
+  {data.answer && <p class="lead">{data.answer}</p>}
+  {section === 'guides' && <p class="lead">{data.summary ?? data.description}</p>}
+  {image && (
+    <figure class="entry-image">
+      <Image
+        src={image}
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 900px) calc(100vw - 32px), 748px"
+        loading="eager"
+        fetchpriority="high"
+        alt=""
+      />
+      <figcaption>
+        <span>{categoryLabel}</span>
+        <a href={`${localize(lang, '/about/')}#game-imagery`}>
+          {ui.home.credit}
+        </a>
+      </figcaption>
+    </figure>
+  )}
+  {headings.filter((h) => h.depth === 2).length > 1 && (
+    <nav class="toc" aria-label={ui.entry.toc}>
+      <strong>{ui.entry.toc}</strong>
+      <ul>
+        {headings
+          .filter((h) => h.depth === 2)
+          .map((h) => (
+            <li>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+      </ul>
+    </nav>
+  )}
+  <article class="prose">
+    <Content />
+  </article>
+  {series.length > 0 && (
+    <section class="series" aria-label={ui.sidebar.route}>
+      <p class="series-label">
+        {fill(ui.entry.routeLabel, { i: index + 1, n: series.length })}
+      </p>
+      <progress
+        class="series-progress"
+        value={index + 1}
+        max={series.length}
+        aria-label={fill(ui.entry.routeLabel, {
+          i: index + 1,
+          n: series.length,
+        })}
+      />
+      <div class="series-nav">
+        {previous && (
+          <a class="card" href={entryUrl('guides', previous.id)}>
+            {fill(ui.entry.previous, { title: previous.data.title })}
+          </a>
+        )}
+        <a
+          class="card next"
+          href={
+            next
+              ? entryUrl('guides', next.id)
+              : localize(lang, '/guides/the-base-map/')
+          }
+        >
+          {fill(ui.entry.next, {
+            title: next ? next.data.title : ui.entry.nextFallback,
+          })}
+        </a>
+      </div>
+    </section>
+  )}
+  {data.sources.length > 0 && (
+    <section class="sources">
+      <h2>{ui.entry.sources}</h2>
+      <p>
+        {fill(ui.entry.sourcesText, { date: formatDate(data.updated, lang) })}
+      </p>
+      <ul>
+        {data.sources.map((s) => (
+          <li>
+            <a href={s.url} target="_blank" rel="noopener noreferrer">
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+  <AdNative label={ui.adLabel} />
+  {relatedGuides.length > 0 && (
+    <section>
+      <h2>{ui.entry.relatedGuides}</h2>
+      <LinkCards cards={relatedGuides} variant="list" />
+    </section>
+  )}
+  {recommendations.length > 0 && (
+    <section>
+      <h2>{ui.entry.related}</h2>
+      <LinkCards cards={recommendations} variant="list" />
+    </section>
+  )}
+</BaseLayout>

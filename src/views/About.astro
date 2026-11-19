@@ -1,0 +1,55 @@
+---
+import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { localize, type Lang } from '../i18n/locales';
+import { t } from '../i18n/ui';
+import { ADS, OFFICIAL_LINKS } from '../config/site.mjs';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+}
+const { lang, alternates } = Astro.props;
+const ui = t(lang);
+const a = ui.about;
+---
+
+<BaseLayout lang={lang} alternates={alternates} title={a.metaTitle} description={a.metaDescription}>
+  <Breadcrumbs items={[{ label: ui.sections.home, href: localize(lang, '/') }, { label: a.metaTitle }]} />
+  <h1>{a.title}</h1>
+  <article class="prose">
+    <p>{a.intro}</p>
+    {
+      a.sections.map((s) => (
+        <>
+          <h2>{s.title}</h2>
+          <p>{s.text}</p>
+        </>
+      ))
+    }
+    {
+      (ADS.socialBar || ADS.nativeBanner || ADS.adsenseClient) && (
+        <>
+          <h2 id="advertising">{a.adsTitle}</h2>
+          <p>{a.adsText}</p>
+          {ADS.adsenseClient && (
+            <p>
+              <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer">
+                {a.adsGoogleLink}
+              </a>
+            </p>
+          )}
+        </>
+      )
+    }
+    <h2 id="official-links">{a.officialTitle}</h2>
+    <ul>
+      <li><a href={OFFICIAL_LINKS.site} rel="noopener noreferrer">gillavr.com</a></li>
+      <li><a href={OFFICIAL_LINKS.store} rel="noopener noreferrer">GILLA on the Meta Quest store</a></li>
+      <li><a href={OFFICIAL_LINKS.discord} rel="noopener noreferrer">Official GILLA Discord</a></li>
+      <li><a href={OFFICIAL_LINKS.fanContent} rel="noopener noreferrer">Fan content &amp; assets rules</a></li>
+    </ul>
+    <h2 id="game-imagery">{a.imageryTitle}</h2>
+    <p>{a.imageryText}</p>
+  </article>
+</BaseLayout>

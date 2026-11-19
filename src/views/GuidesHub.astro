@@ -1,0 +1,94 @@
+---
+import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
+import LinkCards from '../components/LinkCards.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getPublished, entryUrl } from '../lib/content';
+import { GUIDE_CATEGORIES } from '../config/site.mjs';
+import { localize, type Lang } from '../i18n/locales';
+import { t, fill } from '../i18n/ui';
+import { guideImage } from '../lib/imagery';
+import { slugOf } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+  category?: string;
+}
+const { lang, alternates, category } = Astro.props;
+const ui = t(lang);
+type CategoryKey = keyof typeof ui.categories;
+const guides = (await getPublished('guides', lang)).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title, lang),
+);
+const groups = GUIDE_CATEGORIES.map((key) => ({
+  key,
+  ...ui.categories[key as CategoryKey],
+  cards: guides
+    .filter((g) => g.data.category === key)
+    .map((g) => ({
+      title: g.data.title,
+      description: g.data.description,
+      href: entryUrl('guides', g.id),
+      image: guideImage(slugOf(g.id), g.data.category),
+    })),
+})).filter((g) => g.cards.length > 0);
+const current = category ? groups.find((g) => g.key === category)! : undefined;
+const title = current
+  ? fill(ui.hubs.categoryTitle, { label: current.label })
+  : ui.hubs.guides.title;
+const description = current
+  ? `${current.blurb} ${ui.hubs.guides.description}`.slice(0, 170)
+  : ui.hubs.guides.description;
+const crumbs = [
+  { label: ui.sections.home, href: localize(lang, '/') },
+  ...(current
+    ? [
+        { label: ui.sections.guides, href: localize(lang, '/guides/') },
+        { label: current.label },
+      ]
+    : [{ label: ui.sections.guides }]),
+];
+---
+
+<BaseLayout
+  lang={lang}
+  alternates={alternates}
+  title={title}
+  description={description}
+  wide
+>
+  <Breadcrumbs items={crumbs} />
+  <h1>{title}</h1>
+  <p class="lead">{current ? current.blurb : ui.hubs.guides.description}</p>
+  <nav class="filters" aria-label={ui.home.topics}>
+    <a
+      href={localize(lang, '/guides/')}
+      aria-current={!current ? 'page' : undefined}
+    >
+      {ui.hubs.allTopics}
+    </a>
+    {groups.map((g) => (
+      <a
+        href={localize(lang, `/guides/${g.key}/`)}
+        aria-current={g.key === category ? 'page' : undefined}
+      >
+        {g.label}
+      </a>
+    ))}
+  </nav>
+  {current ? (
+    <div id="hub-cards">
+      <LinkCards cards={current.cards} />
+    </div>
+  ) : (
+    groups.map((g) => (
+      <section class="hub-group">
+        <h2>
+          <a href={localize(lang, `/guides/${g.key}/`)}>{g.label}</a>
+        </h2>
+        <p class="muted">{g.blurb}</p>
+        <LinkCards cards={g.cards} />
+      </section>
+    ))
+  )}
+</BaseLayout>

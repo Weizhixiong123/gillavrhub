@@ -1,0 +1,63 @@
+---
+// News hub. Stays noindex until it has entries; lists newest first with the official date.
+import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getPublished, entryUrl } from '../lib/content';
+import { localize, formatDate, type Lang } from '../i18n/locales';
+import { t, fill } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+}
+const { lang, alternates } = Astro.props;
+const section = 'news' as const;
+const ui = t(lang);
+const hub = ui.hubs[section];
+const entries = (await getPublished(section, lang)).sort((a, b) => {
+  const pa = a.data.published?.getTime() ?? 0;
+  const pb = b.data.published?.getTime() ?? 0;
+  return pb - pa || a.id.localeCompare(b.id);
+});
+const cards = entries.map((e) => ({
+  title: e.data.title,
+  description: e.data.description,
+  href: entryUrl(section, e.id),
+  published: e.data.published,
+}));
+---
+
+<BaseLayout
+  lang={lang}
+  alternates={alternates}
+  title={hub.title}
+  description={hub.description}
+  noindex={cards.length === 0}
+>
+  <Breadcrumbs items={[{ label: ui.sections.home, href: localize(lang, '/') }, { label: ui.sections[section] }]} />
+  <h1>{hub.title}</h1>
+  <p class="lead">{hub.description}</p>
+  {
+    cards.length ? (
+      <ul class="answers news-list">
+        {cards.map((c) => (
+          <li>
+            <a href={c.href}>{c.title}</a>
+            <p class="news-date">
+              <time datetime={c.published.toISOString()}>
+                {fill(ui.entry.published, { date: formatDate(c.published, lang) })}
+              </time>
+            </p>
+            <p>{c.description}</p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="notice">
+        <h2>{ui.hubs.emptyNews}</h2>
+        <p>{ui.hubs.emptyText}</p>
+        <a href={localize(lang, '/guides/')}>{ui.hubs.browse}</a>
+      </div>
+    )
+  }
+</BaseLayout>

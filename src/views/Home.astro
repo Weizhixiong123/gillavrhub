@@ -1,0 +1,154 @@
+---
+import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
+import { getPublished, entryUrl } from '../lib/content';
+import { GUIDE_CATEGORIES, OFFICIAL_LINKS } from '../config/site.mjs';
+import { localize, plural, type Lang } from '../i18n/locales';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+}
+const { lang, alternates } = Astro.props;
+const ui = t(lang);
+// Store facts read from the Meta Quest listing (via vrdb.app) on 2026-11-19.
+// Update them together with the "checked" date when the listing changes.
+const FACTS: { label: string; value: string; href?: string }[] = [
+  { label: 'Price', value: 'Free, with in-app purchases' },
+  { label: 'Released', value: 'November 10, 2026 (Early Access)' },
+  { label: 'Headsets', value: 'Quest 2, Quest 3, Quest 3S, Quest Pro' },
+  { label: 'Play area', value: 'Standing or roomscale' },
+  { label: 'Comfort', value: 'Intense' },
+  { label: 'Age rating', value: 'Mature 17+' },
+  { label: 'Developer', value: 'Play Gilla', href: OFFICIAL_LINKS.site },
+];
+const gameSchema = {
+  '@type': 'VideoGame',
+  name: 'GILLA',
+  url: OFFICIAL_LINKS.site,
+  sameAs: [OFFICIAL_LINKS.store],
+  gamePlatform: 'Meta Quest',
+  genre: ['Horror', 'Multiplayer'],
+  author: { '@type': 'Organization', name: 'Play Gilla' },
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+const guides = await getPublished('guides', lang);
+const route = guides
+  .filter((e) => e.data.series === 'first-night')
+  .sort((a, b) => (a.data.step ?? 0) - (b.data.step ?? 0));
+// Only categories with published guides become folders; empty ones would be dead ends.
+const folders = GUIDE_CATEGORIES.map((key) => ({
+  key,
+  ...ui.categories[key as keyof typeof ui.categories],
+  count: guides.filter((e) => e.data.category === key).length,
+})).filter((f) => f.count > 0);
+const answers = (await getPublished('faq', lang))
+  .filter((e) => !e.data.tags.includes('troubleshooting'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title, lang))
+  .slice(0, 8);
+---
+
+<BaseLayout
+  lang={lang}
+  alternates={alternates}
+  home
+  schema={[gameSchema]}
+  title={ui.home.metaTitle}
+  description={ui.home.metaDescription}
+>
+  <section class="dispatch" aria-labelledby="home-title">
+    <div class="dispatch-copy">
+      <h1 id="home-title">{ui.home.title}</h1>
+      <p class="lead">{ui.home.lead}</p>
+      <form action={localize(lang, '/search/')} class="search-form" role="search">
+        <label class="sr-only" for="home-query">{ui.nav.searchLabel}</label>
+        <input id="home-query" type="search" name="q" placeholder={ui.home.placeholder} required />
+        <button type="submit">{ui.search.button}</button>
+      </form>
+      <p class="suggest">
+        {ui.home.popular}
+        {ui.home.popularTerms.map((term) => (
+          <a href={`${localize(lang, '/search/')}?q=${encodeURIComponent(term)}`}>{term}</a>
+        ))}
+      </p>
+    </div>
+    <aside class="facts" aria-labelledby="facts-title">
+      <h2 id="facts-title">{ui.home.facts}</h2>
+      <dl>
+        {FACTS.map((f) => (
+          <div>
+            <dt>{f.label}</dt>
+            <dd>{f.href ? <a href={f.href} rel="noopener noreferrer">{f.value}</a> : f.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="facts-note">
+        <a href={OFFICIAL_LINKS.store} rel="noopener noreferrer">Meta Quest store page</a> ·{' '}
+        <a href={OFFICIAL_LINKS.discord} rel="noopener noreferrer">Official Discord</a>
+      </p>
+    </aside>
+  </section>
+  <div class="dispatch-tools">
+    <a class="start-link" href={localize(lang, '/guides/beginner-guide/')}>
+      <strong>{ui.home.newTitle}</strong>
+      <span>{plural(lang, route.length, ui.home.newSub)}</span>
+    </a>
+    <a class="map-link" href={localize(lang, '/guides/the-base-map/')}>
+      <strong>{ui.nav.map}</strong>
+      <span>Recycler, keycard, locked door, vault and the levels underneath</span>
+    </a>
+  </div>
+
+  <section class="case-files" aria-labelledby="files-title">
+    <div class="section-heading">
+      <h2 id="files-title">{ui.home.topics}</h2>
+      <a href={localize(lang, '/guides/')}>{plural(lang, guides.length, ui.home.allGuides)}</a>
+    </div>
+    <nav class="guide-sign" aria-label={ui.home.topics}>
+      <ul>
+        {folders.map((f) => (
+          <li>
+            <a href={localize(lang, `/guides/${f.key}/`)}>
+              <span class="sign-dest">{f.label}</span>
+              <span class="sign-count">{plural(lang, f.count, ui.home.guideCount)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+
+  <div class="home-grid">
+    <section aria-labelledby="route-title">
+      <div class="section-heading">
+        <h2 id="route-title">{ui.home.route}</h2>
+      </div>
+      <ol class="route-list">
+        {route.map((e) => (
+          <li>
+            <a href={entryUrl('guides', e.id)}>
+              <span>
+                {e.data.title}
+                <small>{e.data.description}</small>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+    <section aria-labelledby="answers-title">
+      <div class="section-heading">
+        <h2 id="answers-title">{ui.home.answers}</h2>
+        <a href={localize(lang, '/faq/')}>{ui.home.allAnswers}</a>
+      </div>
+      <ul class="answers">
+        {answers.map((e) => (
+          <li>
+            <a href={entryUrl('faq', e.id)}>{e.data.title}</a>
+            <p>{e.data.answer}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

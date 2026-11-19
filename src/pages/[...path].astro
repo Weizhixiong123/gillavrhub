@@ -1,0 +1,66 @@
+---
+// Every public page in every language is enumerated here, so URL count, hreflang
+// alternates and noindex decisions live in one place.
+import type { CollectionEntry } from 'astro:content';
+import { LANGS, localize, type Lang } from '../i18n/locales';
+import { getPublished, slugOf, type Section } from '../lib/content';
+import { GUIDE_CATEGORIES } from '../config/site.mjs';
+import Home from '../views/Home.astro';
+import GuidesHub from '../views/GuidesHub.astro';
+import FaqHub from '../views/FaqHub.astro';
+import NewsHub from '../views/NewsHub.astro';
+import Entry from '../views/Entry.astro';
+import About from '../views/About.astro';
+import Search from '../views/Search.astro';
+import NotFound from '../views/NotFound.astro';
+
+type Page =
+  | { view: 'home' | 'faq-hub' | 'news-hub' | 'about' | 'search' | 'not-found' }
+  | { view: 'guides-hub'; category?: string }
+  | { view: 'entry'; section: Section; entry: CollectionEntry<Section> };
+
+export async function getStaticPaths() {
+  const routes: { key: string; lang: Lang; page: Page }[] = [];
+  for (const lang of LANGS) {
+    const add = (key: string, page: Page) => routes.push({ key, lang, page });
+    add('/', { view: 'home' });
+    add('/guides/', { view: 'guides-hub' });
+    add('/faq/', { view: 'faq-hub' });
+    add('/news/', { view: 'news-hub' });
+    add('/about/', { view: 'about' });
+    add('/search/', { view: 'search' });
+    // English 404 is src/pages/404.astro; other languages are copied to <lang>/404.html after build.
+    if (lang !== 'en') add('/404/', { view: 'not-found' });
+    const guides = await getPublished('guides', lang);
+    for (const category of GUIDE_CATEGORIES)
+      if (guides.some((g) => g.data.category === category))
+        add(`/guides/${category}/`, { view: 'guides-hub', category });
+    for (const section of ['guides', 'faq', 'news'] as const)
+      for (const entry of await getPublished(section, lang))
+        add(`/${section}/${slugOf(entry.id)}/`, { view: 'entry', section, entry });
+  }
+  // hreflang: pages share a language-neutral key across languages.
+  const byKey = new Map<string, Lang[]>();
+  for (const r of routes) byKey.set(r.key, [...(byKey.get(r.key) ?? []), r.lang]);
+  return routes.map(({ key, lang, page }) => ({
+    params: { path: localize(lang, key).slice(1, -1) || undefined },
+    props: {
+      lang,
+      page,
+      alternates: byKey.get(key)!.map((l) => ({ lang: l, href: localize(l, key) })),
+    },
+  }));
+}
+
+const { lang, page, alternates } = Astro.props;
+const common = { lang, alternates };
+---
+
+{page.view === 'home' && <Home {...common} />}
+{page.view === 'guides-hub' && <GuidesHub {...common} category={page.category} />}
+{page.view === 'faq-hub' && <FaqHub {...common} />}
+{page.view === 'news-hub' && <NewsHub {...common} />}
+{page.view === 'about' && <About {...common} />}
+{page.view === 'search' && <Search {...common} />}
+{page.view === 'not-found' && <NotFound {...common} />}
+{page.view === 'entry' && <Entry {...common} section={page.section} entry={page.entry} />}

@@ -1,0 +1,80 @@
+---
+import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
+import { localize, type Lang } from '../i18n/locales';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternate[];
+}
+const { lang, alternates } = Astro.props;
+const s = t(lang).search;
+const messages = {
+  searching: s.searching,
+  results: s.results,
+  capped: s.capped,
+  none: s.none,
+  unavailable: s.unavailable,
+};
+---
+
+<BaseLayout lang={lang} alternates={alternates} title={s.metaTitle} description={s.metaDescription} noindex>
+  <h1>{s.title}</h1>
+  <form action={localize(lang, '/search/')} class="search-form" role="search">
+    <label class="sr-only" for="query">{s.label}</label>
+    <input id="query" type="search" name="q" placeholder={s.placeholder} required />
+    <button type="submit">{s.button}</button>
+  </form>
+  <p id="search-status" class="muted" role="status">{s.idle}</p>
+  <div id="search-results" class="search-results"></div>
+  <noscript><p>{s.noscript}</p></noscript>
+  <script type="application/json" id="search-messages" set:html={JSON.stringify(messages)} />
+</BaseLayout>
+<script>
+  type Forms = Partial<Record<Intl.LDMLPluralRule, string>>;
+  const m = JSON.parse(document.getElementById('search-messages')!.textContent!);
+  const locale = document.documentElement.lang;
+  const query = new URL(location.href).searchParams.get('q')?.trim() ?? '';
+  const input = document.querySelector<HTMLInputElement>('#query')!;
+  input.value = query;
+  const status = document.querySelector('#search-status')!;
+  const results = document.querySelector('#search-results')!;
+  const count = (n: number) => {
+    const forms: Forms = m.results;
+    const rule = new Intl.PluralRules(locale).select(n);
+    return (forms[rule] ?? forms.other!).replace('{n}', String(n)).replace('{q}', query);
+  };
+  if (query) {
+    status.textContent = m.searching;
+    try {
+      // Pagefind picks the index matching <html lang>, so results stay in the page's language.
+      const moduleUrl = '/pagefind/pagefind.js';
+      const pagefind = await import(/* @vite-ignore */ moduleUrl);
+      const found = await pagefind.search(query);
+      const pages = await Promise.all(
+        found.results
+          .slice(0, 30)
+          .map(
+            (result: {
+              data: () => Promise<{ url: string; meta: { title: string }; excerpt: string }>;
+            }) => result.data(),
+          ),
+      );
+      status.textContent = count(found.results.length) + (found.results.length > 30 ? m.capped : '');
+      if (!pages.length) status.textContent += m.none;
+      for (const page of pages) {
+        const link = document.createElement('a');
+        link.className = 'card';
+        link.href = page.url;
+        const heading = document.createElement('h2');
+        heading.textContent = page.meta.title;
+        const excerpt = document.createElement('p');
+        excerpt.textContent = new DOMParser().parseFromString(page.excerpt, 'text/html').body.textContent;
+        link.append(heading, excerpt);
+        results.append(link);
+      }
+    } catch {
+      status.textContent = m.unavailable;
+    }
+  }
+</script>

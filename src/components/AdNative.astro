@@ -1,0 +1,20 @@
+---
+// Adsterra Native Banner. Renders nothing unless ADS.nativeBanner is set.
+// The label stays hidden until the network actually fills the container.
+import { ADS } from '../config/site.mjs';
+
+interface Props {
+  label: string;
+}
+const key = ADS.nativeBanner;
+---
+
+{
+  key && (
+    <aside class="ad-slot" aria-label={Astro.props.label}>
+      <p class="ad-label">{Astro.props.label}</p>
+      <script is:inline async="async" data-cfasync="false" src={`https://bauval.org/21/${key}`} />
+      <div id={`container-${key}`} />
+    </aside>
+  )
+}
