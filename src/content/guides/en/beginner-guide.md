@@ -1,8 +1,8 @@
 ---
 updated: '2026-11-19'
 verifiedFor: 'version 0.1.0 (Early Access), against the official site and store listing'
-title: 'GILLA VR beginner guide'
-description: 'What GILLA is, how you move as an ape, what to collect in the Base and why you should keep your voice down. Start here before your first round.'
+title: 'How to play GILLA VR: beginner guide'
+description: 'What is GILLA VR and how to play: move as an ape on Meta Quest, collect gold and diamonds in the Base, stay quiet on voice chat and escape the monsters.'
 category: 'beginner'
 series: 'first-night'
 step: 1
@@ -15,9 +15,13 @@ sources:
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
 ---
-GILLA is a free multiplayer VR horror game for Meta Quest, made by Play Gilla. You play as an ape. You move with your arms, explore a huge abandoned base with other players, and carry gold bars and diamonds back to a recycler. Monsters hunt by sound, so what you say on voice chat can get you caught.
+GILLA is a free multiplayer VR horror game for Meta Quest, made by Play Gilla. You play as an ape, move with your arms, explore a huge abandoned base with other players, and carry gold bars and diamonds back to a recycler. Monsters hunt by sound, so what you say on voice chat can get you caught.
 
-## The core loop in one minute
+## What is GILLA VR?
+
+GILLA (often searched as **GILLA VR** or the **GILLA VR game**) is an Early Access multiplayer horror game on the Meta Quest store for Quest 2, Quest 3, Quest 3S and Quest Pro. Instead of walking with a thumbstick, you swing and push off the floor and walls with your hands while exploring the Base or playing survival and hunt modes. See [how to get GILLA VR](/guides/how-to-get-gilla/) for download size, headsets and store details.
+
+## How to play GILLA VR: the core loop
 
 1. **Join a room.** Jump into a busy public room, or type a code on the lobby computer to play privately with friends. See [how to play with friends](/guides/play-with-friends/).
 2. **Move like an ape.** There is no thumbstick walking. You push off the floor and walls with your hands. See [controls and movement](/guides/movement-and-comfort/).

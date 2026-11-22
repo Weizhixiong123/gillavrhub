@@ -1,9 +1,9 @@
 ---
 updated: '2026-11-19'
 verifiedFor: 'version 0.1.0 (Early Access), against the official site and store listing'
-title: 'What is the official GILLA Discord?'
-description: 'The official GILLA Discord invite is discord.gg/gilla, linked from gillavr.com. Use it for updates and community, and email support for account problems.'
-answer: 'The official GILLA Discord is discord.gg/gilla. It is linked from the official site, gillavr.com.'
+title: 'What is the official GILLA VR Discord server?'
+description: 'The official GILLA VR Discord server invite is discord.gg/gilla, linked from gillavr.com. Join for updates and community, or email support for account help.'
+answer: 'The official GILLA VR Discord server is discord.gg/gilla, linked directly from the official site at gillavr.com.'
 tags: [community, discord, support]
 sources:
   - label: 'GILLA official site (gillavr.com)'

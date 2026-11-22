@@ -1,9 +1,9 @@
 ---
 updated: '2026-11-19'
 verifiedFor: 'version 0.1.0 (Early Access), against the official site and store listing'
-title: 'Are there GILLA VR cheats, mod menus or hacks?'
-description: 'Cheats, mod menus, hacks and unofficial copies of GILLA are banned under the terms of service. Using them can cost you your account and items.'
-answer: 'Using cheats, mod menus, injectors, speed or fly hacks, or modified copies of GILLA breaks the terms of service and can get you banned. Bug abuse is also banned.'
+title: 'Are there GILLA VR mods, cheats or mod menus?'
+description: 'Mods, cheats, mod menus, hacks and unofficial copies of GILLA VR are banned under the terms of service. Using them can cost you your account and items.'
+answer: 'No official mods exist, and using GILLA VR mods, cheats, mod menus, injectors, speed or fly hacks, or modified copies breaks the terms of service and can get you banned.'
 tags: [safety, bans, account]
 sources:
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'

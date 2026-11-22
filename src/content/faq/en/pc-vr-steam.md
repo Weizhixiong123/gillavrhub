@@ -1,9 +1,9 @@
 ---
 updated: '2026-11-19'
 verifiedFor: 'version 0.1.0 (Early Access), against the official site and store listing'
-title: 'Is GILLA VR on Steam or PC VR?'
-description: 'As of November 19, 2026, GILLA is only listed on the Meta Quest store. There is no official Steam or PC VR version.'
-answer: 'Not officially. As of November 19, 2026, GILLA is only on the Meta Quest store, and the official site lists no Steam or PC VR version.'
+title: 'Is GILLA VR on Steam, PC VR or mobile?'
+description: 'As of November 19, 2026, GILLA VR is only on the Meta Quest store for Quest 2, 3, 3S and Pro. There is no official Steam, PC VR or mobile version.'
+answer: 'Not officially. As of November 19, 2026, GILLA is only on the Meta Quest store for Quest headsets, with no official Steam, PC VR or mobile phone version.'
 tags: [platforms, steam, pcvr]
 sources:
   - label: 'GILLA official site (gillavr.com)'

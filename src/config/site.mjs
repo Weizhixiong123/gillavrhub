@@ -50,6 +50,7 @@ export const OFFICIAL_LINKS = {
 export const NAV = [
   { key: 'start', href: '/guides/beginner-guide/' },
   { key: 'map', href: '/guides/the-base-map/' },
+  { key: 'monsters', href: '/guides/monsters/' },
   { key: 'guides', href: '/guides/' },
   { key: 'news', href: '/news/' },
   { key: 'faq', href: '/faq/' },

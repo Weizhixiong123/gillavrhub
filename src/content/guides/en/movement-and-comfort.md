@@ -15,7 +15,7 @@ sources:
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
 ---
-In GILLA your arms are your legs. There is no walking with a thumbstick. You get around the way an ape does: push off the floor, shove off the walls and swing harder to go faster. The game uses **Touch controllers** and supports **standing** and **roomscale** play. Its comfort rating is **Intense**.
+In GILLA your arms are your legs. There is no walking with a thumbstick. Like other gorilla and ape-movement VR games on Meta Quest, you get around with your hands: push off the floor, shove off the walls and swing harder to go faster. The game uses **Touch controllers** and supports **standing** and **roomscale** play. Its comfort rating is **Intense**.
 
 ## How movement works
 

@@ -31,7 +31,7 @@ GILLA is **free** on the **Meta Quest store** and runs on **Quest 2, Quest 3, Qu
 
 ## Price
 
-The game itself is free. The in-game shop sells **cosmetics**, **limited items** and **bundles**. Purchases go through the **Meta Horizon Store** and follow its payment and refund rules. What the shop sells and how coins work is covered in [quests, levels and the shop](/guides/quests-levels-and-shop/).
+**Is GILLA VR free?** Yes — the game itself is free to download and play on Meta Quest. The in-game shop sells **cosmetics**, **limited items** and **bundles**. Purchases go through the **Meta Horizon Store** and follow its payment and refund rules. What the shop sells and how coins work is covered in [quests, levels and the shop](/guides/quests-levels-and-shop/).
 
 You can't sell or trade what you buy. The terms say coins, cosmetics and other items are licensed to you for in-game use only. They can't be sold, traded or cashed out, and buying or selling anything for real money is against the rules.
 
@@ -45,9 +45,9 @@ The comfort rating is **Intense**, because you move by swinging your arms fast. 
 
 ## PC VR and Steam
 
-Not officially. As of November 19, 2026, GILLA is only on the Meta Quest store, and the official site lists no Steam or PC VR version. You may be able to stream the Quest version to a PC with Meta's own tools, but that isn't an official PC release, and we haven't tested it.
+**Is GILLA VR on Steam, PC VR or mobile?** Not officially. As of November 19, 2026, GILLA is only on the Meta Quest store, and the official site lists no Steam, PC VR or standalone mobile phone version. You can start the download from the Meta Horizon mobile app on your phone, or stream a Quest headset to a PC with Meta's own tools, but the game itself runs on a Meta Quest headset.
 
-Watch out for fake downloads. The terms forbid modified, cracked or unofficial copies of GILLA, and players who use them can be banned. Only install GILLA from the Meta Quest store.
+Watch out for fake PC or mobile APK downloads. The terms forbid modified, cracked or unofficial copies of GILLA, and players who use them can be banned. Only install GILLA from the Meta Quest store.
 
 ## Release date and Early Access
 

@@ -9,6 +9,7 @@ const en = {
   nav: {
     start: 'Start here',
     map: 'The Base map',
+    monsters: 'Monsters',
     guides: 'Guides',
     news: 'News',
     faq: 'FAQ',
@@ -37,11 +38,11 @@ const en = {
       'is an unofficial fan site. It is not made, sponsored or approved by Play Gilla (Content Media LLC). GILLA is their trademark. Meta Quest is a trademark of Meta Platforms, Inc.',
   },
   home: {
-    metaTitle: 'GILLA VR Map Wiki: The Base, Monsters & Modes',
+    metaTitle: 'GILLA VR Map Wiki: The Base, Monsters & Game Guide',
     metaDescription:
-      'Unofficial GILLA VR wiki: a guide to the Base map and the keycard door, the three monsters, every game mode, controls and quick answers for Meta Quest.',
+      'Unofficial GILLA VR game wiki for Meta Quest: what GILLA VR is, the Base map and keycard door, every GILLA monster, horror modes, controls, Discord and FAQ.',
     title: 'GILLA VR map wiki',
-    lead: 'Find your way through the Base, learn what hunts you and get ready for your first night in GILLA VR.',
+    lead: 'Find your way through the Base, learn what hunts you and get ready for your first night in the GILLA VR horror game on Meta Quest.',
     heroAlt: 'A hall in the Base, lit red, with a hazard door at the far end',
     heroCaption: 'The Base, in game',
     shotsTitle: 'Through the Base',
@@ -54,7 +55,7 @@ const en = {
     newHere: 'New here? Start with the beginner guide',
     placeholder: 'Search the wiki',
     popular: 'Popular:',
-    popularTerms: ['keycard', 'Grinner', 'recycler', 'free'],
+    popularTerms: ['monsters', 'Discord', 'keycard', 'free', 'Steam'],
     topics: 'Guides by topic',
     allGuides: { one: 'All {n} guide', other: 'All {n} guides' } as Forms,
     guideCount: { one: '{n} guide', other: '{n} guides' } as Forms,

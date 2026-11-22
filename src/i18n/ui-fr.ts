@@ -6,6 +6,7 @@ export const fr: UI = {
   nav: {
     start: 'Commencer ici',
     map: 'Carte de The Base',
+    monsters: 'Monstres',
     guides: 'Guides',
     news: 'Actus',
     faq: 'FAQ',
@@ -51,7 +52,7 @@ export const fr: UI = {
     newHere: 'Nouveau ? Commence par le guide du débutant',
     placeholder: 'Rechercher dans le wiki',
     popular: 'Populaires :',
-    popularTerms: ['carte d’accès', 'Grinner', 'recycleur', 'gratuit'],
+    popularTerms: ['monstres', 'Discord', 'carte d’accès', 'gratuit', 'Steam'],
     topics: 'Guides par thème',
     allGuides: { one: '{n} guide', other: 'Les {n} guides' } as Forms,
     guideCount: { one: '{n} guide', other: '{n} guides' } as Forms,

@@ -1,6 +1,6 @@
 ---
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
-import { getPublished, entryUrl, faqUrl, categoryHref } from '../lib/content';
+import { getPublished, entryUrl, faqUrl, categoryHref, slugOf } from '../lib/content';
 import ModeFinder from '../components/ModeFinder.astro';
 import AdNative from '../components/AdNative.astro';
 import { GUIDE_CATEGORIES, OFFICIAL_LINKS } from '../config/site.mjs';
@@ -41,9 +41,26 @@ const folders = GUIDE_CATEGORIES.map((key) => ({
 }))
   .filter((f) => f.count > 0)
   .map((f) => ({ ...f, href: categoryHref(lang, f.key, guides) }));
+// Order home quick answers by search demand (price, Discord, PC/Steam, headsets, release date, mods, friends, age).
+const TOP_FAQ_ORDER = [
+  'is-it-free',
+  'discord',
+  'pc-vr-steam',
+  'supported-headsets',
+  'release-date',
+  'cheats-and-mods',
+  'play-with-friends',
+  'age-rating',
+];
 const answers = (await getPublished('faq', lang))
-  .filter((e) => e.data.group !== 'community')
-  .sort((a, b) => a.data.title.localeCompare(b.data.title, lang))
+  .sort((a, b) => {
+    const ia = TOP_FAQ_ORDER.indexOf(slugOf(a.id));
+    const ib = TOP_FAQ_ORDER.indexOf(slugOf(b.id));
+    if (ia !== -1 || ib !== -1) {
+      return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+    }
+    return a.data.title.localeCompare(b.data.title, lang);
+  })
   .slice(0, 8);
 ---
 
