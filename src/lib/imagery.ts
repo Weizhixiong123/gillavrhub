@@ -28,13 +28,32 @@ const ALIASES: Record<string, string> = {
   'game-modes': 'recycler-and-keycard',
   monsters: 'the-grinner',
 };
-const lookup = (name: string) => byName[name] ?? byName[ALIASES[name] ?? ''];
+const SCREEN_ALTS: Record<string, string> = {
+  'the-base-map': 'A hall in the Base, lit red, with a hazard door at the far end',
+  'recycler-and-keycard': 'A dark storeroom in the Base, with shelves and crates',
+  'the-grinner': 'The Grinner up close, its mouth ripped open from ear to ear',
+  'the-mako': 'The Mako tearing through the water',
+  keycard: 'A gold GILLA keycard on a concrete floor',
+  'card-reader': 'A card reader on the wall by a hazard door',
+  'floor-hole': 'A jagged hole torn through a storeroom floor',
+};
+const resolveKey = (name: string) =>
+  byName[name] ? name : ALIASES[name] && byName[ALIASES[name]] ? ALIASES[name] : undefined;
+const lookup = (name: string) => {
+  const key = resolveKey(name);
+  return key ? byName[key] : undefined;
+};
 
 export function guideImage(
   slug: string,
   category?: string,
 ): ImageMetadata | undefined {
   return lookup(slug) ?? (category ? lookup(category) : undefined);
+}
+
+export function guideImageAlt(slug: string, category?: string): string {
+  const key = resolveKey(slug) ?? (category ? resolveKey(category) : undefined);
+  return (key && SCREEN_ALTS[key]) ?? '';
 }
 
 /** A screenshot by file name, for pages that place one directly (the home page). */

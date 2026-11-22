@@ -1,6 +1,7 @@
 ---
-// Adsterra Native Banner, placed in the middle of an article. Renders nothing unless
-// ADS.nativeBanner is set. The label stays hidden until the network fills the container.
+// Adsterra Native Banner. ADSTERRA_NATIVE_KEY accepts a zone key or script URL.
+// ADSTERRA_NATIVE_SRC can override the script URL.
+// The label stays hidden until the network fills the container.
 //
 // Astro renders a guide's Markdown as one block, so the slot is rendered right after the
 // article and a small script moves it in front of the article's middle h2 while the page
@@ -11,20 +12,23 @@ import { ADS } from '../config/site.mjs';
 interface Props {
   label: string;
 }
-const key = ADS.nativeBanner;
+const raw = ADS.nativeBanner.trim();
+const isUrl = /^(https?:)?\/\//i.test(raw);
+const key = isUrl ? (raw.match(/[a-f0-9]{32}/i)?.[0] ?? '') : raw;
+const src = ADS.nativeBannerSrc.trim() || (isUrl ? raw : key ? `https://bauval.org/21/${key}` : '');
 ---
 
 {
-  key && (
+  key && src && (
     <aside class="ad-slot ad-native" aria-label={Astro.props.label}>
       <p class="ad-label">{Astro.props.label}</p>
-      <script is:inline async="async" data-cfasync="false" src={`https://bauval.org/21/${key}`} />
+      <script is:inline async="async" data-cfasync="false" src={src} />
       <div id={`container-${key}`} />
     </aside>
   )
 }
 {
-  key && (
+  key && src && (
     <script is:inline>
       (() => {
         const slot = document.currentScript.previousElementSibling;

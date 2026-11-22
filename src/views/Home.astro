@@ -2,6 +2,7 @@
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
 import { getPublished, entryUrl, faqUrl, categoryHref } from '../lib/content';
 import ModeFinder from '../components/ModeFinder.astro';
+import AdNative from '../components/AdNative.astro';
 import { GUIDE_CATEGORIES, OFFICIAL_LINKS } from '../config/site.mjs';
 import { localize, plural, type Lang } from '../i18n/locales';
 import { t } from '../i18n/ui';
@@ -129,6 +130,8 @@ const answers = (await getPublished('faq', lang))
   </section>
 
   <ModeFinder lang={lang} />
+
+  <AdNative label={ui.adLabel} />
 
   <section class="case-files" aria-labelledby="files-title">
     <div class="section-heading">

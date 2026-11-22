@@ -2,6 +2,7 @@
 // News hub. Stays noindex until it has entries; lists newest first with the official date.
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AdNative from '../components/AdNative.astro';
 import { getPublished, entryUrl } from '../lib/content';
 import { localize, formatDate, type Lang } from '../i18n/locales';
 import { t, fill } from '../i18n/ui';
@@ -39,19 +40,22 @@ const cards = entries.map((e) => ({
   <p class="lead">{hub.description}</p>
   {
     cards.length ? (
-      <ul class="answers news-list">
-        {cards.map((c) => (
-          <li>
-            <a href={c.href}>{c.title}</a>
-            <p class="news-date">
-              <time datetime={c.published.toISOString()}>
-                {fill(ui.entry.published, { date: formatDate(c.published, lang) })}
-              </time>
-            </p>
-            <p>{c.description}</p>
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul class="answers news-list">
+          {cards.map((c) => (
+            <li>
+              <a href={c.href}>{c.title}</a>
+              <p class="news-date">
+                <time datetime={c.published.toISOString()}>
+                  {fill(ui.entry.published, { date: formatDate(c.published, lang) })}
+                </time>
+              </p>
+              <p>{c.description}</p>
+            </li>
+          ))}
+        </ul>
+        <AdNative label={ui.adLabel} />
+      </>
     ) : (
       <div class="notice">
         <h2>{ui.hubs.emptyNews}</h2>

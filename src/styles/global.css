@@ -770,6 +770,10 @@ main {
   max-width: var(--measure);
   margin: 32px 0;
 }
+.layout-home .ad-slot,
+.layout-wide .ad-slot {
+  max-width: none;
+}
 .ad-label {
   margin: 0 0 6px;
   font-size: 11px;

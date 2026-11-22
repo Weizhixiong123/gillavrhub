@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AdNative from '../components/AdNative.astro';
 import { getPublished, slugOf, FAQ_GROUPS } from '../lib/content';
 import { localize, formatDate, LANG_META, type Lang } from '../i18n/locales';
 import { t, fill } from '../i18n/ui';
@@ -61,39 +62,42 @@ const schema = [
     {groups.map((g) => <a href={`#${g.key}`}>{g.label}</a>)}
   </nav>
   {
-    groups.map((g) => (
-      <section class="hub-group faq-group" id={g.key}>
-        <h2>{g.label}</h2>
-        {g.items.map(({ entry, slug, Content, moreTitle }) => (
-          <article class="faq-item" id={slug}>
-            <h3>
-              <a href={`#${slug}`}>{entry.data.title}</a>
-            </h3>
-            <p class="faq-answer">{entry.data.answer}</p>
-            <div class="prose">
-              <Content />
-            </div>
-            {entry.data.more && moreTitle && (
-              <p class="faq-more">
-                <a href={localize(lang, entry.data.more)}>
-                  {fill(ui.hubs.faqMore, { title: moreTitle })}
-                </a>
-              </p>
-            )}
-            {entry.data.sources.length > 0 && (
-              <p class="faq-sources">
-                {ui.hubs.faqSources}{' '}
-                {entry.data.sources.map((s, i) => (
-                  <>
-                    {i > 0 && ', '}
-                    <a href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
-                  </>
-                ))}
-              </p>
-            )}
-          </article>
-        ))}
-      </section>
+    groups.map((g, idx) => (
+      <>
+        <section class="hub-group faq-group" id={g.key}>
+          <h2>{g.label}</h2>
+          {g.items.map(({ entry, slug, Content, moreTitle }) => (
+            <article class="faq-item" id={slug}>
+              <h3>
+                <a href={`#${slug}`}>{entry.data.title}</a>
+              </h3>
+              <p class="faq-answer">{entry.data.answer}</p>
+              <div class="prose">
+                <Content />
+              </div>
+              {entry.data.more && moreTitle && (
+                <p class="faq-more">
+                  <a href={localize(lang, entry.data.more)}>
+                    {fill(ui.hubs.faqMore, { title: moreTitle })}
+                  </a>
+                </p>
+              )}
+              {entry.data.sources.length > 0 && (
+                <p class="faq-sources">
+                  {ui.hubs.faqSources}{' '}
+                  {entry.data.sources.map((s, i) => (
+                    <>
+                      {i > 0 && ', '}
+                      <a href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+                    </>
+                  ))}
+                </p>
+              )}
+            </article>
+          ))}
+        </section>
+        {idx === 0 && <AdNative label={ui.adLabel} />}
+      </>
     ))
   }
 </BaseLayout>

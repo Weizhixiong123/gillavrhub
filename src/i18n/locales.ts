@@ -24,7 +24,7 @@ export function localize(lang: Lang, path: string) {
 export function splitLang(path: string): [Lang, string] {
   const first = path.split('/')[1] as Lang;
   if (LANGS.includes(first) && first !== DEFAULT_LANG)
-    return [first, path.slice(first.length + 1) || '/'];
+    return [first, path.slice((first as string).length + 1) || '/'];
   return [DEFAULT_LANG, path];
 }
 

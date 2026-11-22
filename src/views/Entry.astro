@@ -10,7 +10,7 @@ import { localize, formatDate, LANG_META, type Lang } from '../i18n/locales';
 import { t, fill } from '../i18n/ui';
 import { SITE_NAME } from '../config/site.mjs';
 import { Image } from 'astro:assets';
-import { guideImage, shareImage } from '../lib/imagery';
+import { guideImage, guideImageAlt, shareImage } from '../lib/imagery';
 import { slugOf } from '../lib/content';
 
 interface Props {
@@ -45,6 +45,10 @@ const image =
   section === 'guides'
     ? guideImage(slugOf(entry.id), data.category)
     : undefined;
+const imageAlt =
+  section === 'guides'
+    ? guideImageAlt(slugOf(entry.id), data.category)
+    : '';
 const ogImage = await shareImage(image);
 const crumbs = [
   { label: ui.sections.home, href: localize(lang, '/') },
@@ -118,7 +122,7 @@ schema.push({
         sizes="(max-width: 900px) calc(100vw - 32px), 748px"
         loading="eager"
         fetchpriority="high"
-        alt=""
+        alt={imageAlt}
       />
       <figcaption>
         <span>{categoryLabel}</span>

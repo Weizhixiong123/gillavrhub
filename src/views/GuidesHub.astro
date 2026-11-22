@@ -2,6 +2,7 @@
 import BaseLayout, { type Alternate } from '../layouts/BaseLayout.astro';
 import LinkCards from '../components/LinkCards.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AdNative from '../components/AdNative.astro';
 import { getPublished, entryUrl, MIN_CATEGORY_GUIDES } from '../lib/content';
 import { GUIDE_CATEGORIES } from '../config/site.mjs';
 import { localize, type Lang } from '../i18n/locales';
@@ -86,22 +87,28 @@ const crumbs = [
     ))}
   </nav>
   {current ? (
-    <div id="hub-cards">
-      <LinkCards cards={current.cards} />
-    </div>
+    <>
+      <div id="hub-cards">
+        <LinkCards cards={current.cards} />
+      </div>
+      <AdNative label={ui.adLabel} />
+    </>
   ) : (
-    groups.map((g) => (
-      <section class="hub-group" id={g.key}>
-        <h2>
-          {g.cards.length >= MIN_CATEGORY_GUIDES ? (
-            <a href={g.href}>{g.label}</a>
-          ) : (
-            g.label
-          )}
-        </h2>
-        <p class="muted">{g.blurb}</p>
-        <LinkCards cards={g.cards} />
-      </section>
+    groups.map((g, idx) => (
+      <>
+        <section class="hub-group" id={g.key}>
+          <h2>
+            {g.cards.length >= MIN_CATEGORY_GUIDES ? (
+              <a href={g.href}>{g.label}</a>
+            ) : (
+              g.label
+            )}
+          </h2>
+          <p class="muted">{g.blurb}</p>
+          <LinkCards cards={g.cards} />
+        </section>
+        {idx === 0 && <AdNative label={ui.adLabel} />}
+      </>
     ))
   )}
 </BaseLayout>

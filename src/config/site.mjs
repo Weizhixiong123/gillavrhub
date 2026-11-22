@@ -19,9 +19,9 @@ export const SITE_VERIFICATION = {
  */
 export const ADS = {
   socialBar: process.env.ADSTERRA_SOCIAL_BAR_SRC || '',
-  // Native Banner key; the container id must be exactly "container-<key>".
-  // Shown in the middle of guides and news posts.
+  // Native Banner key (32-char hex) or full script src URL; container id is "container-<key>".
   nativeBanner: process.env.ADSTERRA_NATIVE_KEY ?? '9c98cf02eab307b4838a3e2b77550beb',
+  nativeBannerSrc: process.env.ADSTERRA_NATIVE_SRC ?? '',
   // Banner keys, shown above the footer. Only one loads per visit: the 728x90 on
   // screens 768px and wider, the 320x50 below that.
   bannerDesktop: process.env.ADSTERRA_BANNER_728_KEY ?? 'f1f840a860bc1e1886388ce210f5ffbe',
