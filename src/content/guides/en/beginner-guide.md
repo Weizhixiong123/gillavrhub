@@ -1,8 +1,8 @@
 ---
-updated: '2026-11-19'
+updated: '2026-11-24'
 verifiedFor: 'version 0.1.0 (Early Access), against the official site and store listing'
-title: 'How to play GILLA VR: beginner guide'
-description: 'What is GILLA VR and how to play: move as an ape on Meta Quest, collect gold and diamonds in the Base, stay quiet on voice chat and escape the monsters.'
+title: 'What is GILLA VR and how to play: beginner guide'
+description: 'What is GILLA VR and how to play: move as an ape on Meta Quest, collect gold and diamonds in the Base, stay quiet on voice chat and see how it compares to Gorilla Tag.'
 category: 'beginner'
 series: 'first-night'
 step: 1
@@ -14,14 +14,24 @@ sources:
     url: https://vrdb.app/game/1440338659156877
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
+  - label: 'Wikipedia: Gorilla Tag'
+    url: https://en.wikipedia.org/wiki/Gorilla_Tag
 ---
-GILLA is a free multiplayer VR horror game for Meta Quest, made by Play Gilla. You play as an ape, move with your arms, explore a huge abandoned base with other players, and carry gold bars and diamonds back to a recycler. Monsters hunt by sound, so what you say on voice chat can get you caught.
+## What is GILLA VR? {#what-is-gilla-vr}
 
-## What is GILLA VR?
+GILLA is a free multiplayer VR horror game for Meta Quest, made by Play Gilla. You play as an ape. You move with your arms, explore a huge abandoned base with other players, and carry gold bars and diamonds back to a recycler. Monsters hunt by sound, so what you say on voice chat can get you caught. People also search for it as "Gilla VR", "the Gilla game" or, misspelled, "Gila VR".
 
-GILLA (often searched as **GILLA VR** or the **GILLA VR game**) is an Early Access multiplayer horror game on the Meta Quest store for Quest 2, Quest 3, Quest 3S and Quest Pro. Instead of walking with a thumbstick, you swing and push off the floor and walls with your hands while exploring the Base or playing survival and hunt modes. See [how to get GILLA VR](/guides/how-to-get-gilla/) for download size, headsets and store details.
+| | |
+| --- | --- |
+| Made by | Play Gilla |
+| Genre | Multiplayer VR horror |
+| Platform | Meta Quest 2, 3, 3S and Pro |
+| Price | Free, with in-app purchases |
+| Released | November 10, 2026, in Early Access |
 
-## How to play GILLA VR: the core loop
+Price, headsets and how to install it are covered in [how to get GILLA](/guides/how-to-get-gilla/).
+
+## How to play GILLA VR: the core loop {#the-core-loop-in-one-minute}
 
 1. **Join a room.** Jump into a busy public room, or type a code on the lobby computer to play privately with friends. See [how to play with friends](/guides/play-with-friends/).
 2. **Move like an ape.** There is no thumbstick walking. You push off the floor and walls with your hands. See [controls and movement](/guides/movement-and-comfort/).
@@ -30,7 +40,7 @@ GILLA (often searched as **GILLA VR** or the **GILLA VR game**) is an Early Acce
 5. **Stay quiet.** Monsters come to the sound of talking. Plan before you go in, then whisper or go silent near danger.
 6. **Go deeper.** A keycard on a desk opens a locked door, and there is more under the Base. See [the keycard and locked door](/guides/recycler-and-keycard/#the-keycard-and-the-locked-door).
 
-## The three game modes
+## The three game modes {#the-three-game-modes}
 
 | Mode | Official name | What you do |
 | --- | --- | --- |
@@ -40,13 +50,27 @@ GILLA (often searched as **GILLA VR** or the **GILLA VR game**) is an Early Acce
 
 More detail: [GILLA game modes](/guides/game-modes/).
 
-## The three monsters
+## The three monsters {#the-three-monsters}
 
 - **[The Grinner](/guides/monsters/#the-grinner)** hunts in the Base and comes when you talk near it.
 - **[The Mannequin](/guides/monsters/#the-mannequin)** hunts under the Base.
 - **[The Mako](/guides/monsters/#the-mako)** lives in the water in Don't Splash.
 
-## Before you put the headset on
+## Is GILLA like Gorilla Tag? {#is-gilla-like-gorilla-tag}
+
+Many players search for the two together, because they share one big idea: in both, you move by pushing and swinging your arms instead of using a thumbstick. If you've played Gorilla Tag, getting around in GILLA will feel familiar. Otherwise they are different games, from different studios. GILLA isn't a Gorilla Tag mode or mod.
+
+| | GILLA | Gorilla Tag |
+| --- | --- | --- |
+| Made by | Play Gilla | Another Axiom |
+| Kind of game | Multiplayer horror | Social game with tag-like matches |
+| What you do | Collect loot, open the keycard door, avoid monsters | Tag other players, or avoid being tagged |
+| Who hunts you | The Grinner, the Mannequin, the Mako, or a player in Be the Monster | Other players |
+| Platforms | Meta Quest | Meta Quest, Steam and PlayStation VR2 |
+
+The Gorilla Tag details come from its Wikipedia page, listed in the sources below.
+
+## Before you put the headset on {#before-you-put-the-headset-on}
 
 GILLA's comfort rating is **Intense** and it is rated **Mature 17+**. The official terms ask you to clear a big space, because you will swing your arms fast, and to take a break at least every 30 minutes. If VR movement makes you feel sick, read [comfort and motion sickness](/guides/movement-and-comfort/#motion-sickness) first.
 

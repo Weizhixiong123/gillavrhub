@@ -1,8 +1,8 @@
 ---
-updated: '2026-11-19'
+updated: '2026-11-24'
 verifiedFor: 'versión 0.1.0 (acceso anticipado), comprobado con el sitio oficial y la ficha de la tienda'
-title: 'Cómo conseguir GILLA VR: precio, visores, PC VR y edad'
-description: 'GILLA es gratis en Meta Quest 2, 3, 3S y Pro, con compras dentro de la app. No hay versión para Steam ni PC VR. Clasificado Mature 17+. Todo antes de instalarlo.'
+title: 'Cómo descargar GILLA VR: precio, visores, plataformas y edad'
+description: 'Cómo descargar GILLA gratis en Meta Quest 2, 3, 3S y Pro. No hay versión para Steam, PC VR, Xbox, móvil ni Roblox. Clasificado Mature 17+. Todo antes de instalarlo.'
 category: 'beginner'
 tags: [beginner, price, store, headsets, platforms, age-rating]
 sources:
@@ -29,6 +29,18 @@ GILLA es **gratis** en la **tienda de Meta Quest** y funciona en **Quest 2, Ques
 | Lanzamiento | 10 de noviembre de 2026 (acceso anticipado, versión 0.1.0) |
 | Clasificación | Mature 17+ |
 
+## Descargar e instalar {#download-and-install}
+
+GILLA se instala desde la tienda de Meta Quest como cualquier otro juego de Quest. Estos son los pasos habituales de la tienda:
+
+1. **Abre la Tienda** en tu Quest o la **app Meta Horizon** en tu móvil.
+2. **Busca GILLA.** Comprueba que el desarrollador es **Play Gilla**.
+3. Selecciona **Obtener**. El juego es gratis.
+4. **Espera a que se descargue** (unos 1,07 GB en la versión 0.1.0). Si lo conseguiste desde la app del móvil, se instalará la próxima vez que el visor esté encendido y conectado.
+5. **Abre GILLA desde tu Biblioteca** en el visor.
+
+Antes de tu primera ronda, despeja un espacio amplio: vas a mover los brazos rápido. Después lee la [guía para principiantes](/es/guides/beginner-guide/).
+
 ## Precio {#price}
 
 El juego en sí es gratis. La tienda del juego vende **cosméticos**, **objetos limitados** y **packs**. Las compras pasan por la **Meta Horizon Store** y siguen sus normas de pago y reembolso. Qué vende la tienda y cómo funcionan las monedas se explica en [misiones, niveles y tienda](/es/guides/quests-levels-and-shop/).
@@ -48,6 +60,12 @@ La comodidad es **Intensa**, porque te mueves balanceando los brazos rápido. Si
 No de forma oficial. A 19 de noviembre de 2026, GILLA solo está en la tienda de Meta Quest, y el sitio oficial no menciona ninguna versión para Steam ni PC VR. Quizá puedas transmitir la versión de Quest a un PC con las herramientas de Meta, pero eso no es un lanzamiento oficial para PC, y no lo hemos probado.
 
 Cuidado con las descargas falsas. Los términos prohíben las copias modificadas, crackeadas o no oficiales de GILLA, y quien las use puede ser baneado. Instala GILLA solo desde la tienda de Meta Quest.
+
+## Otras plataformas: Xbox, PlayStation, móvil y Roblox {#other-platforms}
+
+No. GILLA solo está en la tienda de Meta Quest, y el sitio oficial no menciona ninguna otra plataforma. No está en Xbox, PlayStation, Nintendo Switch, iPhone ni móviles Android, y no es un juego de Roblox.
+
+Si ves GILLA en cualquier otro sitio, no es el juego oficial. Los términos de servicio prohíben hacer copias, clones o imitaciones de GILLA y jugar con copias modificadas o no oficiales.
 
 ## Fecha de lanzamiento y acceso anticipado {#release-date-and-early-access}
 

@@ -1,5 +1,5 @@
 ---
-updated: '2026-11-19'
+updated: '2026-11-24'
 verifiedFor: 'version 0.1.0 (accès anticipé), vérifié avec le site officiel et la fiche du store'
 title: 'GILLA VR : quêtes quotidiennes, niveaux, boutique et couleur de fourrure'
 description: 'La progression dans GILLA : quêtes quotidiennes, niveau au classement, boutique de cosmétiques à parcourir, pièces et changement de couleur de fourrure.'
@@ -44,6 +44,6 @@ Pour changer la couleur de ta fourrure, va à l’**ordinateur du lobby** et cho
 2. Choisis ta **couleur de fourrure**.
 3. Ton singe change pour tout le monde dans la salle.
 
-## Le modèle officiel du joueur {#the-official-player-model}
+## Le modèle officiel du joueur et photos de profil (pfp) {#the-official-player-model}
 
-Play Gilla propose un **modèle officiel du joueur** pour Blender sur [gillavr.com/player-model](https://gillavr.com/player-model). Tu peux choisir sa couleur dans l’onglet Material, et **ton code couleur du jeu fonctionne aussi**. Tu peux l’utiliser pour des photos de profil, des miniatures, des vidéos, des streams et des fan arts, y compris des vidéos et des streams monétisés, selon sa licence. Tu ne peux ni vendre le modèle ou ce que tu en fais, ni partager ses fichiers, ni l’intégrer à d’autres jeux. La licence ne couvre que les copies que tu télécharges toi-même depuis cette page. Les règles générales pour les créations de fans sont dans la [FAQ](/fr/faq/#fan-content-rules).
+Play Gilla propose un **modèle officiel du joueur** pour Blender sur [gillavr.com/player-model](https://gillavr.com/player-model). Tu peux choisir sa couleur dans l’onglet Material, et **ton code couleur du jeu fonctionne aussi**. Tu peux l’utiliser pour des photos de profil (pfp), des miniatures, des vidéos, des streams et des fan arts, y compris des vidéos et des streams monétisés, selon sa licence. Tu ne peux ni vendre le modèle ou ce que tu en fais, ni partager ses fichiers, ni l’intégrer à d’autres jeux. La licence ne couvre que les copies que tu télécharges toi-même depuis cette page. Les règles générales pour les créations de fans sont dans la [FAQ](/fr/faq/#fan-content-rules).

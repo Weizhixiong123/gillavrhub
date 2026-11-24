@@ -40,6 +40,8 @@ const faq = defineCollection({
     group: z.enum(['game', 'playing', 'community']),
     /** Internal link to the guide section that covers this question in full. */
     more: z.string().startsWith('/').optional(),
+    /** Position within its group on the FAQ page; lower comes first. */
+    order: z.number().int().default(100),
   }),
 });
 

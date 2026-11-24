@@ -38,9 +38,9 @@ const en = {
       'is an unofficial fan site. It is not made, sponsored or approved by Play Gilla (Content Media LLC). GILLA is their trademark. Meta Quest is a trademark of Meta Platforms, Inc.',
   },
   home: {
-    metaTitle: 'GILLA VR Map Wiki: The Base, Monsters & Game Guide',
+    metaTitle: 'GILLA VR Game Wiki: Map, Monsters, Codes & Guides',
     metaDescription:
-      'Unofficial GILLA VR game wiki for Meta Quest: what GILLA VR is, the Base map and keycard door, every GILLA monster, horror modes, controls, Discord and FAQ.',
+      'Unofficial wiki for the GILLA VR game on Meta Quest: what GILLA is, the Base map and keycard door, all monsters, game modes, codes, download help and quick answers.',
     title: 'GILLA VR map wiki',
     lead: 'Find your way through the Base, learn what hunts you and get ready for your first night in the GILLA VR horror game on Meta Quest.',
     heroAlt: 'A hall in the Base, lit red, with a hazard door at the far end',

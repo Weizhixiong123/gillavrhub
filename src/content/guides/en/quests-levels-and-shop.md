@@ -1,5 +1,5 @@
 ---
-updated: '2026-11-19'
+updated: '2026-11-24'
 verifiedFor: 'version 0.1.0 (Early Access), against the official site and store listing'
 title: 'GILLA VR daily quests, levels, shop and fur colour'
 description: 'How progression works in GILLA: daily quests, a room leaderboard level, a walk-in cosmetics shop, coins, and how to change your fur colour on the lobby computer.'
@@ -44,6 +44,6 @@ To change your fur colour, go to the **lobby computer** and pick a new colour. *
 2. Choose your **fur colour**.
 3. Your ape updates for everyone in the room.
 
-## The official player model
+## The official player model and pfp {#the-official-player-model}
 
-Play Gilla offers an **official player model** for Blender at [gillavr.com/player-model](https://gillavr.com/player-model). You can pick its colour in the Material tab, and **your colour code from the game works too**. You can use it for profile pictures, thumbnails, videos, streams and fan art, including monetised videos and streams, under its license. You can't sell the model or things made from it, share its files or put it in other games. The license only covers copies you download from that page yourself. The wider rules for fan work are in the [FAQ](/faq/#fan-content-rules).
+Play Gilla offers an **official player model** for Blender at [gillavr.com/player-model](https://gillavr.com/player-model). You can pick its colour in the Material tab, and **your colour code from the game works too**. You can use it for profile pictures (pfp), thumbnails, videos, streams and fan art, including monetised videos and streams, under its license. You can't sell the model or things made from it, share its files or put it in other games. The license only covers copies you download from that page yourself. The wider rules for fan work are in the [FAQ](/faq/#fan-content-rules).

@@ -27,5 +27,8 @@ pnpm-debug.log*
 test-results/
 playwright-report/
 
+# keyword research exports (Google Trends etc.)
+relatedQueries*.csv
+
 # local screenshot helpers
 .shoot*.mjs

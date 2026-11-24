@@ -1,5 +1,5 @@
 ---
-updated: '2026-11-19'
+updated: '2026-11-24'
 verifiedFor: 'Version 0.1.0 (Early Access), abgeglichen mit der offiziellen Website und der Store-Seite'
 title: 'GILLA VR: tägliche Quests, Level, Shop und Fellfarbe'
 description: 'Fortschritt in GILLA: tägliche Quests, ein Level auf der Bestenliste, ein begehbarer Kosmetik-Shop, Münzen und wie du am Lobby-Computer deine Fellfarbe änderst.'
@@ -44,6 +44,6 @@ Um deine Fellfarbe zu ändern, geh zum **Lobby-Computer** und wähle eine neue F
 2. Wähle deine **Fellfarbe**.
 3. Dein Affe ändert sich für alle im Raum.
 
-## Das offizielle Spielermodell {#the-official-player-model}
+## Das offizielle Spielermodell und Profilbilder (pfp) {#the-official-player-model}
 
-Play Gilla bietet ein **offizielles Spielermodell** für Blender unter [gillavr.com/player-model](https://gillavr.com/player-model) an. Seine Farbe kannst du im Material-Tab wählen, und **dein Farbcode aus dem Spiel funktioniert auch**. Du darfst es für Profilbilder, Thumbnails, Videos, Streams und Fan-Art nutzen, auch für monetarisierte Videos und Streams, gemäß seiner Lizenz. Du darfst das Modell oder daraus Gemachtes nicht verkaufen, seine Dateien nicht weitergeben und es nicht in andere Spiele einbauen. Die Lizenz gilt nur für Kopien, die du selbst von dieser Seite herunterlädst. Die allgemeinen Regeln für Fan-Werke stehen in der [FAQ](/de/faq/#fan-content-rules).
+Play Gilla bietet ein **offizielles Spielermodell** für Blender unter [gillavr.com/player-model](https://gillavr.com/player-model) an. Seine Farbe kannst du im Material-Tab wählen, und **dein Farbcode aus dem Spiel funktioniert auch**. Du darfst es für Profilbilder (pfp), Thumbnails, Videos, Streams und Fan-Art nutzen, auch für monetarisierte Videos und Streams, gemäß seiner Lizenz. Du darfst das Modell oder daraus Gemachtes nicht verkaufen, seine Dateien nicht weitergeben und es nicht in andere Spiele einbauen. Die Lizenz gilt nur für Kopien, die du selbst von dieser Seite herunterlädst. Die allgemeinen Regeln für Fan-Werke stehen in der [FAQ](/de/faq/#fan-content-rules).

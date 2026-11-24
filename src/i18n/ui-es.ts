@@ -35,9 +35,9 @@ export const es: UI = {
       'es un sitio de fans no oficial. No está hecho, patrocinado ni aprobado por Play Gilla (Content Media LLC). GILLA es su marca. Meta Quest es una marca de Meta Platforms, Inc.',
   },
   home: {
-    metaTitle: 'GILLA VR Map Wiki: The Base, monstruos y modos',
+    metaTitle: 'Wiki del juego GILLA VR: mapa, monstruos, códigos y guías',
     metaDescription:
-      'Wiki no oficial de GILLA VR: guía del mapa The Base y de la puerta de la tarjeta de acceso, los tres monstruos, todos los modos, los controles y respuestas rápidas para Meta Quest.',
+      'Wiki no oficial del juego GILLA VR para Meta Quest: qué es GILLA, el mapa The Base, todos los monstruos, modos, códigos, ayuda para descargar y respuestas rápidas.',
     title: 'Wiki del mapa de GILLA VR',
     lead: 'Oriéntate en The Base, descubre qué te caza y prepárate para tu primera noche en GILLA VR.',
     heroAlt: 'Un pasillo de The Base con luz roja y una puerta con franjas de peligro al fondo',

@@ -41,7 +41,8 @@ const {
 const ogImage = new URL(image ?? (await shareImage()), Astro.site).href;
 const ui = t(lang);
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+// The home page title already names the site; other pages get the site name appended.
+const fullTitle = home || title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 const path = Astro.url.pathname;
 const homeHref = localize(lang, '/');
 const links = NAV.map(({ key, href }) => ({ key, href: localize(lang, href) }));

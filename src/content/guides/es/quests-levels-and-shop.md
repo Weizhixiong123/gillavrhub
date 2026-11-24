@@ -1,5 +1,5 @@
 ---
-updated: '2026-11-19'
+updated: '2026-11-24'
 verifiedFor: 'versión 0.1.0 (acceso anticipado), comprobado con el sitio oficial y la ficha de la tienda'
 title: 'GILLA VR: misiones diarias, niveles, tienda y color del pelaje'
 description: 'La progresión en GILLA: misiones diarias, un nivel en la tabla de la sala, una tienda de cosméticos que recorres, monedas y cómo cambiar el color del pelaje en el lobby.'
@@ -44,6 +44,6 @@ Para cambiar el color del pelaje, ve al **ordenador del lobby** y elige un color
 2. Elige el **color del pelaje**.
 3. Tu simio cambia para todos los de la sala.
 
-## El modelo oficial del jugador {#the-official-player-model}
+## El modelo oficial del jugador y fotos de perfil (pfp) {#the-official-player-model}
 
-Play Gilla ofrece un **modelo oficial del jugador** para Blender en [gillavr.com/player-model](https://gillavr.com/player-model). Puedes elegir su color en la pestaña Material, y **el código de color del juego también funciona**. Puedes usarlo para fotos de perfil, miniaturas, vídeos, directos y fan art, incluidos vídeos y directos monetizados, según su licencia. No puedes vender el modelo ni lo que hagas con él, compartir sus archivos ni meterlo en otros juegos. La licencia solo cubre las copias que descargues tú mismo de esa página. Las normas generales para obras de fans están en las [preguntas](/es/faq/#fan-content-rules).
+Play Gilla ofrece un **modelo oficial del jugador** para Blender en [gillavr.com/player-model](https://gillavr.com/player-model). Puedes elegir su color en la pestaña Material, y **el código de color del juego también funciona**. Puedes usarlo para fotos de perfil (pfp), miniaturas, vídeos, directos y fan art, incluidos vídeos y directos monetizados, según su licencia. No puedes vender el modelo ni lo que hagas con él, compartir sus archivos ni meterlo en otros juegos. La licencia solo cubre las copias que descargues tú mismo de esa página. Las normas generales para obras de fans están en las [preguntas](/es/faq/#fan-content-rules).

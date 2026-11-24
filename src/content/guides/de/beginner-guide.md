@@ -1,8 +1,8 @@
 ---
-updated: '2026-11-19'
+updated: '2026-11-24'
 verifiedFor: 'Version 0.1.0 (Early Access), abgeglichen mit der offiziellen Website und der Store-Seite'
-title: 'GILLA VR Einsteiger-Guide'
-description: 'Was GILLA ist, wie du dich als Affe bewegst, was du in The Base sammelst und warum du leise sein solltest. Lies das vor deiner ersten Runde.'
+title: 'Was ist GILLA VR? Einsteiger-Guide zum Affen-Horrorspiel'
+description: 'Was das Spiel GILLA VR ist, wie du dich als Affe bewegst, was du in The Base sammelst, wie es sich von Gorilla Tag unterscheidet und warum du leise sein solltest.'
 category: 'beginner'
 series: 'first-night'
 step: 1
@@ -14,8 +14,22 @@ sources:
     url: https://vrdb.app/game/1440338659156877
   - label: 'GILLA Terms of Service (updated Nov 17, 2026)'
     url: https://gillavr.com/terms
+  - label: 'Wikipedia: Gorilla Tag'
+    url: https://en.wikipedia.org/wiki/Gorilla_Tag
 ---
-GILLA ist ein kostenloses Multiplayer-VR-Horrorspiel für Meta Quest von Play Gilla. Du spielst einen Affen. Du bewegst dich mit den Armen, erkundest mit anderen Spielern eine riesige verlassene Basis und trägst Goldbarren und Diamanten zu einem Recycler zurück. Monster jagen nach Gehör, also kann dich das, was du im Sprachchat sagst, verraten.
+## Was ist GILLA VR? {#what-is-gilla-vr}
+
+GILLA ist ein kostenloses Multiplayer-VR-Horrorspiel für Meta Quest von Play Gilla. Du spielst einen Affen. Du bewegst dich mit den Armen, erkundest mit anderen Spielern eine riesige verlassene Basis und trägst Goldbarren und Diamanten zu einem Recycler zurück. Monster jagen nach Gehör, also kann dich das, was du im Sprachchat sagst, verraten. Gesucht wird das Spiel auch als „Gilla VR“, „das Gilla-Spiel“ oder, falsch geschrieben, „Gila VR“.
+
+| | |
+| --- | --- |
+| Entwickler | Play Gilla |
+| Genre | Multiplayer-VR-Horror |
+| Plattform | Meta Quest 2, 3, 3S und Pro |
+| Preis | Kostenlos, mit In-App-Käufen |
+| Erschienen | 10. November 2026, im Early Access |
+
+Preis, Headsets und die Installation findest du unter [GILLA bekommen](/de/guides/how-to-get-gilla/).
 
 ## Das Spielprinzip in einer Minute {#the-core-loop-in-one-minute}
 
@@ -41,6 +55,20 @@ Mehr dazu: [GILLA Spielmodi](/de/guides/game-modes/).
 - **[The Grinner](/de/guides/monsters/#the-grinner)** jagt in The Base und kommt, wenn du in seiner Nähe redest.
 - **[The Mannequin](/de/guides/monsters/#the-mannequin)** jagt unter The Base.
 - **[The Mako](/de/guides/monsters/#the-mako)** lebt im Wasser von Don't Splash.
+
+## Ist GILLA wie Gorilla Tag? {#is-gilla-like-gorilla-tag}
+
+Viele Spieler suchen nach beiden zusammen, weil sie eine große Idee teilen: In beiden bewegst du dich, indem du dich mit den Armen abstößt und schwingst, statt einen Thumbstick zu nutzen. Wenn du Gorilla Tag gespielt hast, fühlt sich die Bewegung in GILLA vertraut an. Ansonsten sind es verschiedene Spiele von verschiedenen Studios. GILLA ist kein Modus und keine Mod von Gorilla Tag.
+
+| | GILLA | Gorilla Tag |
+| --- | --- | --- |
+| Entwickler | Play Gilla | Another Axiom |
+| Art von Spiel | Multiplayer-Horror | Soziales Spiel mit Fangen-ähnlichen Matches |
+| Was du tust | Beute sammeln, die Schlüsselkarten-Tür öffnen, Monstern ausweichen | Andere Spieler fangen oder nicht gefangen werden |
+| Wer dich jagt | The Grinner, The Mannequin, The Mako oder ein Spieler in Be the Monster | Andere Spieler |
+| Plattformen | Meta Quest | Meta Quest, Steam und PlayStation VR2 |
+
+Die Angaben zu Gorilla Tag stammen von seiner Wikipedia-Seite, die unten bei den Quellen steht.
 
 ## Bevor du das Headset aufsetzt {#before-you-put-the-headset-on}
 

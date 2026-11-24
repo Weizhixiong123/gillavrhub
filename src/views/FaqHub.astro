@@ -29,7 +29,9 @@ const items = await Promise.all(
 const groups = FAQ_GROUPS.map((key) => ({
   key,
   label: ui.hubs.faqGroups[key],
-  items: items.filter((i) => i.entry.data.group === key),
+  items: items
+    .filter((i) => i.entry.data.group === key)
+    .sort((a, b) => a.entry.data.order - b.entry.data.order),
 })).filter((g) => g.items.length > 0);
 const lastChecked = new Date(
   Math.max(...entries.map((e) => e.data.updated.getTime())),
