@@ -18,7 +18,9 @@ export const SITE_VERIFICATION = {
  * public (they appear in every page's HTML); an environment variable overrides each.
  */
 export const ADS = {
-  socialBar: process.env.ADSTERRA_SOCIAL_BAR_SRC || '',
+  // Social Bar script URL, loaded once at the end of every page.
+  socialBar:
+    process.env.ADSTERRA_SOCIAL_BAR_SRC || 'https://bauval.org/14/97f77f0886af2c82a485b5f7b64cdcd8',
   // Native Banner key (32-char hex) or full script src URL; container id is "container-<key>".
   nativeBanner: process.env.ADSTERRA_NATIVE_KEY ?? '9c98cf02eab307b4838a3e2b77550beb',
   nativeBannerSrc: process.env.ADSTERRA_NATIVE_SRC ?? '',
